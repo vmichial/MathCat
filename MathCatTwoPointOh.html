@@ -735,12 +735,25 @@ function Player()
 		}
 		
 //		***********GAME STATE RELATED VARIABLES ********************
+//		
+//MAKE THE EQUATIONS
+var numLevels = 10;
+var numEQ = 20;
+var sign = 1;
 
-var equations = new Array();
-for(var i = 0; i<10 ; i++)
+//create a 2d array 10 levels each needing 20 equations
+var equations = [numLevels];
+for(var i = 0; i<numLevels ; i++)
 {
-	equations[i] = new Array();
+	equations[i] = [numEQ];
 }
+for(var i = 0; i<numEQ ; i++)
+{//this for loop makes the easy level one questions for practice
+	equations[0][i] = {eq: "x = "+(i*sign), answer: (i*sign)};
+	sign *= -1;
+	 }
+//manually add questions for the rest of the levels, this area will be BIG but necessary to keep
+//the equations interesting and progressing in a way that makes sense
 
 
 //		**************THE ARE GAME OBJECT VARIABLES MADE GLOBALS**************
