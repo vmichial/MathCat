@@ -267,9 +267,11 @@
 			//same goes for adding AI. so encapsulate the deck into the 
 			//player's relavant information, here is myDeck
 			this.myDeck = new Deck();
-			this.myHand = [5];	//hold the current src names of cards in hand
+			this.myHand = [5];	//hold the current values of cards in hand
 			this.name = "Math\n Cat";
+			
 			this.Totalscore = 0;		//start the score at zero, this is the score for ENTIRE game
+			
 			this.currentScore = 0;		//this is the score for the current HW questions
 			this.level = 0; 			//this is for the current level
 			this.problemNumber = 1;		//start at first problem
@@ -278,6 +280,7 @@
 			this.subtractBonus = 0;		//keeps track of how many subtractions have been done in HW
 			this.multiplyBonus = 0;		//keeps track of how many multiplications have been done in HW
 			this.divideBonus = 0;		//keeps track of how many divisions have been done in HW
+			
 			this.currentEQ = "X=0"; 	//keeps track of current Equation for problem
 			this.currentX = 0;			//hold the value of X for current problem in HW
 			this.DeckEmpty = false;		//keep track of if the deck is empty
@@ -297,6 +300,15 @@
 				//is all i guess is left easy function... honestly...
 				//it takes more time to make this comment than to actually
 				//code it.. but i will leave it to YOU BWAHAHAHAHAHAHA!
+			}
+			
+			this.makeTermMath = function()
+			{
+				
+			}
+			this.makeSecondTermMath = function()
+			{
+				
 			}
 			this.updateCurrentScore = function (h1, h2, h3, h4, h5) {
 				//add code here to add to current score. 
@@ -374,7 +386,7 @@
 			this.updateTotalScore = function () {
 				//this is called when a problem is finished, it should add the 
 				//currentScore to the TotalScore. and reset anything to what it needs to be
-				this.Totalscore = this.currentScore + this.currentBonus;
+				this.Totalscore += this.currentScore + this.currentBonus;
 
 			}
 			this.nextProblem = function (newEQ, newX) {
@@ -391,16 +403,17 @@
 				this.level = this.level + 1;
 				this.currentEQ = newEQ;
 				this.currentX = newX;
+				this.problemNumber = 1;
 			}
 			this.updateBonus = function () {
 				//um...update the bonuses
 				//if the player presses the '+''-''*''/' buttons
 				//add one to the correct bonus, if they cancel, set to zero.
 				//you figure out how to handle cancels or what not
-				var totalAdd = 0.2 * this.currentScore * this.AddBonus;
-				var totalSubtract = 0.3 * this.currentScore * this.subtractBonus;
-				var totalMultiply = 0.4 * this.currentScore * this.multiplyBonus;
-				var totalDivision = 0.5 * this.currentScore * this.divideBonus;
+				var totalAdd = Math.floor(0.2 * this.currentScore * this.AddBonus);
+				var totalSubtract = Math.floor(0.3 * this.currentScore * this.subtractBonus);
+				var totalMultiply = Math.floor(0.4 * this.currentScore * this.multiplyBonus);
+				var totalDivision = Math.floor(0.5 * this.currentScore * this.divideBonus);
 				this.currentScore = this.currentScore + totalDivision + totalMultiply + totalSubtract + totalAdd;
 			}
 			this.updateHand = function () {
