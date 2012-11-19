@@ -770,6 +770,12 @@
 		var hand3Selected = false;		//from the default position
 		var hand4Selected = false;
 		var hand5Selected = false;
+		
+		var hand1used = false;			//tells us if a card was used in making a value, so it can't be used again
+		var hand2used = false;
+		var hand3used = false;
+		var hand4used = false;
+		var hand5used = false;
 
 		//variables for player data
 		var additionBonus = false;
@@ -788,13 +794,15 @@
 		var timeRemaining = 99;
 		var tensTime = 9;
 		var onesTime = 9;
-
+		
+		//Timers for certain messages
 		var started = false;
 		var clockTimer = 0;
 		var followTime = false;
 		var acceptTimer = 0;
 		var cancelTimer = 0;
-
+		var cardTimer = 0;
+		var operatorTimer = 0;
 		var gameOverTimer = 0;
 
 		//startup variables
@@ -1250,6 +1258,14 @@
 					}
 				}
 				// make dialog choices linger a bit
+				if(pickAcard){
+					cardTimer++;
+					if((cardTimer / fps) == 3) { selectCardDialog = false; cardTimer = 0;}
+				}
+				if(pickAsign){
+					operatorTimer++;
+					if((operatorTimer / fps) == 3){ selectOperationdialog = false; operatorTimer = 0; }
+				}
 				if (acceptDialog) {
 					acceptTimer++;
 					if ((acceptTimer / fps) == 3) { acceptDialog = false; acceptTimer = 0; }
@@ -1432,6 +1448,8 @@
 				else if (quitDialog) { ctx.fillText(quitMessage, 374, 355); }
 				else if (acceptDialog) { ctx.fillText(acceptMessage, 374, 355); }
 				else if (cancelDialog) { ctx.fillText(cancelMessage, 374, 355); }
+				else if(selectCardDialog){ctx.fillText(selectCardMessage, 374, 355);}
+				else if(selectOperationDialog){ctx.fillText(selectOperationMessage, 374, 355);}
 
 				if (failDialog) {
 					ctx.drawImage(failStampPic, -284, -280);
