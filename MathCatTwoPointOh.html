@@ -693,23 +693,6 @@
 		for (var i = 0; i < numLevels ; i++) {
 			equations[i] = [numEQ];
 		}
-		/*
-		for(var i = 0; i<numEQ ; i++)
-		{//this for loop makes the easy level one questions for practice
-			var random = Math.floor(Math.random()*30);
-			equations[0][i] = {eq: "x = "+(random*sign), answer: (random*sign)};
-			sign *= -1;
-		}
-		//manually add questions for the rest of the levels, this area will be BIG but necessary to keep
-		//the equations interesting and progressing in a way that makes sense
-		for(var i = 0; i < numEQ; i++)
-		{
-			var num1 = Math.random()*50;
-			var num2 = Math.random()*50;
-			equations[1][i] = {eq:   , answer: };
-		}
-		*/
-
 
 		//		**************THE ARE GAME OBJECT VARIABLES MADE GLOBALS**************
 		//thesevariables keep track of the state of the game for gameplay logic*****
@@ -718,6 +701,8 @@
 
 		var answerSoFar = 0;
 		var answerBeingBuilt = 0;
+		var answered = false;
+		//DIALOG variables
 		var confirmDialog = false;
 		var confirmMessage = "accept to continue...";
 		var quitDialog = false;
@@ -757,7 +742,6 @@
 		var buildingAnswer = false;		//bool for telling us if player is building answer, accepted ends this mode
 		var buildingTerm = false;		//bool for telling if we are currently building a term
 		var correctAnswer = false;
-		var currentVal = 'undefined';
 
 		var atStartupScreen = true;	//bool for telling us what screen we are in startup screen, which shows our logos
 		var atTitleScreen = false;		//bool for at title screen, true means, show title and play title music
@@ -817,8 +801,6 @@
 		var isIdle = true;
 		var pickAcard = false;
 		var pickAsign = false;
-		var message = 'undefined';
-
 		//************** END OF GAME OBJECT VARIABLES ************ 
 
 		var touchSpot = new String();
@@ -900,7 +882,7 @@
 				//if there is a click to worry about
 				if (handleThisClick) {
 					//******************I have listed all the areas to click for tests i've done
-					//******************in most cases you cannot chang most setting in the final game
+					//******************in most cases you cannot chang moste setting in the final game
 					//******************things like portrait click, bonus click, score click, clock click
 					//******************will have no effect, so the code will be commented
 
@@ -917,8 +899,18 @@
 					//**************CARDS CHECK
 					if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 1
-						if (!hand1Selected) { hand1Selected = true; }
-						else { hand1Selected = false; }
+						if(!answered)
+						{
+							answerBeingBuilt += player1.myHand[0].myValue;
+							if()
+							{
+								
+							}
+						}
+						else if(isIdle){
+							if (!hand1Selected) { hand1Selected = true; }
+							else { hand1Selected = false; }
+							}
 					}
 					else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 2
