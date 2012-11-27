@@ -1,10 +1,12 @@
-maxLVL = 2;
+ï»¿maxLVL = 4;
 
 function generateEQ(level) {
+	var MAX = 20;
+
 	function struct() { this.EQ = ""; this.answer = 0; };
 	// Rolls a number
-	function roll(max) {
-		return Math.round(Math.random() * (max == undefined ? 99 : max));
+	function roll(num) {
+		return Math.round(Math.random() * (num == undefined ? MAX : num));
 	}
 	// Gets the common divisor of 2 numbers
 	function gcd(n1, n2) {
@@ -38,16 +40,16 @@ function generateEQ(level) {
 		if (a != 1) {
 			if (a < 0) {
 				a = Math.round(1 / a);
-				lhs[o1] = 'x÷' + pm(a);
+				lhs[o1] = 'xÃ·' + pm(a);
 			} else {
-				lhs[o1] = pm(a) + '•x';
+				lhs[o1] = pm(a) + 'â€¢x';
 			}
 		} else {
 			lhs[o1] = 'x';
 		}
 
-		lhs[o2] = (c1 == 0) ? '' : '' + c1;
-		lhs[o3] = (c2 == 0) ? '' : '' + c2;
+		lhs[o2] = (c1 == 0) ? '' : '' + pm(c1);
+		lhs[o3] = (c2 == 0) ? '' : '' + pm(c2);
 
 
 
@@ -69,29 +71,37 @@ function generateEQ(level) {
 
 	if (1 <= level) { // Level 1+
 		x = b = roll();
-
 		assemble(b, x);
 	}
 
 	if (2 <= level) { // Level 2+
-		do { // Keep a pretty bound. [optional]
-			temp = roll(); // Roll a C
-		} while ((8 < x) && (x / 3 * 2 < temp));
+		temp = roll(x / 2); // Roll a C
 
 		switch (level) {
 			case 2:
 				c = temp;
-				b = b - temp;
+				b += temp;
 				break;
 			case 3:
+				temp *= (Math.pow(-1, roll(10)))
+				c = temp;
+				b += temp;
 				break;
 			case 4:
+				while (x < 2) x = b++;
+				while (temp < 2) temp++;
+				a = temp;
+				b *= temp;
 				break;
 			case 5:
+				while (x < 2) x = b++;
+				while (temp < 2) temp++;
+				//a /= temp;
+				//b /= temp;
 				break;
 		}
 
-		assemble(b, x, 1, c);
+		assemble(b, x, a, c);
 	}
 
 	if (6 <= level) { // Level 6+
