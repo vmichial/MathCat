@@ -683,17 +683,6 @@
 
 		//		***********GAME STATE RELATED VARIABLES ********************
 		//		
-		//MAKE THE EQUATIONS
-		var numLevels = 10;
-		var numEQ = 20;
-		var sign = 1;
-
-		//create a 2d array 10 levels each needing 20 equations
-		var equations = [numLevels];
-		for (var i = 0; i < numLevels ; i++) {
-			equations[i] = [numEQ];
-		}
-
 		//		**************THE ARE GAME OBJECT VARIABLES MADE GLOBALS**************
 		//thesevariables keep track of the state of the game for gameplay logic*****
 		var player1 = new Player();
@@ -709,6 +698,7 @@
 		var answerSoFar = 0;
 		var answerBeingBuilt = 0;
 		var answered = false;
+		var cardSelected = false;
 		//DIALOG variables
 		var confirmDialog = false;
 		var confirmMessage = "accept to continue...";
@@ -906,7 +896,75 @@
 					*/
 					//**************CARDS CHECK
 					if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
-						
+						//card 1 selected
+							if(pickAcard)
+							{
+								if(!ASF && !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[0].myValue;
+									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand1Selected = true;
+									hand1used = true;
+								}
+								else if(!ASF && ABB)
+								{
+									if(inAddition || inSubtraction || inDivision || inMultiplication)
+									{
+										if(!hand1used)
+										{
+											if(inAddition)
+											{
+												answerBeingBuilt += player1.myHand[0].myValue;
+												cardSelected = true;
+												hand1Selected = true;
+												hand1used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inSubtraction)
+											{
+												answerBeingBuilt -= player1.myHand[0].myValue;
+												hand1Selected = true;
+												hand1used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inDivision)
+											{
+												answerBeingBuilt /= player1.myHand[0].myValue;
+												hand1Selected = true;
+												hand1used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inMultiplication)
+											{
+												answerBeingBuilt *= player1.myHand[0].myValue;
+												hand1Selected = true;
+												hand1used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+										}
+									}
+								}
+								else if(ASF && ABB)
+								{
+								
+								}
+							}
+							else if(pickAsign)
+							{
+								
+							}
+							else if(merge)
+							{
+							
+							}
 							if (!hand1Selected) { hand1Selected = true; }
 							else { hand1Selected = false; }
 						
