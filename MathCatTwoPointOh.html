@@ -702,7 +702,8 @@
 		//math logic for cards variable
 		var isIdle = true;
 		var pickAcard = false;
-		var pickAsign = false;		
+		var pickAsign = false;	
+		var	merge = false;
 		var ASF = false;
 		var ABB = false;
 		var answerSoFar = 0;
@@ -891,8 +892,8 @@
 					//******************in most cases you cannot chang moste setting in the final game
 					//******************things like portrait click, bonus click, score click, clock click
 					//******************will have no effect, so the code will be commented
-
-					//check score
+					/*
+					//check score // check complete, area diabled
 					if (((currentX > 170) && (currentX < 310)) && ((currentY > 170) && (currentY < 210))) {
 						handleThisClick = false;
 						if((player1.totalScore+111111) > 9999999){player1.totalScore = 9999999; }
@@ -902,21 +903,13 @@
 							player1.totalScore = 9999999;
 						}
 					}
+					*/
 					//**************CARDS CHECK
 					if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
-						//clicked in area for card 1
-						/*if(!answered)
-						{
-							answerBeingBuilt += player1.myHand[0].myValue;
-							if(hand1Selected)
-							{
-								
-							}
-						}
-						else if(isIdle){*/
+						
 							if (!hand1Selected) { hand1Selected = true; }
 							else { hand1Selected = false; }
-							//}
+						
 					}
 					else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 2
@@ -939,7 +932,8 @@
 						else { hand5Selected = false; }
 					}
 
-						//****************PORTRAIT PIC CHECK
+						//****************PORTRAIT PIC CHECK ______ check complete, disabling
+					/*
 					else if ((currentX > 680 && currentX < 970) && (currentY > 20 && currentY < 210))//clicked portrait
 					{
 						handleThisClick = false;
@@ -952,6 +946,7 @@
 						else if (moodDead) { moodDead = false; moodExcited = true; }
 
 					}
+					*/
 						//*******************BONUS CHECK****************
 					else if ((currentX > 740 && currentX < 940) && (currentY > 340 && currentY < 375)) {//clicked on addition bonus
 						handleThisClick = false;
