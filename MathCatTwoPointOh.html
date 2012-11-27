@@ -969,23 +969,251 @@
 					}
 					else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 2
-						if (!hand2Selected) { hand2Selected = true; }
-						else { hand2Selected = false; }
+						if(pickAcard)
+							{
+								if(!ASF && !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[1].myValue;
+									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand2Selected = true;
+									hand2used = true;
+								}
+								else if(!ASF && ABB)
+								{
+									if(inAddition || inSubtraction || inDivision || inMultiplication)
+									{
+										if(!hand1used)
+										{
+											if(inAddition)
+											{
+												answerBeingBuilt += player1.myHand[1].myValue;
+												cardSelected = true;
+												hand2Selected = true;
+												hand2used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inSubtraction)
+											{
+												answerBeingBuilt -= player1.myHand[1].myValue;
+												hand2Selected = true;
+												hand2used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inDivision)
+											{
+												answerBeingBuilt /= player1.myHand[1].myValue;
+												hand2Selected = true;
+												hand2used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inMultiplication)
+											{
+												answerBeingBuilt *= player1.myHand[1].myValue;
+												hand2Selected = true;
+												hand2used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+										}
+									}
+								}
+								else if(ASF && ABB)
+								{
+								
+								}
 					}
 					else if ((currentX > 425 && currentX < 525) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 3
-						if (!hand3Selected) { hand3Selected = true; }
-						else { hand3Selected = false; }
+						if(pickAcard)
+							{
+								if(!ASF && !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[2].myValue;
+									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand3Selected = true;
+									hand3used = true;
+								}
+								else if(!ASF && ABB)
+								{
+									if(inAddition || inSubtraction || inDivision || inMultiplication)
+									{
+										if(!hand1used)
+										{
+											if(inAddition)
+											{
+												answerBeingBuilt += player1.myHand[2].myValue;
+												cardSelected = true;
+												hand3Selected = true;
+												hand3used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inSubtraction)
+											{
+												answerBeingBuilt -= player1.myHand[2].myValue;
+												hand3Selected = true;
+												hand3used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inDivision)
+											{
+												answerBeingBuilt /= player1.myHand[2].myValue;
+												hand3Selected = true;
+												hand3used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inMultiplication)
+											{
+												answerBeingBuilt *= player1.myHand[2].myValue;
+												hand3Selected = true;
+												hand3used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+										}
+									}
+								}
+								else if(ASF && ABB)
+								{
+								
+								}
 					}
 					else if ((currentX > 525 && currentX < 625) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 4
-						if (!hand4Selected) { hand4Selected = true; }
-						else { hand4Selected = false; }
+						if(pickAcard)
+							{
+								if(!ASF && !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[3].myValue;
+									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand4Selected = true;
+									hand4used = true;
+								}
+								else if(!ASF && ABB)
+								{
+									if(inAddition || inSubtraction || inDivision || inMultiplication)
+									{
+										if(!hand1used)
+										{
+											if(inAddition)
+											{
+												answerBeingBuilt += player1.myHand[3].myValue;
+												cardSelected = true;
+												hand4Selected = true;
+												hand4used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inSubtraction)
+											{
+												answerBeingBuilt -= player1.myHand[3].myValue;
+												hand4Selected = true;
+												hand4used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inDivision)
+											{
+												answerBeingBuilt /= player1.myHand[3].myValue;
+												hand4Selected = true;
+												hand4used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inMultiplication)
+											{
+												answerBeingBuilt *= player1.myHand[3].myValue;
+												hand4Selected = true;
+												hand4used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+										}
+									}
+								}
+								else if(ASF && ABB)
+								{
+								
+								}
 					}
 					else if ((currentX > 625 && currentX < 725) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 5
-						if (!hand5Selected) { hand5Selected = true; }
-						else { hand5Selected = false; }
+						if(pickAcard)
+							{
+								if(!ASF && !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[4].myValue;
+									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand5Selected = true;
+									hand5used = true;
+								}
+								else if(!ASF && ABB)
+								{
+									if(inAddition || inSubtraction || inDivision || inMultiplication)
+									{
+										if(!hand1used)
+										{
+											if(inAddition)
+											{
+												answerBeingBuilt += player1.myHand[4].myValue;
+												cardSelected = true;
+												hand5Selected = true;
+												hand5used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inSubtraction)
+											{
+												answerBeingBuilt -= player1.myHand[4].myValue;
+												hand5Selected = true;
+												hand5used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inDivision)
+											{
+												answerBeingBuilt /= player1.myHand[4].myValue;
+												hand5Selected = true;
+												hand5used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+											else if(inMultiplication)
+											{
+												answerBeingBuilt *= player1.myHand[4].myValue;
+												hand5Selected = true;
+												hand5used = true;
+												pickAcard = false;
+												pickAsign = true;
+											}
+										}
+									}
+								}
+								else if(ASF && ABB)
+								{
+								
+								}
 					}
 
 						//****************PORTRAIT PIC CHECK ______ check complete, disabling
@@ -1086,12 +1314,15 @@
 						//clicked on DECK
 					else if ((currentX > 110 && currentX < 220) && (currentY > 425 && currentY < 560)) {
 						handleThisClick = false;
-						player1.myDeck.addToHand(hand1Selected, hand2Selected, hand3Selected, hand4Selected, hand5Selected);
-						hand1Selected = false;
-						hand2Selected = false;
-						hand3Selected = false;
-						hand4Selected = false;
-						hand5Selected = false;
+						if(!pickAcard || !pickAsign || !merge)
+						{
+							player1.myDeck.addToHand(hand1Selected, hand2Selected, hand3Selected, hand4Selected, hand5Selected);
+							hand1Selected = false;
+							hand2Selected = false;
+							hand3Selected = false;
+							hand4Selected = false;
+							hand5Selected = false;
+						}
 					}
 						//****CLOCK
 					else if ((currentX > 0 && currentX < 125) && (currentY > 590 && currentY < 701)) {//clicked on Clock, disabled for now
