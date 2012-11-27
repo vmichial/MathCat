@@ -1507,6 +1507,17 @@
 					ctx.fillText(confirmMessage, 374, 355);
 					ctx.fillText(failMessage, 374, 295);
 				}
+				
+				ctx.font = '15px Arial';
+				var unknown = '_';
+				var ABBstring = "current term:"
+				var ASFstring = "your answer:"
+				ctx.fillText(ASFstring,370,195);
+				ctx.fillText(ABBstring,515,195);
+				ctx.font = '50px Arial';
+				if(ASF){ctx.fillText(answerSoFar,370,255);}else{ctx.fillText(unknown,370,255);}
+				if(ABB){ctx.fillText(answerBeingBuilt,540,255);}else{fillText(unknown,540,255);}
+				
 
 
 				//more stuff
