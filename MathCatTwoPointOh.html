@@ -965,9 +965,7 @@
 							{
 							
 							}
-						}
-						
-					
+						}				
 					else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 2
 						if(pickAcard)
@@ -987,7 +985,7 @@
 								{
 									if(inAddition || inSubtraction || inDivision || inMultiplication)
 									{
-										if(!hand1used)
+										if(!hand2used)
 										{
 											if(inAddition)
 											{
@@ -1050,7 +1048,7 @@
 								{
 									if(inAddition || inSubtraction || inDivision || inMultiplication)
 									{
-										if(!hand1used)
+										if(!hand3used)
 										{
 											if(inAddition)
 											{
@@ -1113,7 +1111,7 @@
 								{
 									if(inAddition || inSubtraction || inDivision || inMultiplication)
 									{
-										if(!hand1used)
+										if(!hand4used)
 										{
 											if(inAddition)
 											{
@@ -1593,7 +1591,7 @@
 
 		}
 
-
+	}
 		// ****************** DRAW FUNCTION STARTS HERE ****************************
 		function draw(ctx) {
 			ctx.clearRect(0, 0, 1000, 700);
