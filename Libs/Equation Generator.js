@@ -111,17 +111,16 @@ function generateEQ(level) {
 				break;
 
 			case 5: // ax = b   =>   x = ab
-				a = x + 1;
-				b = temp;
-				x = a * b;
-
-				if (roll(10) % 2 == 0) {
-					temp = a;
-					a = x;
-					x = temp;
-					x = '/' + x;
-				} else {
+				if (roll(10) % 2 == 0) { // Choose a/x or x/a
+					b = temp;
+					a = x + 1; // Make non zero
+					x = a * b;
 					a = '/' + a;
+				} else {
+					b = temp + 1; // Make non zero
+					x = x + 1;
+					a = x * b;
+					x = '/' + x;
 				}
 
 				break;
