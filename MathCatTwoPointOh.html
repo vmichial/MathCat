@@ -49,6 +49,7 @@
 			this.myValue = value;		//in integer value for doing math with
 			this.myColor = color;		//a string for holding the color, used in making the name of the image
 			this.myImage = new Image();	//make an image variable
+			this.rank = 0;
 		};
 
 		//the deck class. represents the relavant data to manage a deck
@@ -137,6 +138,7 @@
 				for (var i = 0; i < 5; i++) {
 					this.inDeck[i].here = false;
 					this.inHand[i].here = true;
+					this.inHand[i].rank = i+1;
 				}
 				this.numUsed = 5;
 				this.firstCard = 0;
@@ -162,9 +164,11 @@
 				if ((!h1) && (this.numUsed < this.MAX_DECK_SIZE)) {
 					this.inHand[handIndices[0]].here = false;
 					this.used[handIndices[0]].here = true;
-
+					
+					//now to make the rank the same, so the card is displayed in the correct spot
+					this.inHand[this.numUsed].rank = this.inHand[handIndices[0]].rank;					
 					this.inHand[this.numUsed].here = true;
-					this.inDeck[this.numUsed].here = false;
+					this.inDeck[this.numUsed].here = false;					
 					this.numUsed++;
 				}
 				else if (!h1) {
@@ -175,6 +179,8 @@
 				if ((!h2) && (this.numUsed < this.MAX_DECK_SIZE)) {
 					this.inHand[handIndices[1]].here = false;
 					this.used[handIndices[1]].here = true;
+					//now to make the rank the same, so the card is displayed in the correct spot
+					this.inHand[this.numUsed].rank = this.inHand[handIndices[1]].rank;
 
 					this.inHand[this.numUsed].here = true;
 					this.inDeck[this.numUsed].here = false;
@@ -188,6 +194,8 @@
 				if ((!h3) && (this.numUsed < this.MAX_DECK_SIZE)) {
 					this.inHand[handIndices[2]].here = false;
 					this.used[handIndices[2]].here = true;
+					//now to make the rank the same, so the card is displayed in the correct spot
+					this.inHand[this.numUsed].rank = this.inHand[handIndices[2]].rank;
 
 					this.inHand[this.numUsed].here = true;
 					this.inDeck[this.numUsed].here = false;
@@ -201,6 +209,8 @@
 				if ((!h4) && (this.numUsed < this.MAX_DECK_SIZE)) {
 					this.inHand[handIndices[3]].here = false;
 					this.used[handIndices[3]].here = true;
+					//now to make the rank the same, so the card is displayed in the correct spot
+					this.inHand[this.numUsed].rank = this.inHand[handIndices[3]].rank;
 
 					this.inHand[this.numUsed].here = true;
 					this.inDeck[this.numUsed].here = false;
@@ -214,6 +224,8 @@
 				if ((!h5) && (this.numUsed < this.MAX_DECK_SIZE)) {
 					this.inHand[handIndices[4]].here = false;
 					this.used[handIndices[4]].here = true;
+					//now to make the rank the same, so the card is displayed in the correct spot
+					this.inHand[this.numUsed].rank = this.inHand[handIndices[4]].rank;
 
 					this.inHand[this.numUsed].here = true;
 					this.inDeck[this.numUsed].here = false;
@@ -416,6 +428,17 @@
 					if (this.myDeck.inHand[i].here == true) {
 						this.myHand[handNum] = this.myDeck.inHand[i];
 						handNum++;
+					}
+				}
+				var temporary;
+				for(var a = 0; a<5 ; a++){
+					for(var b = a+1; b<5 ; b++){
+						if(this.myHand[b].rank < this.myHand[a].rank)
+						{
+							temporary = this.myHand[b];
+							this.myHand[b] = this.myHand[a];
+							this.myHand[a] = temporary;
+						}
 					}
 				}
 			}
@@ -2064,11 +2087,11 @@
 						if(!pickAcard || !pickAsign || !merge)
 						{
 							player1.myDeck.addToHand(hand1Selected, hand2Selected, hand3Selected, hand4Selected, hand5Selected);
-							hand1Selected = false;
-							hand2Selected = false;
-							hand3Selected = false;
-							hand4Selected = false;
-							hand5Selected = false;
+							if(!hand1used){hand1Selected = false;}
+							if(!hand2used){hand2Selected = false;}
+							if(!hand3used){hand3Selected = false;}
+							if(!hand4used){hand4Selected = false;}
+							if(!hand5used){hand5Selected = false;}
 						}
 					}
 						//****CLOCK
@@ -2078,7 +2101,7 @@
 						//else{outOfTime= false;}
 					}
 
-						//********TIME CHECK
+					//********TIME CHECK
 					else if ((currentX > 126 && currentX < 270) && (currentY > 590 && currentY < 701)) {
 						if (followTime == true) {
 							handleThisClick = false;
@@ -2270,8 +2293,8 @@
 						}
 						else if(restartDialog)
 						{
-							handleThisClick = true;
-							resetDialog = false;
+							handleThisClick = false;
+							restartDialog = false;
 							cancelDialog = true;
 						}
 						else if (confirmDialog) {
