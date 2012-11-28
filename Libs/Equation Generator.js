@@ -37,12 +37,22 @@ function generateEQ(level) {
 		o2 = roll(1); if (o1 <= o2) o2++;
 		o3 = (o1 == 0 || o2 == 0 ? (o1 == 1 || o2 == 1 ? 2 : 1) : 0);
 
-		var isFrac = (typeof a == 'string');
-		if (isFrac) a = Number(a.substring(1, a.length));
+		var xFrac = 0, isFrac = (typeof a == 'string') || (typeof x == 'string');
+		if (isFrac) {
+			if (typeof a == 'string') {
+				a = Number(a.substring(1, a.length));
+				xFrac = 0;
+			}
+			if (typeof x == 'string') {
+				x = Number(x.substring(1, x.length));
+				xFrac = 1;
+			}
+		}
 
 		if (a != 1) {
 			if (isFrac) {
-				lhs[o1] = 'x÷' + pm(a);
+				if (xFrac) lhs[o1] = pm(a) + '÷x';
+				else lhs[o1] = 'x÷' + pm(a);
 			} else {
 				lhs[o1] = pm(a) + '•x';
 			}
@@ -87,24 +97,33 @@ function generateEQ(level) {
 				c = temp;
 				b += temp;
 				break;
+
 			case 3:
 				temp *= (Math.pow(-1, roll(10)))
 				c = temp;
 				b += temp;
 				break;
+
 			case 4: // ax = b
 				while (temp < 1) temp++;
 				a = temp;
 				b *= temp;
-
-				// reduce to make math easier
-
 				break;
-			case 5: // ax = tb
-				a = roll(Math.round(Math.sqrt(MAX))-2)+2;
-				b = roll(Math.round(Math.sqrt(MAX)/4*5)-1)+1;
+
+			case 5: // ax = b   =>   x = ab
+				a = x + 1;
+				b = temp;
 				x = a * b;
-				a = '/' + a;
+
+				if (roll(10) % 2 == 0) {
+					temp = a;
+					a = x;
+					x = temp;
+					x = '/' + x;
+				} else {
+					a = '/' + a;
+				}
+
 				break;
 		}
 
