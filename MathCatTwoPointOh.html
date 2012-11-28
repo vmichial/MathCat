@@ -1027,6 +1027,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[0].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												cardSelected = true;
 												hand1Selected = true;
 												hand1used = true;
@@ -1109,6 +1110,7 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												answerSoFar = Math.floor(answerSoFar);
 												inAddition = true;
 												inSubtraction = true;
 												inDivision = true;
@@ -1166,6 +1168,7 @@
 									answerBeingBuilt = 0;
 									ABB = true;
 									answerBeingBuilt = player1.myHand[1].myValue;
+									answerSoFar = Math.floor(answerSoFar);
 									cardSelected = true;
 									makeTermActive = true;
 									pickAcard = false;
@@ -1221,6 +1224,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[1].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												makeTermActive = true;
 												cardSelected = true;
 												hand2Selected = true;
@@ -1295,6 +1299,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[1].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												cardSelected = true;
 												makeTermActive = true;
 												hand2Selected = true;
@@ -1413,6 +1418,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[2].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												makeTermActive = true;
 												cardSelected = true;
 												hand3Selected = true;
@@ -1487,6 +1493,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[2].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												cardSelected = true;
 												hand3Selected = true;
 												hand3used = true;
@@ -1605,6 +1612,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[3].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												cardSelected = true;
 												hand4Selected = true;
 												hand4used = true;
@@ -1679,6 +1687,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[3].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												cardSelected = true;
 												hand4Selected = true;
 												hand4used = true;
@@ -1797,6 +1806,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[4].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												cardSelected = true;
 												hand5Selected = true;
 												hand5used = true;
@@ -1871,6 +1881,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[4].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												answerSoFar = Math.floor(answerSoFar);
 												cardSelected = true;
 												hand5Selected = true;
 												makeTermActive = true;
@@ -2064,6 +2075,7 @@
 						if(merge){
 							cardSelected = false;
 							answerSoFar /= answerBeingBuilt;
+							answerSoFar = Math.floor(answerSoFar);
 							ASF = true;
 							answerBeingBuilt = 0;
 							ABB = false;
