@@ -718,6 +718,8 @@
 		var pickAcardMessage = "select a card";
 		var pickAsignDialog = false;
 		var pickAsignMessage = "select an operator";
+		var restartDialog = false;
+		var restartMessage = "restart this question?";
 
 		var moodOMG = false;
 		var moodFearful = false;		//bool for determining if we should use fearful portrait
@@ -1895,6 +1897,33 @@
 							handleThisClick = false;
 							acceptDialog = false;
 						}
+						else if(restartDialog)
+						{
+							restartDialog = false;
+							cardSelected = false;
+							answerSoFar = 0;
+							answerBeingBuilt = 0;
+							ABB = false;
+							ASF = false;
+							hand1Selected = false;
+							hand2Selected = false;
+							hand3Selected = false;
+							hand4Selected = false;
+							hand5Selected = false;
+							hand1used = false;
+							hand2used = false;
+							hand3used = false;
+							hand4used = false;
+							hand5used = false;
+							pickAsign = false;
+							pickAcard = false;
+							pickAsign = false;
+							pickAcard = true;
+							inAddition = false;
+							inSubtraction = false;
+							inDivision = false;
+							inMultiplication = false;
+						}
 						else if (confirmDialog) {
 							handleThisClick = false;
 							acceptDialog = true;
@@ -1913,15 +1942,15 @@
 							player1.myDeck.shuffleDeck();
 							player1.myDeck.makeFirstHand();
 							acceptDialog = false;
-							player1.answerSoFar = 0;
-							player1.answerBeingBuilt = 0;
+							answerSoFar = 0;
+							answerBeingBuilt = 0;
 							ABB = false;
 							ASF = false;
-							hand1selected = false;
-							hand2selected = false;
-							hand3selected = false;
-							hand4selected = false;
-							hand5selected = false;
+							hand1Selected = false;
+							hand2Selected = false;
+							hand3Selected = false;
+							hand4Selected = false;
+							hand5Selected = false;
 							hand1used = false;
 							hand2used = false;
 							hand3used = false;
@@ -1929,7 +1958,6 @@
 							hand5used = false;
 							pickAsign = false;
 							pickAcard = false;
-							player1.myDeck.resetD
 
 						}
 						else if (cancelDialog) {
@@ -1949,15 +1977,15 @@
 							player1.myDeck.resetDeck();
 							player1.myDeck.shuffleDeck();
 							player1.myDeck.makeFirstHand();
-							player1.answerSoFar = 0;
-							player1.answerBeingBuilt = 0;
+							answerSoFar = 0;
+							answerBeingBuilt = 0;
 							ABB = false;
 							ASF = false;
-							hand1selected = false;
-							hand2selected = false;
-							hand3selected = false;
-							hand4selected = false;
-							hand5selected = false;
+							hand1Selected = false;
+							hand2Selected = false;
+							hand3Selected = false;
+							hand4Selected = false;
+							hand5Selected = false;
 							hand1used = false;
 							hand2used = false;
 							hand3used = false;
@@ -1965,7 +1993,11 @@
 							hand5used = false;
 							pickAsign = false;
 							pickAcard = false;
-							player1.myDeck.resetD
+							player1.myDeck.resetDeck();
+						}
+						else if(pickAcard || pickAsign || merge)
+						{
+							//skip the question
 						}
 						else {
 							handleThisClick = false;
@@ -1979,6 +2011,12 @@
 						if (acceptDialog) {
 							handleThisClick = false;
 							acceptDialog = false;
+						}
+						else if(restartDialog)
+						{
+							handleThisClick = true;
+							resetDialog = false;
+							cancelDialog = true;
 						}
 						else if (confirmDialog) {
 							handleThisClick = false;
@@ -2004,15 +2042,15 @@
 							numSubtractions = 0;
 							numMultiplies = 0;
 							numDivisions = 0;
-							player1.answerSoFar = 0;
-							player1.answerBeingBuilt = 0;
+							answerSoFar = 0;
+							answerBeingBuilt = 0;
 							ABB = false;
 							ASF = false;
-							hand1selected = false;
-							hand2selected = false;
-							hand3selected = false;
-							hand4selected = false;
-							hand5selected = false;
+							hand1Selected = false;
+							hand2Selected = false;
+							hand3Selected = false;
+							hand4Selected = false;
+							hand5Selected = false;
 							hand1used = false;
 							hand2used = false;
 							hand3used = false;
@@ -2023,6 +2061,21 @@
 							player1.myDeck.resetDeck();
 							player1.myDeck.shuffleDeck();
 							player1.myDeck.makeFirstHand();
+						}
+						else if(pickAcard || pickAsign || merge)
+						{
+							if(!ASF && !ABB)
+							{
+								quitDialog = true;
+							}
+							else if(!ASF && ABB)
+							{
+								restartDialog = true;
+							}
+							else if(ASF && ABB)
+							{
+								restartDialog = true;
+							}
 						}
 						else {
 							handleThisClick = false;
@@ -2302,6 +2355,7 @@
 				else if (cancelDialog) { ctx.fillText(cancelMessage, 374, 355); }
 				else if(selectCardDialog){ctx.fillText(selectCardMessage, 374, 355);}
 				else if(selectOperationDialog){ctx.fillText(selectOperationMessage, 374, 355);}
+				else if(restartDialog){ctx.fillText(restartMessage,374,355);}
 
 				
 				
