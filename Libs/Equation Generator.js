@@ -1,7 +1,7 @@
 ﻿maxLVL = 5;
 
 function generateEQ(level) {
-	var MAX = 64;
+	var MAX = 16;
 
 	function struct() { this.EQ = ""; this.answer = 0; };
 	// Rolls a number
@@ -92,7 +92,7 @@ function generateEQ(level) {
 				c = temp;
 				b += temp;
 				break;
-			case 4:
+			case 4: // ax = b
 				while (temp < 1) temp++;
 				a = temp;
 				b *= temp;
@@ -100,10 +100,11 @@ function generateEQ(level) {
 				// reduce to make math easier
 
 				break;
-			case 5:
-				while (temp < 2) temp++;
-				a = '/' + temp;
-				x *= temp;
+			case 5: // ax = tb
+				a = roll(Math.round(Math.sqrt(MAX))-2)+2;
+				b = roll(Math.round(Math.sqrt(MAX)/4*5)-1)+1;
+				x = a * b;
+				a = '/' + a;
 				break;
 		}
 
