@@ -720,6 +720,8 @@
 		var pickAsignMessage = "select an operator";
 		var restartDialog = false;
 		var restartMessage = "restart this question?";
+		var mergeDialog = false;
+		var mergeMessage = "Select an operator to merge";
 
 		var moodOMG = false;
 		var moodFearful = false;		//bool for determining if we should use fearful portrait
@@ -788,6 +790,7 @@
 		var cardTimer = 0;
 		var operatorTimer = 0;
 		var gameOverTimer = 0;
+		var mergeTimer = 0;
 
 		//startup variables
 		var startupTimer = 0;
@@ -1923,6 +1926,7 @@
 					{//clicked on ADD button
 						handleThisClick = false;
 						if(pickAsign){
+						cardSelected = false;
 							makeTermActive = true;
 							inAddition = true;
 							inSubtraction = false;
@@ -1931,7 +1935,25 @@
 							pickAsign = false;
 							pickAcard = true;
 							numAdditions++;
+							selectCardDialog = true;
 							}
+						if(merge){
+							cardSelected = false;
+							answerSoFar += answerBeingBuilt;
+							ASF = true;
+							answerBeingBuilt = 0;
+							ABB = false;
+							numAdditions++;
+							merge = false;
+							pickAsign = false;
+							pickAcard = true;
+							inAddition = false;
+							inSubtraction = false;
+							inMultiplication = false;
+							inDivision = false;
+							makeTermActive = false;
+							selectCardDialog = true;
+						}
 
 
 					}
@@ -1944,9 +1966,28 @@
 							inDivision = false;
 							inMultiplication = false;
 							pickAsign = false;
+							merge = false;
 							pickAcard = true;
 							numSubtractions++;
+							selectCardDialog = true;
 							}
+							if(merge){
+							cardSelected = false;
+							answerSoFar -= answerBeingBuilt;
+							ASF = true;
+							answerBeingBuilt = 0;
+							ABB = false;
+							numSubtractions++;
+							merge = false;
+							pickAsign = false;
+							pickAcard = true;
+							inAddition = false;
+							inSubtraction = false;
+							inMultiplication = false;
+							inDivision = false;
+							makeTermActive = false;
+							selectCardDialog = true;
+						}
 
 
 					}
@@ -1961,7 +2002,26 @@
 							pickAcard = true;
 							makeTermActive = true;
 							numMultiplies++;
+							merge = false;
+							selectCardDialog = true;
 							}
+							if(merge){
+							cardSelected = false;
+							answerSoFar *= answerBeingBuilt;
+							ASF = true;
+							answerBeingBuilt = 0;
+							ABB = false;
+							numMultiplies++;
+							merge = false;
+							pickAsign = false;
+							pickAcard = true;
+							inAddition = false;
+							inSubtraction = false;
+							inMultiplication = false;
+							inDivision = false;
+							makeTermActive = false;
+							selectCardDialog = true;
+						}
 
 
 					}
@@ -1976,7 +2036,25 @@
 							pickAsign = false;
 							pickAcard = true;
 							numDivisions++;
+							selectCardDialog = true;
 							}
+						if(merge){
+							cardSelected = false;
+							answerSoFar /= answerBeingBuilt;
+							ASF = true;
+							answerBeingBuilt = 0;
+							ABB = false;
+							numDivisions++;
+							merge = false;
+							pickAsign = false;
+							pickAcard = true;
+							inAddition = false;
+							inSubtraction = false;
+							inMultiplication = false;
+							inDivision = false;
+							makeTermActive = false;
+							selectCardDialog = true;
+						}
 
 
 					}
@@ -2035,7 +2113,7 @@
 								{
 									if(makeTermActive){makeTermActive = false;}else{makeTermActive = true;}
 								}
-								if(!ASF && ABB)
+								else if(!ASF && ABB)
 								{
 									if(makeTermActive)
 									{
@@ -2049,13 +2127,19 @@
 										inMultiplication = false;
 										inDivision = false;
 										pickAsign = false;
+										selectCardDialog = true;
 										pickAcard = true;
+										merge = false;
 									}
 								}
-								if(ASF && ABB)
+								else if(ASF && !ABB){
+									if(makeTermActive){makeTermActive = false;} else{makeTermActive = true;}
+								}
+								else if(ASF && ABB)
 								{
 									pickAcard = false;
 									pickAsign = false;
+									mergeDialog = true;
 									merge = true;
 								}
 							}
@@ -2249,6 +2333,10 @@
 							{
 								restartDialog = true;
 							}
+							else if(ASF && !ABB)
+							{
+								restartDialog = true;
+							}
 						}
 						else {
 							handleThisClick = false;
@@ -2353,6 +2441,11 @@
 				if (cancelDialog) {
 					cancelTimer++;
 					if ((cancelTimer / fps) == 3) { cancelDialog = false; cancelTimer = 0; }
+				}
+				if(mergeDialog)
+				{
+					mergeTimer++;
+					if((mergeTimer / fps) == 3){mergeDialog = false; mergeTimer = 0;}
 				}
 				//make sure conditional buttons update regardless of click
 				if (makeTermActive) {
@@ -2531,6 +2624,7 @@
 				else if(selectCardDialog){ctx.fillText(selectCardMessage, 374, 355);}
 				else if(selectOperationDialog){ctx.fillText(selectOperationMessage, 374, 355);}
 				else if(restartDialog){ctx.fillText(restartMessage,374,355);}
+				else if(mergeDialog){ctx.fillText(mergeMessage,374,355);}
 
 				
 				
