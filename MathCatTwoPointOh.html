@@ -50,6 +50,7 @@
 			this.myColor = color;		//a string for holding the color, used in making the name of the image
 			this.myImage = new Image();	//make an image variable
 			this.rank = 0;
+			this.disabled = false;
 		};
 
 		//the deck class. represents the relavant data to manage a deck
@@ -73,22 +74,6 @@
 			this.firstCard = 0;
 			this.lastCard = 4;
 
-			//make dumpHand()
-			this.dumpHand = function () {
-				for (var i = this.firstCard; i <= this.lastCard; i++) {
-					this.inHand[i].here = false;
-					this.used[i].here = true;
-				}
-				this.firstCard = this.lastCard + 1;
-				this.lastCard++;
-				while ((this.lastCard < this.firstCard + 5) && (this.lastCard < this.MAX_DECK_SIZE)) {
-					this.inDeck[this.lastCard].here = false;
-					this.inHand[this.lastCard].here = true;
-					this.lastCard++;
-					this.numUsed++;
-				}
-				this.lastCard--;
-			}
 			this.initializeDeck = function () {
 
 				var color = ["blue", "brown", "green", "purple"];
@@ -145,95 +130,117 @@
 				this.lastCard = 4;
 			}
 
-			this.addToHand = function (h1, h2, h3, h4, h5) {
+			this.addToHand = function (h1, h2, h3, h4, h5,H1,H2,H3,H4,H5) {
 				//use this function to add cards to the hand.  
-				//use the howMany parameter to determine how
-				//many more cards the hand needs
-				//its just a matter ofhanging a few bools to true
+				//rank makes it so that the cards are in
+				//the same spot when you dumb cards
 				var handIndices = [5];
-
-				var i = 0;
 				var ind = 0;
-				while (i < this.numUsed) {
-					if (this.inHand[i].here == true) {
-						handIndices[ind++] = i;
+				for(var c = 0; c<5 ; c++)
+				{
+					for(var e = 0; e<this.numUsed ; e++)
+					{
+						if( (this.inHand[e].here == true) && (this.inHand[e].rank == (c+1)) )
+						{
+							handIndices[ind++] = e;
+						}
 					}
-					i++;
+				}
+				
+				if(handIndices[0] !== 'undefined'){
+					if ((!h1 || !H1) && (this.numUsed < this.MAX_DECK_SIZE)) {
+						this.inHand[handIndices[0]].here = false;
+						this.used[handIndices[0]].here = true;					
+						//now to make the rank the same, so the card is displayed in the correct spot
+						this.inHand[this.numUsed].rank = this.inHand[handIndices[0]].rank;					
+						this.inHand[this.numUsed].here = true;
+						this.inDeck[this.numUsed].here = false;					
+						this.numUsed++;
+					}
+					else if (!h1 || !H1) {
+						this.inHand[handIndices[0]].disabled = true;
+						this.inDeck[handIndices[0]].disabled = true;
+						this.used[handIndices[0]].disabled = true;
+						this.inHand[handIndices[0]].here = false;
+						this.used[handIndices[0]].here = true;
+					}
 				}
 
-				if ((!h1) && (this.numUsed < this.MAX_DECK_SIZE)) {
-					this.inHand[handIndices[0]].here = false;
-					this.used[handIndices[0]].here = true;
-					
-					//now to make the rank the same, so the card is displayed in the correct spot
-					this.inHand[this.numUsed].rank = this.inHand[handIndices[0]].rank;					
-					this.inHand[this.numUsed].here = true;
-					this.inDeck[this.numUsed].here = false;					
-					this.numUsed++;
-				}
-				else if (!h1) {
-					this.inHand[handIndices[0]].here = false;
-					this.used[handIndices[0]].here = true;
-				}
+				if(handIndices[1] !== 'undefined'){
+					if ((!h2 || !H2) && (this.numUsed < this.MAX_DECK_SIZE)) {
+						this.inHand[handIndices[1]].here = false;
+						this.used[handIndices[1]].here = true;
+						//now to make the rank the same, so the card is displayed in the correct spot
+						this.inHand[this.numUsed].rank = this.inHand[handIndices[1]].rank;
 
-				if ((!h2) && (this.numUsed < this.MAX_DECK_SIZE)) {
-					this.inHand[handIndices[1]].here = false;
-					this.used[handIndices[1]].here = true;
-					//now to make the rank the same, so the card is displayed in the correct spot
-					this.inHand[this.numUsed].rank = this.inHand[handIndices[1]].rank;
-
-					this.inHand[this.numUsed].here = true;
-					this.inDeck[this.numUsed].here = false;
-					this.numUsed++;
+						this.inHand[this.numUsed].here = true;
+						this.inDeck[this.numUsed].here = false;
+						this.numUsed++;
+					}
+					else if (!h2 || !H2) {
+						this.inHand[handIndices[1]].here = false;
+						this.used[handIndices[1]].here = true;
+						this.inHand[handIndices[1]].disabled = true;
+						this.inDeck[handIndices[1]].disabled = true;
+						this.used[handIndices[1]].disabled = true;
+					}
 				}
-				else if (!h2) {
-					this.inHand[handIndices[1]].here = false;
-					this.used[handIndices[1]].here = true;
+				if(handIndices[2] !== 'undefined'){
+					if ((!h3 || !H3) && (this.numUsed < this.MAX_DECK_SIZE)) {
+						this.inHand[handIndices[2]].here = false;
+						this.used[handIndices[2]].here = true;
+						//now to make the rank the same, so the card is displayed in the correct spot
+						this.inHand[this.numUsed].rank = this.inHand[handIndices[2]].rank;
+		
+						this.inHand[this.numUsed].here = true;
+						this.inDeck[this.numUsed].here = false;
+						this.numUsed++;
+					}
+					else if (!h3 || !H3) {
+						this.inHand[handIndices[2]].here = false;
+						this.used[handIndices[2]].here = true;
+						this.inHand[handIndices[2]].disabled = true;
+						this.inDeck[handIndices[2]].disabled = true;
+						this.used[handIndices[2]].disabled = true;
+					}
 				}
-
-				if ((!h3) && (this.numUsed < this.MAX_DECK_SIZE)) {
-					this.inHand[handIndices[2]].here = false;
-					this.used[handIndices[2]].here = true;
-					//now to make the rank the same, so the card is displayed in the correct spot
-					this.inHand[this.numUsed].rank = this.inHand[handIndices[2]].rank;
-
-					this.inHand[this.numUsed].here = true;
-					this.inDeck[this.numUsed].here = false;
-					this.numUsed++;
+				if(handIndices[3] !== 'undefined'){
+					if ((!h4 || !H4) && (this.numUsed < this.MAX_DECK_SIZE)) {
+						this.inHand[handIndices[3]].here = false;
+						this.used[handIndices[3]].here = true;
+						//now to make the rank the same, so the card is displayed in the correct spot
+						this.inHand[this.numUsed].rank = this.inHand[handIndices[3]].rank;
+	
+						this.inHand[this.numUsed].here = true;
+						this.inDeck[this.numUsed].here = false;
+						this.numUsed++;
+					}
+					else if (!h4 || !H4) {
+						this.inHand[handIndices[3]].here = false;
+						this.used[handIndices[3]].here = true;
+						this.inHand[handIndices[3]].disabled = true;
+						this.inDeck[handIndices[3]].disabled = true;
+						this.used[handIndices[3]].disabled = true;
+					}
 				}
-				else if (!h3) {
-					this.inHand[handIndices[2]].here = false;
-					this.used[handIndices[2]].here = true;
-				}
-
-				if ((!h4) && (this.numUsed < this.MAX_DECK_SIZE)) {
-					this.inHand[handIndices[3]].here = false;
-					this.used[handIndices[3]].here = true;
-					//now to make the rank the same, so the card is displayed in the correct spot
-					this.inHand[this.numUsed].rank = this.inHand[handIndices[3]].rank;
-
-					this.inHand[this.numUsed].here = true;
-					this.inDeck[this.numUsed].here = false;
-					this.numUsed++;
-				}
-				else if (!h4) {
-					this.inHand[handIndices[3]].here = false;
-					this.used[handIndices[3]].here = true;
-				}
-
-				if ((!h5) && (this.numUsed < this.MAX_DECK_SIZE)) {
-					this.inHand[handIndices[4]].here = false;
-					this.used[handIndices[4]].here = true;
-					//now to make the rank the same, so the card is displayed in the correct spot
-					this.inHand[this.numUsed].rank = this.inHand[handIndices[4]].rank;
-
-					this.inHand[this.numUsed].here = true;
-					this.inDeck[this.numUsed].here = false;
-					this.numUsed++;
-				}
-				else if (!h5) {
-					this.inHand[handIndices[4]].here = false;
-					this.used[handIndices[4]].here = true;
+				if(handIndices[4] !== 'undefined'){
+					if ((!h5 || !H5) && (this.numUsed < this.MAX_DECK_SIZE)) {
+						this.inHand[handIndices[4]].here = false;
+						this.used[handIndices[4]].here = true;
+						//now to make the rank the same, so the card is displayed in the correct spot
+						this.inHand[this.numUsed].rank = this.inHand[handIndices[4]].rank;
+	
+						this.inHand[this.numUsed].here = true;
+						this.inDeck[this.numUsed].here = false;
+						this.numUsed++;
+					}
+					else if (!h5 || !H5) {
+						this.inHand[handIndices[4]].here = false;
+						this.used[handIndices[4]].here = true;
+						this.inHand[handIndices[4]].disabled = true;
+						this.inDeck[handIndices[4]].disabled = true;
+						this.used[handIndices[4]].disabled = true;
+					}
 				}
 
 			}
@@ -244,6 +251,10 @@
 					this.inDeck[i].here = true;
 					this.inHand[i].here = false;
 					this.used[i].here = false;
+					this.inHand[i].disabled = false;
+					this.inDeck[i].disabled = false;
+					this.used[i].disabled = false;
+					this.initializeDeck();
 					this.shuffleDeck();
 					this.makeFirstHand();
 				}
@@ -253,17 +264,7 @@
 				//this is needed in game logic to know when one of our
 				//ending conditions are met. also if it is empty
 				//we don't have to display the cardBack.png
-				/*
-						var keepTrack=true;
-						for(var i=0;i<this.MAX_DECK_SIZE;i++)
-						{
-							if(this.inDeck[i].here==true)
-							{
-								keepTrack = false;
-							}
-						}
-						return keepTrack;
-				*/
+				
 				if (this.numUsed < this.MAX_DECK_SIZE) { return false; }
 				else { return true; }
 
@@ -832,11 +833,6 @@
 		var currentX = 0;
 		var currentY = 0;
 
-		//		var SSfirstPass = new Boolean(true);
-
-		//var titleScreenReady = new Boolean(false);
-		//$(titleScreen).load(function () { titleScreenReady = true; });
-
 
 		function touchHandler(coors) {
 			touchSpot = "(" + coors.x + "," + coors.y + ")";
@@ -946,7 +942,7 @@
 					//**************CARDS CHECK
 					if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
 						//card 1 selected
-						if(!hand1Selected && !hand1used){
+						if(!hand1Selected && !hand1used && !player1.myHand[0].disabled){
 							if(pickAcard)
 							{
 								if(!ASF && !ABB)
@@ -1141,7 +1137,7 @@
 					}						
 					else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 2
-						if(!hand2Selected && !hand2used)
+						if(!hand2Selected && !hand2used && !player1.myHand[1].disabled)
 						{
 							if(pickAcard)
 							{
@@ -1337,7 +1333,7 @@
 					}
 					else if ((currentX > 425 && currentX < 525) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 3
-						if(!hand3Selected && !hand3used){
+						if(!hand3Selected && !hand3used && !player1.myHand[2].disabled){
 						if(pickAcard)
 							{
 								if(!ASF && !ABB)
@@ -1531,7 +1527,7 @@
 					}
 					else if ((currentX > 525 && currentX < 625) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 4
-					if(!hand4Selected && !hand4used){
+					if(!hand4Selected && !hand4used && !player1.myHand[3].disabled){
 						if(pickAcard)
 							{
 								if(!ASF && !ABB)
@@ -1725,7 +1721,7 @@
 					}
 					else if ((currentX > 625 && currentX < 725) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 5
-						if(!hand5Selected && !hand5used){
+						if(!hand5Selected && !hand5used && !player1.myHand[4].disabled){
 						if(pickAcard)
 							{
 								if(!ASF && !ABB)
@@ -2096,9 +2092,10 @@
 						//clicked on DECK
 					else if ((currentX > 110 && currentX < 220) && (currentY > 425 && currentY < 560)) {
 						handleThisClick = false;
-						if(!pickAcard || !pickAsign || !merge)
+						if(!player1.myDeck.isEmpty())
 						{
-							player1.myDeck.addToHand(hand1Selected, hand2Selected, hand3Selected, hand4Selected, hand5Selected);
+							player1.myDeck.addToHand(hand1Selected, hand2Selected, hand3Selected, hand4Selected, hand5Selected
+													 ,hand1used,hand2used,hand3used,hand4used,hand5used);
 							if(!hand1used){hand1Selected = false;}
 							if(!hand2used){hand2Selected = false;}
 							if(!hand3used){hand3Selected = false;}
@@ -2175,6 +2172,10 @@
 									pickAcard = false;
 									pickAsign = false;
 									mergeDialog = true;
+									inAddition = true;
+									inSubtraction = true;
+									inMultiplication = true;
+									inDivision = true;
 									merge = true;
 								}
 							}
@@ -2392,11 +2393,7 @@
 				else{makeTermPic.src = "Images/Buttons/makeTermButton.png";}
 				//if you are at the point where no more cards exist
 				//in the last 3 slots, don't allow them to be selected
-				if (player1.myDeck.numUsed >= player1.myDeck.MAX_DECK_SIZE) {
-					hand3Selected = false;
-					hand4Selected = false;
-					hand5Selected = false;
-				}
+
 				if (followTime) {//this handles the clock counter and changes any dependent event bools
 					//that are based on time
 					clockTimer++;
@@ -2569,22 +2566,26 @@
 				//Draw Deck*************
 				if (!deckEmpty) { ctx.drawImage(cardBack, 120, 440); }
 
-				//Draw cards
+				//Draw cards if the card isn't disabled
+				if(!player1.myHand[0].disabled){
 				if (hand1Selected) { ctx.drawImage(player1.myHand[0].myImage, 230, 415); }
 				else { ctx.drawImage(player1.myHand[0].myImage, 230, 440); }
-
+				}
+				if(!player1.myHand[1].disabled){
 				if (hand2Selected) { ctx.drawImage(player1.myHand[1].myImage, 330, 415); }
 				else { ctx.drawImage(player1.myHand[1].myImage, 330, 440); }
-
-				if (player1.myDeck.numUsed < player1.myDeck.MAX_DECK_SIZE) {
-					if (hand3Selected) { ctx.drawImage(player1.myHand[2].myImage, 430, 415); }
-					else { ctx.drawImage(player1.myHand[2].myImage, 430, 440); }
-
-					if (hand4Selected) { ctx.drawImage(player1.myHand[3].myImage, 530, 415); }
-					else { ctx.drawImage(player1.myHand[3].myImage, 530, 440); }
-
-					if (hand5Selected) { ctx.drawImage(player1.myHand[4].myImage, 630, 415); }
-					else { ctx.drawImage(player1.myHand[4].myImage, 630, 440); }
+				}
+				if(!player1.myHand[2].disabled){
+				if (hand3Selected) { ctx.drawImage(player1.myHand[2].myImage, 430, 415); }
+				else { ctx.drawImage(player1.myHand[2].myImage, 430, 440); }
+				}
+				if(!player1.myHand[3].disabled){
+				if (hand4Selected) { ctx.drawImage(player1.myHand[3].myImage, 530, 415); }
+				else { ctx.drawImage(player1.myHand[3].myImage, 530, 440); }
+				}
+				if(!player1.myHand[4].disabled){
+				if (hand5Selected) { ctx.drawImage(player1.myHand[4].myImage, 630, 415); }
+				else { ctx.drawImage(player1.myHand[4].myImage, 630, 440); }
 				}
 				//draw clock***********
 				if (!outOfTime) { ctx.drawImage(clockHappyPic, -6, 572); }
