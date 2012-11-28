@@ -920,6 +920,7 @@
 					//**************CARDS CHECK
 					if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
 						//card 1 selected
+						if(!hand1Selected && !hand1used){
 							if(pickAcard)
 							{
 								if(!ASF && !ABB)
@@ -928,6 +929,25 @@
 									ABB = true;
 									answerBeingBuilt = player1.myHand[0].myValue;
 									cardSelected = true;
+									makeTermActive = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand1Selected = true;
+									hand1used = true;
+									selectOperationDialog = true;
+									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;									
+								}
+								else if(ASF && !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[0].myValue;
+									cardSelected = true;
+									makeTermActive = true;
 									pickAcard = false;
 									pickAsign = true;	
 									hand1Selected = true;
@@ -938,7 +958,6 @@
 									inSubtraction = true;
 									inDivision = true;
 									inMultiplication = true;
-									
 								}
 								else if(!ASF && ABB)
 								{
@@ -950,6 +969,7 @@
 											{
 												answerBeingBuilt += player1.myHand[0].myValue;
 												cardSelected = true;
+												makeTermActive = true;
 												hand1Selected = true;
 												hand1used = true;
 												pickAcard = false;
@@ -969,6 +989,7 @@
 												hand1used = true;
 												pickAcard = false;
 												pickAsign = true;
+												makeTermActive = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
 												inAddition = true;
@@ -984,6 +1005,7 @@
 												hand1Selected = true;
 												hand1used = true;
 												pickAcard = false;
+												makeTermActive = true;
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
@@ -998,6 +1020,7 @@
 												cardSelected = true;
 												hand1Selected = true;
 												hand1used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1019,6 +1042,7 @@
 											if(inAddition)
 											{
 												answerBeingBuilt += player1.myHand[0].myValue;
+												makeTermActive = true;
 												cardSelected = true;
 												hand1Selected = true;
 												hand1used = true;
@@ -1037,6 +1061,7 @@
 												cardSelected = true;
 												hand1Selected = true;
 												hand1used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1052,6 +1077,7 @@
 												answerBeingBuilt = Math.floor(answerBeingBuilt);												
 												cardSelected = true;
 												hand1Selected = true;
+												makeTermActive = true;
 												hand1used = true;
 												pickAcard = false;
 												pickAsign = true;
@@ -1067,6 +1093,7 @@
 												answerBeingBuilt *= player1.myHand[0].myValue;
 												cardSelected = true;
 												hand1Selected = true;
+												makeTermActive = true;
 												hand1used = true;
 												pickAcard = false;
 												pickAsign = true;
@@ -1082,17 +1109,39 @@
 								}
 							
 							}
-						}						
+						}
+					}						
 					else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 2
-						if(pickAcard)
+						if(!hand2Selected && !hand2used)
+						{
+							if(pickAcard)
 							{
 								if(!ASF && !ABB)
 								{
 									answerBeingBuilt = 0;
 									ABB = true;
 									answerBeingBuilt = player1.myHand[1].myValue;
+									makeTermActive = true;
 									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand2Selected = true;
+									hand2used = true;
+									selectOperationDialog = true;
+									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
+								}
+								else if(ASF & !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[1].myValue;
+									cardSelected = true;
+									makeTermActive = true;
 									pickAcard = false;
 									pickAsign = true;	
 									hand2Selected = true;
@@ -1113,6 +1162,7 @@
 											if(inAddition)
 											{
 												answerBeingBuilt += player1.myHand[1].myValue;
+												makeTermActive = true;
 												cardSelected = true;
 												hand2Selected = true;
 												hand2used = true;
@@ -1128,6 +1178,7 @@
 											else if(inSubtraction)
 											{
 												answerBeingBuilt -= player1.myHand[1].myValue;
+												makeTermActive = true;
 												cardSelected = true;
 												hand2Selected = true;
 												hand2used = true;
@@ -1144,6 +1195,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[1].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												makeTermActive = true;
 												cardSelected = true;
 												hand2Selected = true;
 												hand2used = true;
@@ -1159,6 +1211,7 @@
 											else if(inMultiplication)
 											{
 												answerBeingBuilt *= player1.myHand[1].myValue;
+												makeTermActive = true;
 												cardSelected = true;
 												hand2Selected = true;
 												hand2used = true;
@@ -1183,6 +1236,7 @@
 											if(inAddition)
 											{
 												answerBeingBuilt += player1.myHand[1].myValue;
+												makeTermActive = true;
 												cardSelected = true;
 												hand2Selected = true;
 												hand2used = true;
@@ -1198,6 +1252,7 @@
 											else if(inSubtraction)
 											{
 												answerBeingBuilt -= player1.myHand[1].myValue;
+												makeTermActive = true;
 												cardSelected = true;
 												hand2Selected = true;
 												hand2used = true;
@@ -1215,6 +1270,7 @@
 												answerBeingBuilt /= player1.myHand[1].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
 												cardSelected = true;
+												makeTermActive = true;
 												hand2Selected = true;
 												hand2used = true;
 												pickAcard = false;
@@ -1232,6 +1288,7 @@
 												cardSelected = true;
 												hand2Selected = true;
 												hand2used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1245,9 +1302,11 @@
 									}
 								}
 							}
+						}
 					}
 					else if ((currentX > 425 && currentX < 525) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 3
+						if(!hand3Selected && !hand3used){
 						if(pickAcard)
 							{
 								if(!ASF && !ABB)
@@ -1255,7 +1314,26 @@
 									answerBeingBuilt = 0;
 									ABB = true;
 									answerBeingBuilt = player1.myHand[2].myValue;
+									makeTermActive = true;
 									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand3Selected = true;
+									hand3used = true;
+									selectOperationDialog = true;
+									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
+								}
+								else if(ASF && !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[2].myValue;
+									cardSelected = true;
+									makeTermActive = true;
 									pickAcard = false;
 									pickAsign = true;	
 									hand3Selected = true;
@@ -1276,6 +1354,7 @@
 											if(inAddition)
 											{
 												answerBeingBuilt += player1.myHand[2].myValue;
+												makeTermActive = true;
 												cardSelected = true;
 												hand3Selected = true;
 												hand3used = true;
@@ -1291,6 +1370,7 @@
 											else if(inSubtraction)
 											{
 												answerBeingBuilt -= player1.myHand[2].myValue;
+												makeTermActive = true;
 												cardSelected = true;
 												hand3Selected = true;
 												hand3used = true;
@@ -1307,6 +1387,7 @@
 											{
 												answerBeingBuilt /= player1.myHand[2].myValue;
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
+												makeTermActive = true;
 												cardSelected = true;
 												hand3Selected = true;
 												hand3used = true;
@@ -1325,6 +1406,7 @@
 												cardSelected = true;
 												hand3Selected = true;
 												hand3used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1347,6 +1429,7 @@
 											{
 												answerBeingBuilt += player1.myHand[2].myValue;
 												cardSelected = true;
+												makeTermActive = true;
 												hand3Selected = true;
 												hand3used = true;
 												pickAcard = false;
@@ -1365,6 +1448,7 @@
 												hand3Selected = true;
 												hand3used = true;
 												pickAcard = false;
+												makeTermActive = true;
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
@@ -1380,6 +1464,7 @@
 												cardSelected = true;
 												hand3Selected = true;
 												hand3used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1394,6 +1479,7 @@
 												answerBeingBuilt *= player1.myHand[2].myValue;
 												cardSelected = true;
 												hand3Selected = true;
+												makeTermActive = true;
 												hand3used = true;
 												pickAcard = false;
 												pickAsign = true;
@@ -1408,9 +1494,11 @@
 									}
 								}
 							}
+						}
 					}
 					else if ((currentX > 525 && currentX < 625) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 4
+					if(!hand4Selected && !hand4used){
 						if(pickAcard)
 							{
 								if(!ASF && !ABB)
@@ -1419,6 +1507,25 @@
 									ABB = true;
 									answerBeingBuilt = player1.myHand[3].myValue;
 									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand4Selected = true;
+									makeTermActive = true;
+									hand4used = true;
+									selectOperationDialog = true;
+									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
+								}
+								else if(ASF && !ABB)
+								{	
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[3].myValue;
+									cardSelected = true;
+									makeTermActive = true;
 									pickAcard = false;
 									pickAsign = true;	
 									hand4Selected = true;
@@ -1444,6 +1551,7 @@
 												hand4used = true;
 												pickAcard = false;
 												pickAsign = true;
+												makeTermActive = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
 												inAddition = true;
@@ -1456,6 +1564,7 @@
 												answerBeingBuilt -= player1.myHand[3].myValue;
 												cardSelected = true;
 												hand4Selected = true;
+												makeTermActive = true;
 												hand4used = true;
 												pickAcard = false;
 												pickAsign = true;
@@ -1476,6 +1585,7 @@
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
+												makeTermActive = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
 												inAddition = true;
 												inSubtraction = true;
@@ -1491,6 +1601,7 @@
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
+												makeTermActive = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
 												inAddition = true;
 												inSubtraction = true;
@@ -1511,6 +1622,7 @@
 												answerBeingBuilt += player1.myHand[3].myValue;
 												cardSelected = true;
 												hand4Selected = true;
+												makeTermActive = true;
 												hand4used = true;
 												pickAcard = false;
 												pickAsign = true;
@@ -1526,6 +1638,7 @@
 												answerBeingBuilt -= player1.myHand[3].myValue;
 												cardSelected = true;
 												hand4Selected = true;
+												makeTermActive = true;
 												hand4used = true;
 												pickAcard = false;
 												pickAsign = true;
@@ -1543,6 +1656,7 @@
 												cardSelected = true;
 												hand4Selected = true;
 												hand4used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1560,6 +1674,7 @@
 												hand4used = true;
 												pickAcard = false;
 												pickAsign = true;
+												makeTermActive = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
 												inAddition = true;
@@ -1571,9 +1686,11 @@
 									}
 								}
 							}
+						}
 					}
 					else if ((currentX > 625 && currentX < 725) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 5
+						if(!hand5Selected && !hand5used){
 						if(pickAcard)
 							{
 								if(!ASF && !ABB)
@@ -1582,6 +1699,25 @@
 									ABB = true;
 									answerBeingBuilt = player1.myHand[4].myValue;
 									cardSelected = true;
+									pickAcard = false;
+									pickAsign = true;	
+									hand5Selected = true;
+									makeTermActive = true;
+									hand5used = true;
+									selectOperationDialog = true;
+									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
+								}
+								else if(ASF && !ABB)
+								{
+									answerBeingBuilt = 0;
+									ABB = true;
+									answerBeingBuilt = player1.myHand[4].myValue;
+									cardSelected = true;
+									makeTermActive = true;
 									pickAcard = false;
 									pickAsign = true;	
 									hand5Selected = true;
@@ -1605,6 +1741,7 @@
 												cardSelected = true;
 												hand5Selected = true;
 												hand5used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1622,6 +1759,7 @@
 												hand5used = true;
 												pickAcard = false;
 												pickAsign = true;
+												makeTermActive = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
 												inAddition = true;
@@ -1637,6 +1775,7 @@
 												hand5Selected = true;
 												hand5used = true;
 												pickAcard = false;
+												makeTermActive = true;
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
@@ -1651,6 +1790,7 @@
 												cardSelected = true;
 												hand5Selected = true;
 												hand5used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1677,6 +1817,7 @@
 												hand5used = true;
 												pickAcard = false;
 												pickAsign = true;
+												makeTermActive = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
 												inAddition = true;
@@ -1690,6 +1831,7 @@
 												cardSelected = true;
 												hand5Selected = true;
 												hand5used = true;
+												makeTermActive = true;
 												pickAcard = false;
 												pickAsign = true;
 												selectOperationDialog = true;
@@ -1705,6 +1847,7 @@
 												answerBeingBuilt = Math.floor(answerBeingBuilt);
 												cardSelected = true;
 												hand5Selected = true;
+												makeTermActive = true;
 												hand5used = true;
 												pickAcard = false;
 												pickAsign = true;
@@ -1727,6 +1870,7 @@
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
 												inAddition = true;
 												inSubtraction = true;
+												makeTermActive = true;
 												inDivision = true;
 												inMultiplication = true;
 											}
@@ -1735,6 +1879,7 @@
 								}
 							}
 						}
+					}
 						//****************PORTRAIT PIC CHECK ______ check complete, disabling
 					/*
 					else if ((currentX > 680 && currentX < 970) && (currentY > 20 && currentY < 210))//clicked portrait
@@ -1778,6 +1923,7 @@
 					{//clicked on ADD button
 						handleThisClick = false;
 						if(pickAsign){
+							makeTermActive = true;
 							inAddition = true;
 							inSubtraction = false;
 							inDivision = false;
@@ -1793,6 +1939,7 @@
 						handleThisClick = false;
 						if(pickAsign){
 							inAddition = false;
+							makeTermActive = true;
 							inSubtraction = true;
 							inDivision = false;
 							inMultiplication = false;
@@ -1812,6 +1959,7 @@
 							inMultiplication = true;
 							pickAsign = false;
 							pickAcard = true;
+							makeTermActive = true;
 							numMultiplies++;
 							}
 
@@ -1824,6 +1972,7 @@
 							inSubtraction = false;
 							inDivision = true;
 							inMultiplication = false;
+							makeTermActive = true;
 							pickAsign = false;
 							pickAcard = true;
 							numDivisions++;
@@ -1880,9 +2029,9 @@
 					}
 						//make term button
 					else if ((currentX > 775 && currentX < 950) && (currentY > 585 && currentY < 641)) {
-							if(pickAcard)
+							if(pickAcard || pickAsign)
 							{
-								if(!ABB && !ASF)
+								if(!ASF && !ABB)
 								{
 									if(makeTermActive){makeTermActive = false;}else{makeTermActive = true;}
 								}
@@ -1890,6 +2039,7 @@
 								{
 									if(makeTermActive)
 									{
+										makeTermActive = false;
 										answerSoFar = answerBeingBuilt;
 										answerBeingBuilt = 0;
 										ABB = false;
@@ -1897,12 +2047,16 @@
 										inAddition = false;
 										inSubtraction = false;
 										inMultiplication = false;
-										indivision = false;
+										inDivision = false;
+										pickAsign = false;
+										pickAcard = true;
 									}
 								}
 								if(ASF && ABB)
 								{
-									
+									pickAcard = false;
+									pickAsign = false;
+									merge = true;
 								}
 							}
 						}
@@ -1920,6 +2074,7 @@
 							answerBeingBuilt = 0;
 							ABB = false;
 							ASF = false;
+							makeTermActive = false;
 							hand1Selected = false;
 							hand2Selected = false;
 							hand3Selected = false;
@@ -1961,6 +2116,7 @@
 							answerBeingBuilt = 0;
 							ABB = false;
 							ASF = false;
+							makeTermActive = false;
 							hand1Selected = false;
 							hand2Selected = false;
 							hand3Selected = false;
@@ -1996,6 +2152,7 @@
 							answerBeingBuilt = 0;
 							ABB = false;
 							ASF = false;
+							makeTermActive = false;
 							hand1Selected = false;
 							hand2Selected = false;
 							hand3Selected = false;
@@ -2073,6 +2230,7 @@
 							hand5used = false;
 							pickAsign = false;
 							pickAcard = false;
+							makeTermActive = false;
 							player1.myDeck.resetDeck();
 							player1.myDeck.shuffleDeck();
 							player1.myDeck.makeFirstHand();
