@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Lab</title>
+	<link rel="icon" href="Images/Misc/Lab.ico" />
+	<script type="text/javascript" src="Libs/Equation Generator.js"></script>
+	<style type="text/css">
+		body {
+			font-family:Arial;
+			font-size:14pt;
+			background-color:#000000;
+			color:#ffffff;
+		}
+		.lab {
+			background-image:url("Images/Misc/Lab BG.png");
+			background-repeat:no-repeat;
+			background-position:center top;
+			width:100%;
+			height:100%;
+			position:absolute;
+			z-index:-1;
+		}
+		td {
+			border: 1px solid #600000;
+		}
+		.eq {
+			background-color:#2020a0;
+		}
+		.ans {
+			font-family: Arial;
+			float:right;
+			background-color:#005000;
+		}
+	</style>
+</head>
+<body>
+	<div class="lab"></div>
+	<script type="text/javascript">
+		function struct() { this.EQ = ""; this.answer = 0; };
+
+		document.write('Equation Generator Test<br><table>');
+
+		document.write('<tr>');
+		for (var l = 1; l <= maxLVL; l++){
+			document.write('<td style="font-weight:bold;color:#ff0000;text-align:center;">Level: ' + l + '</td>');
+		}
+		document.write('</tr>');
+
+		for (var i = 0; i < 20; i++) {
+			document.write('<tr>');
+			for (var l = 1; l <= maxLVL; l++) {
+				document.write('<td>');
+
+				struct = generateEQ(l);
+				document.write('<span class=eq>' + struct.EQ + '</span> &nbsp; &nbsp; <span class=ans>' + struct.answer + '</span><br>');
+
+				document.write('</td>');
+			}
+			document.write('</tr>');
+		}
+		document.write('</table>');
+	</script>
+</body>
+</html>

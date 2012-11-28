@@ -1,7 +1,7 @@
-﻿maxLVL = 4;
+﻿maxLVL = 5;
 
 function generateEQ(level) {
-	var MAX = 20;
+	var MAX = 64;
 
 	function struct() { this.EQ = ""; this.answer = 0; };
 	// Rolls a number
@@ -37,9 +37,11 @@ function generateEQ(level) {
 		o2 = roll(1); if (o1 <= o2) o2++;
 		o3 = (o1 == 0 || o2 == 0 ? (o1 == 1 || o2 == 1 ? 2 : 1) : 0);
 
+		var isFrac = (typeof a == 'string');
+		if (isFrac) a = Number(a.substring(1, a.length));
+
 		if (a != 1) {
-			if (a < 0) {
-				a = Math.round(1 / a);
+			if (isFrac) {
 				lhs[o1] = 'x÷' + pm(a);
 			} else {
 				lhs[o1] = pm(a) + '•x';
@@ -63,19 +65,22 @@ function generateEQ(level) {
 
 	//		For any expression in the form of:
 	// ax+c=n
-	var temp = 0;
+	var factor, temp = 0;
 	var a, x, c, b;
 	a = 1; x = c = b = 0;
 
 
 
 	if (1 <= level) { // Level 1+
-		x = b = roll();
+		x = roll();
+		if (x < 2) x = roll(); // Reduce chances of getting 0 & 1
+		b = x;
 		assemble(b, x);
 	}
 
 	if (2 <= level) { // Level 2+
-		temp = roll(x / 2); // Roll a C
+		temp = roll(x / 3 * 2); // Roll a C
+		if (temp < 2) temp = roll(x / 3 * 2); // Reduce chances of getting 0 & 1
 
 		switch (level) {
 			case 2:
@@ -88,16 +93,17 @@ function generateEQ(level) {
 				b += temp;
 				break;
 			case 4:
-				while (x < 2) x = b++;
-				while (temp < 2) temp++;
+				while (temp < 1) temp++;
 				a = temp;
 				b *= temp;
+
+				// reduce to make math easier
+
 				break;
 			case 5:
-				while (x < 2) x = b++;
 				while (temp < 2) temp++;
-				//a /= temp;
-				//b /= temp;
+				a = '/' + temp;
+				x *= temp;
 				break;
 		}
 
