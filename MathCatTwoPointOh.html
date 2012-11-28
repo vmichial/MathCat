@@ -739,8 +739,6 @@
 		var canceled = false;			//bool for telling us if we canceled
 		var startPlaying = false;		//bool for knowing the game phase JUST STARTED
 		var hasEquation = false;		//bool tells if player has an equation
-		var buildingAnswer = false;		//bool for telling us if player is building answer, accepted ends this mode
-		var buildingTerm = false;		//bool for telling if we are currently building a term
 		var correctAnswer = false;
 
 		var atStartupScreen = true;	//bool for telling us what screen we are in startup screen, which shows our logos
@@ -866,6 +864,7 @@
 						clockOnes.src = "Images/Clock/clock" + onesTime + ".png";
 						handleThisClick = false;
 						player1.totalScore = 0;
+						//math vartiables to reset
 						answerSoFar = 0;
 						answerBeingBuilt = 0;
 						ASF = false;
@@ -884,6 +883,10 @@
 						hand5Selected = false;
 						hand5used = false;
 						selectCardDialog = true;
+						inAddition = false;
+						inSubtraction = false;
+						inDivision = false;
+						inMultiplication = false;
 					}
 					else if ((currentX > 730 && currentX < 960) && (currentY > 630)) {
 						atTitleScreen = false;
@@ -929,6 +932,10 @@
 									hand1used = true;
 									selectOperationDialog = true;
 									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
 									
 								}
 								else if(!ASF && ABB)
@@ -947,6 +954,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inSubtraction)
 											{
@@ -957,6 +968,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inDivision)
 											{
@@ -967,6 +982,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inMultiplication)
 											{
@@ -977,6 +996,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 										}
 									}
@@ -1004,6 +1027,10 @@
 									hand2used = true;
 									selectOperationDialog = true;
 									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
 								}
 								else if(!ASF && ABB)
 								{
@@ -1021,6 +1048,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inSubtraction)
 											{
@@ -1031,6 +1062,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inDivision)
 											{
@@ -1041,6 +1076,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inMultiplication)
 											{
@@ -1051,6 +1090,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 										}
 									}
@@ -1077,6 +1120,10 @@
 									hand3used = true;
 									selectOperationDialog = true;
 									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
 								}
 								else if(!ASF && ABB)
 								{
@@ -1094,6 +1141,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inSubtraction)
 											{
@@ -1104,6 +1155,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inDivision)
 											{
@@ -1114,6 +1169,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inMultiplication)
 											{
@@ -1124,6 +1183,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 										}
 									}
@@ -1150,6 +1213,10 @@
 									hand4used = true;
 									selectOperationDialog = true;
 									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
 								}
 								else if(!ASF && ABB)
 								{
@@ -1167,6 +1234,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inSubtraction)
 											{
@@ -1177,6 +1248,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inDivision)
 											{
@@ -1187,6 +1262,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inMultiplication)
 											{
@@ -1197,6 +1276,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 										}
 									}
@@ -1223,6 +1306,10 @@
 									hand5used = true;
 									selectOperationDialog = true;
 									if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+									inAddition = true;
+									inSubtraction = true;
+									inDivision = true;
+									inMultiplication = true;
 								}
 								else if(!ASF && ABB)
 								{
@@ -1240,6 +1327,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inSubtraction)
 											{
@@ -1250,6 +1341,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inDivision)
 											{
@@ -1260,6 +1355,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 											else if(inMultiplication)
 											{
@@ -1270,6 +1369,10 @@
 												pickAsign = true;
 												selectOperationDialog = true;
 												if(selectCardDialog){selectCardDialog = false; cardTimer = 0;}
+												inAddition = true;
+												inSubtraction = true;
+												inDivision = true;
+												inMultiplication = true;
 											}
 										}
 									}
@@ -1318,60 +1421,59 @@
 					}
 						//*************MATH BUTTONS***************************
 					else if ((currentX > 270 && currentX < 360) && (currentY > 615 && currentY < 685)) 
-					{
-						//clicked on ADD button
-						if (inAddition) { handleThisClick = false; inAddition = false; }
-						else
-						{
-							handleThisClick = false;
+					{//clicked on ADD button
+						handleThisClick = false;
+						if(pickAsign){
 							inAddition = true;
-							if (numAdditions < 9) {
-								numAdditions++;
-								addTimes.src = "Images/Times/times" + numAdditions + ".png";
+							inSubtraction = false;
+							inDivision = false;
+							inMultiplication = false;
+							pickAsign = false;
+							pickAcard = true;
+							numAdditions++;
 							}
-						}
 
 
 					}
 					else if ((currentX > 385 && currentX < 490) && (currentY > 580 && currentY < 650)) {//clicked on SUBTRACT button
-						if (inSubtraction) { handleThisClick = false; inSubtraction = false; }
-						else
-						{
-							handleThisClick = false;
+						handleThisClick = false;
+						if(pickAsign){
+							inAddition = false;
 							inSubtraction = true;
-							if (numSubtractions < 9) {
-								numSubtractions++;
-								minusTimes.src = "Images/Times/times" + numSubtractions + ".png";
+							inDivision = false;
+							inMultiplication = false;
+							pickAsign = false;
+							pickAcard = true;
+							numSubtractions++;
 							}
-						}
 
 
 					}
 					else if ((currentX > 520 && currentX < 635) && (currentY > 585 && currentY < 650)) {//clicked on MULTIPLY button
-						if (inMultiplication) { handleThisClick = false; inMultiplication = false; }
-						else
-						{
-							handleThisClick = false;
+						handleThisClick = false;
+						if(pickAsign){
+							inAddition = false;
+							inSubtraction = false;
+							inDivision = false;
 							inMultiplication = true;
-							if (numMultiplies < 9) {
-								numMultiplies++;
-								multiTimes.src = "Images/Times/times" + numMultiplies + ".png";
+							pickAsign = false;
+							pickAcard = true;
+							numMultiplies++;
 							}
-						}
 
 
 					}
 					else if ((currentX > 645 && currentX < 750) && (currentY > 600 && currentY < 680)) {//clicked on DIVIDE button
-						if (inDivision) { handleThisClick = false; inDivision = false; }
-						else
-						{
-							handleThisClick = false;
+						handleThisClick = false;
+						if(pickAsign){
+							inAddition = false;
+							inSubtraction = false;
 							inDivision = true;
-							if (numDivisions < 9) {
-								numDivisions++;
-								divideTimes.src = "Images/Times/times" + numDivisions + ".png";
+							inMultiplication = false;
+							pickAsign = false;
+							pickAcard = true;
+							numDivisions++;
 							}
-						}
 
 
 					}
@@ -1581,6 +1683,10 @@
 				//end click handle area ****gamestatus not click dependant found below****
 				player1.updateHand();
 				deckEmpty = player1.myDeck.isEmpty();
+				divideTimes.src = "Images/Times/times" + numDivisions + ".png";
+				multiTimes.src = "Images/Times/times" + numMultiplies + ".png";
+				minusTimes.src = "Images/Times/times" + numSubtractions + ".png";
+				addTimes.src = "Images/Times/times" + numAdditions + ".png";
 				//if you are at the point where no more cards exist
 				//in the last 3 slots, don't allow them to be selected
 				if (player1.myDeck.numUsed >= player1.myDeck.MAX_DECK_SIZE) {
