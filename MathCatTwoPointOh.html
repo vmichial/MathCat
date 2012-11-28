@@ -1880,17 +1880,32 @@
 					}
 						//make term button
 					else if ((currentX > 775 && currentX < 950) && (currentY > 585 && currentY < 641)) {
-						if (makeTermActive) {
-							handleThisClick = false;
-							makeTermActive = false;
-							makeTermPic.src = "Images/Buttons/finishTermButton.png";
+							if(pickAcard)
+							{
+								if(!ABB && !ASF)
+								{
+									if(makeTermActive){makeTermActive = false;}else{makeTermActive = true;}
+								}
+								if(!ASF && ABB)
+								{
+									if(makeTermActive)
+									{
+										answerSoFar = answerBeingBuilt;
+										answerBeingBuilt = 0;
+										ABB = false;
+										ASF = true;
+										inAddition = false;
+										inSubtraction = false;
+										inMultiplication = false;
+										indivision = false;
+									}
+								}
+								if(ASF && ABB)
+								{
+									
+								}
+							}
 						}
-						else {
-							handleThisClick = false;
-							makeTermActive = true;
-							makeTermPic.src = "Images/Buttons/makeTermButton.png";
-						}
-					}
 						//********Accept Button*******
 					else if ((currentX > 750 && currentX < 876) && (currentY > 640)) {
 						if (acceptDialog) {
@@ -2092,6 +2107,8 @@
 				multiTimes.src = "Images/Times/times" + numMultiplies + ".png";
 				minusTimes.src = "Images/Times/times" + numSubtractions + ".png";
 				addTimes.src = "Images/Times/times" + numAdditions + ".png";
+				if(makeTermActive){makeTermPic.src = "Images/Buttons/finishTermButton.png";}
+				else{makeTermPic.src = "Images/Buttons/makeTermButton.png";}
 				//if you are at the point where no more cards exist
 				//in the last 3 slots, don't allow them to be selected
 				if (player1.myDeck.numUsed >= player1.myDeck.MAX_DECK_SIZE) {
