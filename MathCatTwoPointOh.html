@@ -44,7 +44,7 @@
 
 		//the card class, represents the relavant data for a CARD
 
-		function Card(value, color, used) {
+		function Card(value, color, used){
 			this.here = used;			//used as a flag for if it is in a particular spot, hand, deck, or used
 			this.myValue = value;		//in integer value for doing math with
 			this.myColor = color;		//a string for holding the color, used in making the name of the image
@@ -57,17 +57,15 @@
 		//including which cards are in the deck, in the player's hand
 		//and which have been used.
 		function Deck() {
-
 			//remember the deck works like this. the 0 spot in the array
 			//for each one (inDeck, inHand, used) are all the same card
 			//but the bool, "here" will only be true in ONE OF THEM
 			//if you are true inDeck then you are false inHand and used.
-			//this way we know where cards are.    
-
+			//this way we know where cards are. 
 			this.inDeck = [52];			//thecard array for the deck
 			this.inHand = [52];			//card array for the hand
 			this.used = [52];			//card array for used cards
-			this.numUsed = 0;					//use this variable to keep track of how many cards are used
+			this.numUsed = 0;			//use this variable to keep track of how many cards are used
 			this.MAX_DECK_SIZE = 52;
 			this.x_size = 90;
 			this.y_size = 120;
@@ -75,7 +73,6 @@
 			this.lastCard = 4;
 
 			this.initializeDeck = function () {
-
 				var color = ["blue", "brown", "green", "purple"];
 				var inB = 0;
 				for (var i = 0; i < 13; i++) {
@@ -87,20 +84,16 @@
 						this.used[inB] = new Card(i + 1, color[j], false);
 						this.inHand[inB].myImage.src = "Images/Cards/card" + (i + 1) + color[j] + ".png"
 						inB += 1;
-
 					}
 				}
 				//add code here for initializing the deck
 				//each array should be filled with card objects
 				//the color should be either "green""red""purple"or "black"
 			}
-
 			this.shuffleDeck = function () {
-
 				//add code here for shuffleing the deck.
 				//remember, however you move the cards in one
 				//array, MOVE IT THE SAME IN THE OTHERS
-
 				for (var c = 0; c < 700 ; c++) {
 					for (var i = 0; i < this.MAX_DECK_SIZE ; i++) {
 						rand = Math.floor((Math.random() * 51));
@@ -129,7 +122,6 @@
 				this.firstCard = 0;
 				this.lastCard = 4;
 			}
-
 			this.addToHand = function (h1, h2, h3, h4, h5,H1,H2,H3,H4,H5) {
 				//use this function to add cards to the hand.  
 				//rank makes it so that the cards are in
@@ -164,7 +156,6 @@
 						this.used[handIndices[0]].here = true;
 					}
 				}
-
 				if(handIndices[1] !== 'undefined'){
 					if ((!h2 || !H2) && (this.numUsed < this.MAX_DECK_SIZE)) {
 						this.inHand[handIndices[1]].here = false;
@@ -266,11 +257,9 @@
 				
 				if (this.numUsed < this.MAX_DECK_SIZE) { return false; }
 				else { return true; }
-
 			}
 		};
 		//***************************END DECK
-
 		//whenever we start a game, we need to keep track of all information
 		//relavant to the player. so we have a Player class. just give it a 
 		//string when its made, and that will be the player name.
@@ -279,8 +268,8 @@
 			//same goes for adding AI. so encapsulate the deck into the 
 			//player's relavant information, here is myDeck
 			this.myDeck = new Deck();
-			this.myHand = [5];	//hold the current src names of cards in hand
-			this.name = "Math\n Cat";
+			this.myHand = [5];			//hold the current src names of cards in hand
+			this.name = "Math\n Cat";	//player name
 			this.Totalscore = 0;		//start the score at zero, this is the score for ENTIRE game
 			this.currentScore = 0;		//this is the score for the current HW questions
 			this.level = 1; 			//this is for the current level
@@ -297,8 +286,6 @@
 			this.myAnswer = 0;//the answer you can attempt to submit
 			this.termToBuild = 0;//the term you are currently building
 			this.answerAttempted = false;//if you have attempted an answer, display answer so far
-
-
 
 			this.initializePlayer = function () {
 				//ADD CODE HERE FOR SETTING THE PLAYER UP AT GAME START
@@ -440,18 +427,11 @@
 					}
 				}
 			}
-			//if anymore needed, add them in onto next class
+		//if anymore needed, add them in onto next class
 		};
-
-		//this class will be used by the game class
-
-
-
 		//		************************************************************************************************
 		//						END GAME CLASSES//START GAME DATA
 		//		************************************************************************************************
-
-
 		var gameCanvas = document.getElementById("myCanvas");
 		var gameContext = gameCanvas.getContext("2d");
 		var CanvasH = 700;
@@ -477,70 +457,6 @@
 		var clickMaxTime = 250;
 
 		var fps = 30;
-
-
-		//this is the touch code here! only thing is we won't be drawing!
-		// This will be defined on a TOUCH device such as Ultrabook or whatever
-		//tested it and yes it finds it
-		var is_touch_device = 'ontouchstart' in document.documentElement;
-		if (is_touch_device) {//this activates if its a touch device
-			// create a drawer which tracks touch movements
-			var toucher = {
-				touchstart: function (coors) {
-					touchDown = true;
-					touched = true;
-					touchTime = new Date().getTime();
-					touchHandler(coors);
-				},
-				touchmove: function (coors) {
-					//we don't want to add dragging just yet so just end the event
-					touched = false;
-				},
-				touchend: function (coors) {
-					touchDown = false;
-					touchTime = 0;
-				}
-			}
-
-
-			function TOUCH(event) {
-				event.preventDefault();
-				//so grabbing the first [element zero] of the multi touch targets
-				var coors = {
-					x: event.targetTouches[0].pageX,
-					y: event.targetTouches[0].pageY
-				};
-				// Now we need to get the offset of the canvas location
-				var obj = document.getElementById("myCanvas");
-
-				if (obj.offsetParent) {
-					// Every time we find a new object, we add its offsetLeft and offsetTop to curleft and curtop.
-					do {
-						coors.x -= obj.offsetLeft;
-						coors.y -= obj.offsetTop;
-					}
-						// The while loop can be "while (obj = obj.offsetParent)" only, which does return null
-						// when null is passed back, but that creates a warning in some editors (i.e. VS2010).
-					while ((obj = obj.offsetParent) != null);
-				}
-
-				// pass the coordinates to the appropriate handler
-				toucher[event.type](coors);
-
-			}
-
-			gameCanvas.addEventListener('touchstart', TOUCH, true);
-			gameCanvas.addEventListener('touchmove', TOUCH, true);
-			gameCanvas.addEventListener('touchend', TOUCH, true);
-
-			// prevent elastic scrolling
-			gameCanvas.addEventListener('touchmove', function (event) {
-				event.preventDefault();
-			}, false);
-		}
-			//********************END OF TOUCH CODE//START OF CLICK CODE**************************
-
-		else {
 			// When the click fires set bools, get position and call clickhandler
 			$("#myCanvas").mousedown(function (mouseEvent) {
 				clickDown = true;
@@ -562,12 +478,6 @@
 				}).mouseout(function (mouseEvent) {
 				});
 			});
-		}
-		//********************The Deck*******************************
-
-
-		//*******************End of The deck*************************
-
 		//		****************IMAGES THAT SHOULD BE AVAILABLE AT ALL TIMES*****************
 
 		//background images
@@ -819,8 +729,6 @@
 		var showFranciaGarcia = false;
 		var showJYC = false;
 		var showCodeForGood = false;
-		
-
 		//************** END OF GAME OBJECT VARIABLES ************ 
 
 		var touchSpot = new String();
@@ -828,7 +736,6 @@
 
 		var currentX = 0;
 		var currentY = 0;
-
 
 		function touchHandler(coors) {
 			touchSpot = "(" + coors.x + "," + coors.y + ")";
@@ -867,6 +774,7 @@
 			else if (atTitleScreen) {
 				if (handleThisClick) {
 					if ((currentX > 80 && currentX < 350) && (currentY > 630)) {
+						player1.myDeck.resetDeck();
 						moodFearful = false;
 						moodExcited = true;
 						moodCelebrate = false;
@@ -919,22 +827,7 @@
 
 				//if there is a click to worry about
 				if (handleThisClick) {
-					//******************I have listed all the areas to click for tests i've done
-					//******************in most cases you cannot chang moste setting in the final game
-					//******************things like portrait click, bonus click, score click, clock click
-					//******************will have no effect, so the code will be commented
-					/*
-					//check score // check complete, area diabled
-					if (((currentX > 170) && (currentX < 310)) && ((currentY > 170) && (currentY < 210))) {
-						handleThisClick = false;
-						if((player1.totalScore+111111) > 9999999){player1.totalScore = 9999999; }
-						else if (player1.totalScore < 9999999) { player1.totalScore += 111111; }
-						else
-						{
-							player1.totalScore = 9999999;
-						}
-					}
-					*/
+
 					//**************CARDS CHECK
 					if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
 						//card 1 selected
@@ -1913,38 +1806,17 @@
 					/*
 					else if ((currentX > 680 && currentX < 970) && (currentY > 20 && currentY < 210))//clicked portrait
 					{
-						handleThisClick = false;
-						//moods portrait cycle through
-						if (moodExcited) { moodExcited = false; moodFearful = true; }
-						else if (moodFearful) { moodFearful = false; moodCelebrate = true; }
-						else if (moodCelebrate) { moodCelebrate = false; moodConfused = true; }
-						else if (moodConfused) { moodConfused = false; moodOMG = true; }
-						else if (moodOMG) { moodOMG = false; moodDead = true; }
-						else if (moodDead) { moodDead = false; moodExcited = true; }
-
 					}
 					*/
 						//*******************BONUS CHECK****************//no need to test this anymore
 					/*
 					else if ((currentX > 740 && currentX < 940) && (currentY > 340 && currentY < 375)) {//clicked on addition bonus
-						handleThisClick = false;
-						if (additionBonus) { additionBonus = false; }
-						else { additionBonus = true; }
 					}
 					else if ((currentX > 740 && currentX < 940) && (currentY > 400 && currentY < 435)) {//clicked on subtraction bonus
-						handleThisClick = false;
-						if (subtractionBonus) { subtractionBonus = false; }
-						else { subtractionBonus = true; }
 					}
 					else if ((currentX > 740 && currentX < 940) && (currentY > 450 && currentY < 495)) {//clicked on multplication bonus
-						handleThisClick = false;
-						if (multiplyBonus) { multiplyBonus = false; }
-						else { multiplyBonus = true; }
 					}
 					else if ((currentX > 740 && currentX < 940) && (currentY > 530 && currentY < 550)) {//clicked on division bonus
-						handleThisClick = false;
-						if (divideBonus) { divideBonus = false; }
-						else { divideBonus = true; }
 					}
 					*/
 						//*************MATH BUTTONS***************************
@@ -2085,7 +1957,7 @@
 
 
 					}
-						//clicked on DECK
+					//clicked on DECK
 					else if ((currentX > 110 && currentX < 220) && (currentY > 425 && currentY < 560)) {
 						handleThisClick = false;
 						if(!player1.myDeck.isEmpty())
@@ -2224,9 +2096,6 @@
 							numSubtractions = 0;
 							numMultiplies = 0;
 							numDivisions = 0;
-							player1.myDeck.resetDeck();
-							player1.myDeck.shuffleDeck();
-							player1.myDeck.makeFirstHand();
 							acceptDialog = false;
 							answerSoFar = 0;
 							answerBeingBuilt = 0;
@@ -2261,9 +2130,6 @@
 							numSubtractions = 0;
 							numMultiplies = 0;
 							numDivisions = 0;
-							player1.myDeck.resetDeck();
-							player1.myDeck.shuffleDeck();
-							player1.myDeck.makeFirstHand();
 							answerSoFar = 0;
 							answerBeingBuilt = 0;
 							ABB = false;
@@ -2347,9 +2213,6 @@
 							pickAsign = false;
 							pickAcard = false;
 							makeTermActive = false;
-							player1.myDeck.resetDeck();
-							player1.myDeck.shuffleDeck();
-							player1.myDeck.makeFirstHand();
 						}
 						else if(pickAcard || pickAsign || merge)
 						{
@@ -2590,9 +2453,6 @@
 				//drawTime************
 				ctx.drawImage(clockTens, 110, 625);
 				ctx.drawImage(clockOnes, 170, 625);
-				//testing the actual values to see if its just slow loading the pics FIXED
-				//ctx.fillText(tensTime,120,600);
-				//ctx.fillText(onesTime,131,600);
 
 				//Draw panic button*******and bonuses********
 				if (panicked) {
