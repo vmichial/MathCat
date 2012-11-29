@@ -4,6 +4,8 @@
 	<meta charset="utf-8" />
 	<title>Lab</title>
 	<link rel="icon" href="Images/Misc/Lab.ico" />
+	<script type="text/javascript" src="Libs/Standard.js"></script>
+	<script type="text/javascript" src="Libs/Basic.js"></script>
 	<script type="text/javascript" src="Libs/Equation Generator.js"></script>
 	<script type="text/javascript" src="Libs/Deck.js"></script>
 	<style type="text/css">
@@ -44,14 +46,18 @@
 
 	<script type="text/javascript">
 		var deck1 = new Deck(); // Makes a new Deck of default size 52
-		deck1.select(4);	
-		deck1.select(7);	
-		deck1.select(23);	
-		deck1.select(30);	
-		deck1.select(50);	
-		deck1.deselect(7);
+		var handSize, hand = new Array();
 
+		deck1.shuffle();
+		deck1.select(4);
+		deck1.select(7);
+		deck1.select(23);
+		deck1.select(30);
+		deck1.select(50);
+		deck1.deselect(7);
+			
 		document.write('<div style="float:right">' +
+		'deck1.shuffle();		<br>' +
 		'deck1.select(4);		<br>' +
 		'deck1.select(7);		<br>' +
 		'deck1.select(23);	<br>' +
@@ -61,6 +67,12 @@
 		'</div>')
 
 		document.write('Card Deck Representation<br><table>');
+
+		handSize = deck1.listSelected(hand);
+
+		for (var i = 0; i < handSize; i++)
+			document.write(hand[i] + '<br>');
+
 		document.write('<tr>');
 		document.write('<td>Num</td>');
 		document.write('<td>Value</td>');
@@ -70,13 +82,14 @@
 		document.write('</tr>');
 
 		for (var i = 0; i < 52; i++) {
+			var c = deck1.cards[i];
 			document.write('<tr>');
 
-			document.write('<td>' + i + '</td>');
-			document.write('<td>' + cardV(i) + '</td>');
-			document.write('<td>' + cardS(i) + '</td>');
-			document.write('<td>' + cardFile(i) + '</td>');
-			document.write('<td>' + (deck1.isSelected(i) ? 'true' : '&nbsp;') + '</td>');
+			document.write('<td>' + c + '</td>');
+			document.write('<td>' + cardV(c) + '</td>');
+			document.write('<td>' + cardS(c) + '</td>');
+			document.write('<td>' + cardFile(c) + '</td>');
+			document.write('<td>' + (deck1.isSelected(c) ? 'true' : '&nbsp;') + '</td>');
 
 			document.write('</tr>');
 		}
@@ -90,14 +103,14 @@
 		document.write('Equation Generator Test<br><table>');
 
 		document.write('<tr>');
-		for (var l = 1; l <= maxLVL; l++){
+		for (var l = 1; l <= maxLVL_generateEQ; l++){
 			document.write('<td style="font-weight:bold;color:#ff0000;text-align:center;">Level: ' + l + '</td>');
 		}
 		document.write('</tr>');
 
 		for (var i = 0; i < 20; i++) {
 			document.write('<tr>');
-			for (var l = 1; l <= maxLVL; l++) {
+			for (var l = 1; l <= maxLVL_generateEQ; l++) {
 				document.write('<td>');
 
 				struct = generateEQ(l);

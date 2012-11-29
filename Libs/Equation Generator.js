@@ -1,25 +1,10 @@
-﻿maxLVL = 5;
+﻿maxLVL_generateEQ = 5;
 
 function generateEQ(level) {
 	var MAX = 16;
 
 	function struct() { this.EQ = ""; this.answer = 0; };
-	// Rolls a number
-	function roll(num) {
-		return Math.round(Math.random() * (num == undefined ? MAX : num));
-	}
 	// Gets the common divisor of 2 numbers
-	function gcd(n1, n2) {
-		function _gcd(n1, n2) {
-			return (n2 == 0 ? n1 : _gcd(n2, Math.floor(n1 % n2)));
-		}
-		if (n1 < n2) { // Swap if wrong endian
-			var t = n1;
-			n1 = n2;
-			n2 = t;
-		}
-		return _gcd(n1, n2);
-	}
 
 	ans = new struct();
 	function assemble(b, x, a, c1, c2) {
@@ -83,8 +68,8 @@ function generateEQ(level) {
 
 
 	if (1 <= level) { // Level 1+
-		x = roll();
-		if (x < 2) x = roll(); // Reduce chances of getting 0 & 1
+		x = roll(MAX);
+		if (x < 2) x = roll(MAX); // Reduce chances of getting 0 & 1
 		b = x;
 		assemble(b, x);
 	}
