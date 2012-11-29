@@ -145,8 +145,7 @@
 							handIndices[ind++] = e;
 						}
 					}
-				}
-				
+				}				
 				if(handIndices[0] !== 'undefined'){
 					if ((!h1 || !H1) && (this.numUsed < this.MAX_DECK_SIZE)) {
 						this.inHand[handIndices[0]].here = false;
@@ -304,8 +303,6 @@
 			this.initializePlayer = function () {
 				//ADD CODE HERE FOR SETTING THE PLAYER UP AT GAME START
 				//call functions for the deck.
-
-
 				this.myDeck.initializeDeck();
 				this.myDeck.shuffleDeck();
 				//this.myDeck.addToHand();  //<----- Broken function ****FIXED****
@@ -385,14 +382,12 @@
 						}
 					}
 				}
-
 				this.currentScore += addCardScore;
 			}
 			this.updateTotalScore = function () {
 				//this is called when a problem is finished, it should add the 
 				//currentScore to the TotalScore. and reset anything to what it needs to be
 				this.Totalscore = this.currentScore + this.currentBonus;
-
 			}
 			this.nextProblem = function (newEQ, newX) {
 				//insert code here to advance to the next problem generate new EQ and X
@@ -400,7 +395,6 @@
 				this.problemNumber = this.problemNumber + 1;
 				this.currentEQ = newEQ;
 				this.currentX = newX;
-
 			}
 			this.nextLevel = function (newEQ, newX) {
 				//add code here for progressing the player to the next level
@@ -446,7 +440,6 @@
 					}
 				}
 			}
-
 			//if anymore needed, add them in onto next class
 		};
 
