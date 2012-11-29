@@ -35,6 +35,13 @@ var Deck = function (deckSize) {
 
 
 	// --====[ Methods ]====--
+	this.init = function () {
+		for (var i = 0, e = Math.floor(this.DECKSIZE / 32) + 1 ; i < e; i++)
+			this.selected[i] = this.old_selected[i] = 0;
+		for (var i = 0, e = this.DECKSIZE; i < e; i++)
+			this.cards[i] = this.old_cards[i] = i;
+	}
+
 	this.isSelected = function (num) {
 		return 0 != (this.selected[Math.floor(num / 32)] & (1 << (num % 32)));
 	}
@@ -61,6 +68,12 @@ var Deck = function (deckSize) {
 	this.stateLoad = function () {
 		for (var i = 0, e = Math.floor(this.DECKSIZE / 32) + 1 ; i < e; i++)
 			this.selected[i] = this.old_selected[i];
+	}
+
+	this.setCards=function(list, listSize){
+		this.DECKSIZE = listSize;
+		this.init();
+		for (var i = 0; i < listSize; i++) this.cards[i] = list[i];
 	}
 
 	this.shuffle = function () {
@@ -92,8 +105,5 @@ var Deck = function (deckSize) {
 
 
 	// --====[ Constructor ]====--
-	for (var i = 0, e = Math.floor(this.DECKSIZE / 32) + 1 ; i < e; i++)
-		this.selected[i] = this.old_selected[i] = 0;
-	for (var i = 0, e = this.DECKSIZE; i < e; i++)
-		this.cards[i] = this.old_cards[i] = i;
+	this.init();
 }

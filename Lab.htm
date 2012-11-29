@@ -69,6 +69,7 @@
 		document.write('Card Deck Representation<br><table>');
 
 		handSize = deck1.listSelected(hand);
+		deck1.setCards(hand, handSize);
 
 		for (var i = 0; i < handSize; i++)
 			document.write(hand[i] + '<br>');
@@ -81,7 +82,7 @@
 		document.write('<td>Selected</td>');
 		document.write('</tr>');
 
-		for (var i = 0; i < 52; i++) {
+		for (var i = 0; i < deck1.DECKSIZE; i++) {
 			var c = deck1.cards[i];
 			document.write('<tr>');
 
