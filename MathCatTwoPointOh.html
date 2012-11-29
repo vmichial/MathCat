@@ -424,21 +424,24 @@
 				//whatever cards are inHand, we need these card pictures displayed.
 				//hold those cards data in the array, use this function to populate 
 				//and update the array
-				var handNum = 0;
-				for (var i = 0; i < this.myDeck.numUsed; i++) {
-					if (this.myDeck.inHand[i].here == true) {
-						this.myHand[handNum] = this.myDeck.inHand[i];
-						handNum++;
+				if(this.myDeck.numUsed < this.myDeck.MAX_DECK_SIZE)
+				{
+					var handNum = 0;
+					for (var i = 0; i < this.myDeck.numUsed; i++) {
+						if (this.myDeck.inHand[i].here == true) {
+							this.myHand[handNum] = this.myDeck.inHand[i];
+							handNum++;
+						}
 					}
-				}
-				var temporary;
-				for(var a = 0; a<5 ; a++){
-					for(var b = a+1; b<5 ; b++){
-						if(this.myHand[b].rank < this.myHand[a].rank)
-						{
-							temporary = this.myHand[b];
-							this.myHand[b] = this.myHand[a];
-							this.myHand[a] = temporary;
+					var temporary;
+					for(var a = 0; a<5 ; a++){
+						for(var b = a+1; b<5 ; b++){
+							if(this.myHand[b].rank < this.myHand[a].rank)
+							{
+								temporary = this.myHand[b];
+								this.myHand[b] = this.myHand[a];
+								this.myHand[a] = temporary;
+							}
 						}
 					}
 				}
