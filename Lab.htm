@@ -5,38 +5,86 @@
 	<title>Lab</title>
 	<link rel="icon" href="Images/Misc/Lab.ico" />
 	<script type="text/javascript" src="Libs/Equation Generator.js"></script>
+	<script type="text/javascript" src="Libs/Deck.js"></script>
 	<style type="text/css">
 		body {
-			font-family:Arial;
-			font-size:14pt;
-			background-color:#000000;
-			color:#ffffff;
+			font-family: Arial;
+			font-size: 14pt;
+			background-color: #000000;
+			color: #ffffff;
 		}
+
 		.lab {
-			background-image:url("Images/Misc/Lab BG.png");
-			background-repeat:no-repeat;
-			background-position:center top;
-			width:100%;
-			height:100%;
-			position:absolute;
-			z-index:-1;
+			background-image: url("Images/Misc/Lab BG.png");
+			background-repeat: no-repeat;
+			background-position: center top;
+			width: 100%;
+			height: 1024px;
+			position: absolute;
+			z-index: -1;
 		}
+
 		td {
 			border: 1px solid #600000;
 		}
+
 		.eq {
-			background-color:#2020a0;
+			background-color: #2020a0;
 		}
+
 		.ans {
 			font-family: Arial;
-			float:right;
-			background-color:#005000;
+			float: right;
+			background-color: #005000;
 		}
 	</style>
 </head>
 <body>
 	<div class="lab"></div>
+
 	<script type="text/javascript">
+		var deck1 = new Deck(); // Makes a new Deck of default size 52
+		deck1.select(4);	
+		deck1.select(7);	
+		deck1.select(23);	
+		deck1.select(30);	
+		deck1.select(50);	
+		deck1.deselect(7);
+
+		document.write('<div style="float:right">' +
+		'deck1.select(4);		<br>' +
+		'deck1.select(7);		<br>' +
+		'deck1.select(23);	<br>' +
+		'deck1.select(30);	<br>' +
+		'deck1.select(50);	<br>' +
+		'deck1.deselect(7);	<br>' +
+		'</div>')
+
+		document.write('Card Deck Representation<br><table>');
+		document.write('<tr>');
+		document.write('<td>Num</td>');
+		document.write('<td>Value</td>');
+		document.write('<td>Suit</td>');
+		document.write('<td>File Name</td>');
+		document.write('<td>Selected</td>');
+		document.write('</tr>');
+
+		for (var i = 0; i < 52; i++) {
+			document.write('<tr>');
+
+			document.write('<td>' + i + '</td>');
+			document.write('<td>' + cardV(i) + '</td>');
+			document.write('<td>' + cardS(i) + '</td>');
+			document.write('<td>' + cardFile(i) + '</td>');
+			document.write('<td>' + (deck1.isSelected(i) ? 'true' : '&nbsp;') + '</td>');
+
+			document.write('</tr>');
+		}
+		document.write('</table>');
+	</script>
+
+	<script type="text/javascript">
+		/*
 		function struct() { this.EQ = ""; this.answer = 0; };
 
 		document.write('Equation Generator Test<br><table>');
@@ -60,6 +108,7 @@
 			document.write('</tr>');
 		}
 		document.write('</table>');
+		*/
 	</script>
 </body>
 </html>
