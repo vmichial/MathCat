@@ -61,6 +61,11 @@ var Deck = function (deckSize) {
 			this.selected[i] = 0;
 	}
 
+	this.selectInverse = function () {
+		for (var i = 0, e = Math.floor(this.DECKSIZE / 32) + 1 ; i < e; i++)
+			this.selected[i] = ~this.selected[i];
+	}
+
 	this.stateSave = function () {
 		for (var i = 0, e = Math.floor(this.DECKSIZE / 32) + 1 ; i < e; i++)
 			this.old_selected[i] = this.selected[i];
