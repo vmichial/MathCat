@@ -552,20 +552,20 @@
 		//		
 		//		**************THE ARE GAME OBJECT VARIABLES MADE GLOBALS**************
 		//thesevariables keep track of the state of the game for gameplay logic*****
-		var player1 = new Player();
-		player1.initializePlayer();
+									var player1 = new Player();
+									player1.initializePlayer();
 
 		//math logic for cards variable
-		var isIdle = true;
-		var pickAcard = true;
-		var pickAsign = false;	
-		var	merge = false;
-		var ASF = false;
-		var ABB = false;
-		var answerSoFar = 0;
-		var answerBeingBuilt = 0;
-		var answered = false;
-		var cardSelected = false;
+									var isIdle = true;
+									var pickAcard = true;
+									var pickAsign = false;	
+									var	merge = false;
+									var ASF = false;
+									var ABB = false;
+									var answerSoFar = 0;
+									var answerBeingBuilt = 0;
+									var answered = false;
+									var cardSelected = false;
 		//DIALOG variables
 		var confirmDialog = false;
 		var confirmMessage = "accept to continue...";
@@ -598,19 +598,19 @@
 		var moodDead = false;			//bool for determining if we should use Dead portrait
 		var moodOMG = false;
 
-		var inDivision = false;			//bools for the buttons
-		var inAddition = false;			//
-		var inSubtraction = false;		//
-		var inMultiplication = false;	//mmk
+										var inDivision = false;			//bools for the buttons
+										var inAddition = false;			//
+										var inSubtraction = false;		//
+										var inMultiplication = false;	//mmk
 
 
-		var makeTermActive = false;		//bool for telling us if in makeTerm mode
-		var panicked = false;			//bool for telling us if panic button was pressed this equation
-		var accepted = false;			//bool for telling us if player accepted.
-		var canceled = false;			//bool for telling us if we canceled
-		var startPlaying = false;		//bool for knowing the game phase JUST STARTED
-		var hasEquation = false;		//bool tells if player has an equation
-		var correctAnswer = false;
+										var makeTermActive = false;		//bool for telling us if in makeTerm mode
+										var panicked = false;			//bool for telling us if panic button was pressed this equation
+										var accepted = false;			//bool for telling us if player accepted.
+										var canceled = false;			//bool for telling us if we canceled
+										var startPlaying = false;		//bool for knowing the game phase JUST STARTED
+										var hasEquation = false;		//bool tells if player has an equation
+										var correctAnswer = false;
 
 		var atStartupScreen = true;	//bool for telling us what screen we are in startup screen, which shows our logos
 		var atTitleScreen = false;		//bool for at title screen, true means, show title and play title music
@@ -618,35 +618,35 @@
 		var atGameOverScreen = false;	//oh so sad, true if you just phail hard
 		var atEndScreen = false;
 
-		var hand1Selected = false;		//these hand selected bools are needed for drawing.
-		var hand2Selected = false;		//if we click on a card, we want to move it slightly
-		var hand3Selected = false;		//from the default position
-		var hand4Selected = false;
-		var hand5Selected = false;
+										var hand1Selected = false;		//these hand selected bools are needed for drawing.
+										var hand2Selected = false;		//if we click on a card, we want to move it slightly
+										var hand3Selected = false;		//from the default position
+										var hand4Selected = false;
+										var hand5Selected = false;
 		
-		var hand1used = false;			//tells us if a card was used in making a value, so it can't be used again
-		var hand2used = false;
-		var hand3used = false;
-		var hand4used = false;
-		var hand5used = false;
+										var hand1used = false;			//tells us if a card was used in making a value, so it can't be used again
+										var hand2used = false;
+										var hand3used = false;
+										var hand4used = false;
+										var hand5used = false;
 
 		//variables for player data
-		var additionBonus = false;
-		var subtractionBonus = false;
-		var multiplyBonus = false;
-		var divideBonus = false;
+										var additionBonus = false;
+										var subtractionBonus = false;
+										var multiplyBonus = false;
+										var divideBonus = false;
 
-		var numAdditions = 0;
-		var numSubtractions = 0;
-		var numMultiplies = 0;
-		var numDivisions = 0;
+										var numAdditions = 0;
+										var numSubtractions = 0;
+										var numMultiplies = 0;
+										var numDivisions = 0;
 
-		var deckEmpty = false;
+										var deckEmpty = false;
 
-		var outOfTime = false;
-		var timeRemaining = 99;
-		var tensTime = 9;
-		var onesTime = 9;
+										var outOfTime = false;
+										var timeRemaining = 99;
+										var tensTime = 9;
+										var onesTime = 9;
 		
 		//Timers for certain messages
 		var started = false;
@@ -2082,7 +2082,6 @@
 							hand5used = false;
 							pickAsign = false;
 							pickAcard = false;
-							player1.myDeck.resetDeck();
 						}
 						else if(pickAcard || pickAsign || merge)
 						{
