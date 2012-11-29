@@ -122,7 +122,52 @@
 				this.firstCard = 0;
 				this.lastCard = 4;
 			}
-			this.addToHand = function (h1, h2, h3, h4, h5,H1,H2,H3,H4,H5) {
+			this.addToHand = function(h1, h2, h3, h4, h5,H1,H2,H3,H4,H5)
+			{
+				var cardsRemaining = this.MAX_DECK_SIZE - this.numUsed;
+				var handIndices = [5];
+				var selections = [5];
+				if(h1 && H1){selections[0] = true;}else{selections[0] = false;}
+				if(h2 && H2){selections[1] = true;}else{selections[1] = false;}
+				if(h3 && H3){selections[2] = true;}else{selections[2] = false;}
+				if(h4 && H4){selections[3] = true;}else{selections[3] = false;}
+				if(h5 && H5){selections[4] = true;}else{selections[4] = false;}
+				//find the indices of the cards to be dumped in rank order
+				for (var i = 0; i<5; i++){
+					for(var j = 0; j<this.numUsed; j++){
+						if( (this.inHand[j].here) && (this.inHand[j].rank == (i+1)) ){
+							handIndices[i] = j;
+						}
+					}
+				}
+				
+				//now loop from i = 0 to i = 4, so long as there is a card in the deck
+				//check if the card whose rank is i+1 needs to be dumped
+				//if the card needs to be dumped, and there is a card in the deck
+				//set the card used, and make a new card with the same rank.
+				//if the card needs to be dumped but there are no cards in the deck
+				//leave the card, in hand, but disable it
+				
+				for(var i = 0; i < 5 ; i++){
+					if(!selections[i]){
+						if(cardsRemaining > 0){
+							this.inHand[handIndices[i]].here = false;
+							this.used[handIndices[i]].here = true;					
+							//now to make the rank the same, so the card is displayed in the correct spot
+							this.inHand[this.numUsed].rank = this.inHand[handIndices[i]].rank;					
+							this.inHand[this.numUsed].here = true;
+							this.inDeck[this.numUsed].here = false;					
+							this.numUsed++;
+							cardsRemaining--;
+						}
+						else{
+							this.inHand[handIndices[i]].disabled = true;
+						}
+	
+					}
+				}
+			}
+			/*this.addToHand = function (h1, h2, h3, h4, h5,H1,H2,H3,H4,H5) {
 				//use this function to add cards to the hand.  
 				//rank makes it so that the cards are in
 				//the same spot when you dumb cards
@@ -233,7 +278,7 @@
 					}
 				}
 
-			}
+			}*/
 			this.resetDeck = function () {
 				//add code here to reset the deck. just set all the bools to
 				//show that all cards are inDeck. then we can do another hand
@@ -730,7 +775,6 @@
 		var showJYC = false;
 		var showCodeForGood = false;
 		//************** END OF GAME OBJECT VARIABLES ************ 
-
 		var touchSpot = new String();
 		var clickSpot = new String();
 
@@ -746,7 +790,6 @@
 			clickSpot = "(" + pos.x + "," + pos.y + ")";
 			currentX = pos.x;
 			currentY = pos.y;
-
 			//this will handle changing the variables depending on game state
 			//and the click position
 		}
