@@ -13,17 +13,19 @@ function GameStates() {
 
 
 	function Hand() {
-		this.selected1 = false;		//these hand selected bools are needed for drawing.
-		this.selected2 = false;		//if we click on a card, we want to move it slightly
-		this.selected3 = false;		//from the default position
-		this.selected4 = false;
-		this.selected5 = false;
-
-		this.used1 = false;			//tells us if a card was used in making a value, so it can't be used again
-		this.used2 = false;
-		this.used3 = false;
-		this.used4 = false;
-		this.used5 = false;
+		this.selected = [5];
+		this.selected[0] = false;		//these hand selected bools are needed for drawing.
+		this.selected[1] = false;		//if we click on a card, we want to move it slightly
+		this.selected[2] = false;		//from the default position
+		this.selected[3] = false;
+		this.selected[4] = false;
+		
+		this.used = [5];
+		this.used[0] = false;			//tells us if a card was used in making a value, so it can't be used again
+		this.used[1] = false;
+		this.used[2] = false;
+		this.used[3] = false;
+		this.used[4] = false;
 	}
 	this.hand = new Hand();
 
@@ -105,4 +107,182 @@ function GameStates() {
 
 	this.player1 = new Player();
 	this.player1.initializePlayer();
+	
+	this.clickedAcard = function(cardChoice){
+						if (!this.hand.selected1 && !this.hand.used1 && !this.player1.myHand[cardChoice].disabled) {
+							if (this.logic.pickAcard) {
+								if (!this.logic.ASF && !this.logic.ABB) {
+									this.logic.answerBeingBuilt = 0;
+									this.logic.ABB = true;
+									this.logic.answerBeingBuilt = this.player1.myHand[cardChoice].myValue;
+									this.logic.cardSelected = true;
+									this.logic.makeTermActive = true;
+									this.logic.pickAcard = false;
+									this.logic.pickAsign = true;
+									this.hand.selected[cardChoice] = true;
+									this.hand.used[cardChoice] = true;
+									msg.selectOperationDialog = true;
+									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+									this.logic.inAddition = true;
+									this.logic.inSubtraction = true;
+									this.logic.inDivision = true;
+									this.logic.inMultiplication = true;
+								}
+								else if (this.logic.ASF && !this.logic.ABB) {
+									this.logic.answerBeingBuilt = 0;
+									this.logic.ABB = true;
+									this.logic.answerBeingBuilt = this.player1.myHand[cardChoice].myValue;
+									this.logic.cardSelected = true;
+									this.logic.makeTermActive = true;
+									this.logic.pickAcard = false;
+									this.logic.pickAsign = true;
+									this.hand.selected[cardChoice] = true;
+									this.hand.used[cardChoice] = true;
+									msg.selectOperationDialog = true;
+									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+									this.logic.inAddition = true;
+									this.logic.inSubtraction = true;
+									this.logic.inDivision = true;
+									this.logic.inMultiplication = true;
+								}
+								else if (!this.logic.ASF && this.logic.ABB) {
+									if (this.logic.inAddition || this.logic.inSubtraction || this.logic.inDivision || this.logic.inMultiplication) {
+										if (!this.hand.used1) {
+											if (this.logic.inAddition) {
+												this.logic.answerBeingBuilt += this.player1.myHand[cardChoice].myValue;
+												this.logic.cardSelected = true;
+												this.logic.makeTermActive = true;
+												this.hand.selected[cardChoice] = true;
+												this.hand.used[cardChoice] = true;
+												this.logic.pickAcard = false;
+												this.logic.pickAsign = true;
+												msg.selectOperationDialog = true;
+												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+												this.logic.inAddition = true;
+												this.logic.inSubtraction = true;
+												this.logic.inDivision = true;
+												this.logic.inMultiplication = true;
+											}
+											else if (this.logic.inSubtraction) {
+												this.logic.answerBeingBuilt -= this.player1.myHand[cardChoice].myValue;
+												this.logic.cardSelected = true;
+												this.hand.selected[cardChoice] = true;
+												this.hand.used[cardChoice] = true;
+												this.logic.pickAcard = false;
+												this.logic.pickAsign = true;
+												this.logic.makeTermActive = true;
+												msg.selectOperationDialog = true;
+												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+												this.logic.inAddition = true;
+												this.logic.inSubtraction = true;
+												this.logic.inDivision = true;
+												this.logic.inMultiplication = true;
+											}
+											else if (this.logic.inDivision) {
+												this.logic.answerBeingBuilt /= this.player1.myHand[cardChoice].myValue;
+												this.logic.answerBeingBuilt = Math.floor(this.logic.answerBeingBuilt);
+												this.logic.answerSoFar = Math.floor(this.logic.answerSoFar);
+												this.logic.cardSelected = true;
+												this.hand.selected[cardChoice] = true;
+												this.hand.used[cardChoice] = true;
+												this.logic.pickAcard = false;
+												this.logic.makeTermActive = true;
+												this.logic.pickAsign = true;
+												msg.selectOperationDialog = true;
+												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+												this.logic.inAddition = true;
+												this.logic.inSubtraction = true;
+												this.logic.inDivision = true;
+												this.logic.inMultiplication = true;
+											}
+											else if (this.logic.inMultiplication) {
+												this.logic.answerBeingBuilt *= this.player1.myHand[cardChoice].myValue;
+												this.logic.cardSelected = true;
+												this.hand.selected[cardChoice] = true;
+												this.hand.used[cardChoice] = true;
+												this.logic.makeTermActive = true;
+												this.logic.pickAcard = false;
+												this.logic.pickAsign = true;
+												msg.selectOperationDialog = true;
+												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+												this.logic.inAddition = true;
+												this.logic.inSubtraction = true;
+												this.logic.inDivision = true;
+												this.logic.inMultiplication = true;
+											}
+										}
+									}
+								}
+								else if (this.logic.ASF && this.logic.ABB) {
+									if (this.logic.inAddition || this.logic.inSubtraction || this.logic.inDivision || this.logic.inMultiplication) {
+										if (!this.hand.used1) {
+											if (this.logic.inAddition) {
+												this.logic.answerBeingBuilt += this.player1.myHand[cardChoice].myValue;
+												this.logic.makeTermActive = true;
+												this.logic.cardSelected = true;
+												this.hand.selected[cardChoice] = true;
+												this.hand.used[cardChoice] = true;
+												this.logic.pickAcard = false;
+												this.logic.pickAsign = true;
+												msg.selectOperationDialog = true;
+												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+												this.logic.inAddition = true;
+												this.logic.inSubtraction = true;
+												this.logic.inDivision = true;
+												this.logic.inMultiplication = true;
+											}
+											else if (this.logic.inSubtraction) {
+												this.logic.answerBeingBuilt -= this.player1.myHand[cardChoice].myValue;
+												this.logic.cardSelected = true;
+												this.hand.selected[cardChoice] = true;
+												this.hand.used[cardChoice] = true;
+												this.logic.makeTermActive = true;
+												this.logic.pickAcard = false;
+												this.logic.pickAsign = true;
+												msg.selectOperationDialog = true;
+												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+												this.logic.inAddition = true;
+												this.logic.inSubtraction = true;
+												this.logic.inDivision = true;
+												this.logic.inMultiplication = true;
+											}
+											else if (this.logic.inDivision) {
+												this.logic.answerBeingBuilt /= this.player1.myHand[cardChoice].myValue;
+												this.logic.answerBeingBuilt = Math.floor(this.logic.answerBeingBuilt);
+												this.logic.cardSelected = true;
+												this.hand.selected[cardChoice] = true;
+												this.logic.makeTermActive = true;
+												this.hand.used[cardChoice] = true;
+												this.logic.pickAcard = false;
+												this.logic.pickAsign = true;
+												msg.selectOperationDialog = true;
+												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+												this.logic.answerSoFar = Math.floor(this.logic.answerSoFar);
+												this.logic.inAddition = true;
+												this.logic.inSubtraction = true;
+												this.logic.inDivision = true;
+												this.logic.inMultiplication = true;
+											}
+											else if (this.logic.inMultiplication) {
+												this.logic.answerBeingBuilt *= this.player1.myHand[cardChoice].myValue;
+												this.logic.cardSelected = true;
+												this.hand.selected[cardChoice] = true;
+												this.logic.makeTermActive = true;
+												this.hand.used[cardChoice] = true;
+												this.logic.pickAcard = false;
+												this.logic.pickAsign = true;
+												msg.selectOperationDialog = true;
+												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+												this.logic.inAddition = true;
+												this.logic.inSubtraction = true;
+												this.logic.inDivision = true;
+												this.logic.inMultiplication = true;
+											}
+										}
+									}
+								}
+
+							}
+						}
+	}
 }

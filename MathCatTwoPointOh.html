@@ -176,16 +176,16 @@
 						gameState.logic.pickAsign = false;
 						gameState.logic.pickAcard = true;
 						gameState.logic.cardSelected = false;
-						gameState.hand.Selected1 = false;
-						gameState.hand.used1 = false;
-						gameState.hand.Selected2 = false;
-						gameState.hand.used2 = false;
-						gameState.hand.Selected3 = false;
-						gameState.hand.used3 = false;
-						gameState.hand.Selected4 = false;
-						gameState.hand.used4 = false;
-						gameState.hand.Selected5 = false;
-						gameState.hand.used5 = false;
+						gameState.hand.Selected[0] = false;
+						gameState.hand.used[0] = false;
+						gameState.hand.Selected[1] = false;
+						gameState.hand.used[1] = false;
+						gameState.hand.Selected[2] = false;
+						gameState.hand.used[2] = false;
+						gameState.hand.Selected[3] = false;
+						gameState.hand.used[3] = false;
+						gameState.hand.Selected[4] = false;
+						gameState.hand.used[4] = false;
 						msg.selectCardDialog = true;
 						gameState.logic.inAddition = false;
 						gameState.logic.inSubtraction = false;
@@ -207,890 +207,23 @@
 					//**************CARDS CHECK
 					if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
 						//card 1 selected
-						if (!gameState.hand.selected1 && !gameState.hand.used1 && !gameState.player1.myHand[0].disabled) {
-							if (gameState.logic.pickAcard) {
-								if (!gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[0].myValue;
-									gameState.logic.cardSelected = true;
-									gameState.logic.makeTermActive = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected1 = true;
-									gameState.hand.used1 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[0].myValue;
-									gameState.logic.cardSelected = true;
-									gameState.logic.makeTermActive = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected1 = true;
-									gameState.hand.used1 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (!gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used1) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[0].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.selected1 = true;
-												gameState.hand.used1 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[0].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected1 = true;
-												gameState.hand.used1 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												gameState.logic.makeTermActive = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[0].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected1 = true;
-												gameState.hand.used1 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[0].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected1 = true;
-												gameState.hand.used1 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-								else if (gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used1) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[0].myValue;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected1 = true;
-												gameState.hand.used1 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[0].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected1 = true;
-												gameState.hand.used1 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[0].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected1 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.used1 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[0].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected1 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.used1 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-
-							}
-						}
+						gameState.clickedAcard(0);
 					}
 					else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 2
-						if (!gameState.hand.selected2 && !gameState.hand.used2 && !gameState.player1.myHand[1].disabled) {
-							if (gameState.logic.pickAcard) {
-								if (!gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[1].myValue;
-									gameState.logic.makeTermActive = true;
-									gameState.logic.cardSelected = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected2 = true;
-									gameState.hand.used2 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (gameState.logic.ASF & !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[1].myValue;
-									gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-									gameState.logic.cardSelected = true;
-									gameState.logic.makeTermActive = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected2 = true;
-									gameState.hand.used2 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (!gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used2) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[1].myValue;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected2 = true;
-												gameState.hand.used2 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[1].myValue;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected2 = true;
-												gameState.hand.used2 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[1].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected2 = true;
-												gameState.hand.used2 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[1].myValue;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected2 = true;
-												gameState.hand.used2 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-								else if (gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used2) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[1].myValue;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected2 = true;
-												gameState.hand.used2 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[1].myValue;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected2 = true;
-												gameState.hand.used2 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[1].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.cardSelected = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.selected2 = true;
-												gameState.hand.used2 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[1].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected2 = true;
-												gameState.hand.used2 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-							}
-						}
+						gameState.clickedAcard(1);
 					}
 					else if ((currentX > 425 && currentX < 525) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 3
-						if (!gameState.hand.selected3 && !gameState.hand.used3 && !gameState.player1.myHand[2].disabled) {
-							if (gameState.logic.pickAcard) {
-								if (!gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[2].myValue;
-									gameState.logic.makeTermActive = true;
-									gameState.logic.cardSelected = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected3 = true;
-									gameState.hand.used3 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[2].myValue;
-									gameState.logic.cardSelected = true;
-									gameState.logic.makeTermActive = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected3 = true;
-									gameState.hand.used3 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (!gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used3) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[2].myValue;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected3 = true;
-												gameState.hand.used3 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[2].myValue;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected3 = true;
-												gameState.hand.used3 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[2].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.makeTermActive = true;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected3 = true;
-												gameState.hand.used3 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[2].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected3 = true;
-												gameState.hand.used3 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-								else if (gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used3) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[2].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.selected3 = true;
-												gameState.hand.used3 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[2].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected3 = true;
-												gameState.hand.used3 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[2].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected3 = true;
-												gameState.hand.used3 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[2].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected3 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.used3 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-							}
-						}
+						gameState.clickedAcard(2);
 					}
 					else if ((currentX > 525 && currentX < 625) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 4
-						if (!gameState.hand.selected4 && !gameState.hand.used4 && !gameState.player1.myHand[3].disabled) {
-							if (gameState.logic.pickAcard) {
-								if (!gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[3].myValue;
-									gameState.logic.cardSelected = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected4 = true;
-									gameState.logic.makeTermActive = true;
-									gameState.hand.used4 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[3].myValue;
-									gameState.logic.cardSelected = true;
-									gameState.logic.makeTermActive = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected4 = true;
-									gameState.hand.used4 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (!gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used4) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[3].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected4 = true;
-												gameState.hand.used4 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												gameState.logic.makeTermActive = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[3].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected4 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.used4 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[3].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected4 = true;
-												gameState.hand.used4 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												gameState.logic.makeTermActive = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[3].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected4 = true;
-												gameState.hand.used4 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												gameState.logic.makeTermActive = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-								else if (gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used4) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[3].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected4 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.used4 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[3].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected4 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.used4 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[3].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected4 = true;
-												gameState.hand.used4 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[3].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected4 = true;
-												gameState.hand.used4 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												gameState.logic.makeTermActive = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-							}
-						}
+						gameState.clickedAcard(3);
 					}
 					else if ((currentX > 625 && currentX < 725) && (currentY > 440 && currentY < 580)) {
 						//clicked in area for card 5
-						if (!gameState.hand.selected5 && !gameState.hand.used5 && !gameState.player1.myHand[4].disabled) {
-							if (gameState.logic.pickAcard) {
-								if (!gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[4].myValue;
-									gameState.logic.cardSelected = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected5 = true;
-									gameState.logic.makeTermActive = true;
-									gameState.hand.used5 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (gameState.logic.ASF && !gameState.logic.ABB) {
-									gameState.logic.answerBeingBuilt = 0;
-									gameState.logic.ABB = true;
-									gameState.logic.answerBeingBuilt = gameState.player1.myHand[4].myValue;
-									gameState.logic.cardSelected = true;
-									gameState.logic.makeTermActive = true;
-									gameState.logic.pickAcard = false;
-									gameState.logic.pickAsign = true;
-									gameState.hand.selected5 = true;
-									gameState.hand.used5 = true;
-									msg.selectOperationDialog = true;
-									if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-									gameState.logic.inAddition = true;
-									gameState.logic.inSubtraction = true;
-									gameState.logic.inDivision = true;
-									gameState.logic.inMultiplication = true;
-								}
-								else if (!gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used5) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[4].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected5 = true;
-												gameState.hand.used5 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[4].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected5 = true;
-												gameState.hand.used5 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												gameState.logic.makeTermActive = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[4].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected5 = true;
-												gameState.hand.used5 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[4].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected5 = true;
-												gameState.hand.used5 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-								else if (gameState.logic.ASF && gameState.logic.ABB) {
-									if (gameState.logic.inAddition || gameState.logic.inSubtraction || gameState.logic.inDivision || gameState.logic.inMultiplication) {
-										if (!gameState.hand.used5) {
-											if (gameState.logic.inAddition) {
-												gameState.logic.answerBeingBuilt += gameState.player1.myHand[4].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected5 = true;
-												gameState.hand.used5 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												gameState.logic.makeTermActive = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inSubtraction) {
-												gameState.logic.answerBeingBuilt -= gameState.player1.myHand[4].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected5 = true;
-												gameState.hand.used5 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inDivision) {
-												gameState.logic.answerBeingBuilt /= gameState.player1.myHand[4].myValue;
-												gameState.logic.answerBeingBuilt = Math.floor(gameState.logic.answerBeingBuilt);
-												gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected5 = true;
-												gameState.logic.makeTermActive = true;
-												gameState.hand.used5 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-											else if (gameState.logic.inMultiplication) {
-												gameState.logic.answerBeingBuilt *= gameState.player1.myHand[4].myValue;
-												gameState.logic.cardSelected = true;
-												gameState.hand.selected5 = true;
-												gameState.hand.used5 = true;
-												gameState.logic.pickAcard = false;
-												gameState.logic.pickAsign = true;
-												msg.selectOperationDialog = true;
-												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												gameState.logic.inAddition = true;
-												gameState.logic.inSubtraction = true;
-												gameState.logic.makeTermActive = true;
-												gameState.logic.inDivision = true;
-												gameState.logic.inMultiplication = true;
-											}
-										}
-									}
-								}
-							}
-						}
+						gameState.clickedAcard(4);
 					}
 						//****************PORTRAIT PIC CHECK ______ check complete, disabling
 						/*
@@ -1250,13 +383,13 @@
 					else if ((currentX > 110 && currentX < 220) && (currentY > 425 && currentY < 560)) {
 						handleThisClick = false;
 						if (!gameState.player1.myDeck.isEmpty()) {
-							gameState.player1.myDeck.addToHand(gameState.hand.selected1, gameState.hand.selected2, gameState.hand.selected3, gameState.hand.selected4, gameState.hand.selected5
-													 , gameState.hand.used1, gameState.hand.used2, gameState.hand.used3, gameState.hand.used4, gameState.hand.used5);
-							if (!gameState.hand.used1) { gameState.hand.selected1 = false; }
-							if (!gameState.hand.used2) { gameState.hand.selected2 = false; }
-							if (!gameState.hand.used3) { gameState.hand.selected3 = false; }
-							if (!gameState.hand.used4) { gameState.hand.selected4 = false; }
-							if (!gameState.hand.used5) { gameState.hand.selected5 = false; }
+							gameState.player1.myDeck.addToHand(gameState.hand.selected[0], gameState.hand.selected[1], gameState.hand.selected[2], gameState.hand.selected[3], gameState.hand.selected[4]
+													 , gameState.hand.used[0], gameState.hand.used[1], gameState.hand.used[2], gameState.hand.used[3], gameState.hand.used[4]);
+							if (!gameState.hand.used[0]) { gameState.hand.selected[0] = false; }
+							if (!gameState.hand.used[1]) { gameState.hand.selected[1] = false; }
+							if (!gameState.hand.used[2]) { gameState.hand.selected[2] = false; }
+							if (!gameState.hand.used[3]) { gameState.hand.selected[3] = false; }
+							if (!gameState.hand.used[4]) { gameState.hand.selected[4] = false; }
 						}
 					}
 						//****CLOCK
@@ -1348,16 +481,16 @@
 							gameState.logic.ABB = false;
 							gameState.logic.ASF = false;
 							gameState.logic.makeTermActive = false;
-							gameState.hand.selected1 = false;
-							gameState.hand.selected2 = false;
-							gameState.hand.selected3 = false;
-							gameState.hand.selected4 = false;
-							gameState.hand.selected5 = false;
-							gameState.hand.used1 = false;
-							gameState.hand.used2 = false;
-							gameState.hand.used3 = false;
-							gameState.hand.used4 = false;
-							gameState.hand.used5 = false;
+							gameState.hand.selected[0] = false;
+							gameState.hand.selected[1] = false;
+							gameState.hand.selected[2] = false;
+							gameState.hand.selected[3] = false;
+							gameState.hand.selected[4] = false;
+							gameState.hand.used[0] = false;
+							gameState.hand.used[1] = false;
+							gameState.hand.used[2] = false;
+							gameState.hand.used[3] = false;
+							gameState.hand.used[4] = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = false;
 							gameState.logic.pickAsign = false;
@@ -1387,16 +520,16 @@
 							gameState.logic.ABB = false;
 							gameState.logic.ASF = false;
 							gameState.logic.makeTermActive = false;
-							gameState.hand.selected1 = false;
-							gameState.hand.selected2 = false;
-							gameState.hand.selected3 = false;
-							gameState.hand.selected4 = false;
-							gameState.hand.selected5 = false;
-							gameState.hand.used1 = false;
-							gameState.hand.used2 = false;
-							gameState.hand.used3 = false;
-							gameState.hand.used4 = false;
-							gameState.hand.used5 = false;
+							gameState.hand.selected[0] = false;
+							gameState.hand.selected[1] = false;
+							gameState.hand.selected[2] = false;
+							gameState.hand.selected[3] = false;
+							gameState.hand.selected[4] = false;
+							gameState.hand.used[0] = false;
+							gameState.hand.used[1] = false;
+							gameState.hand.used[2] = false;
+							gameState.hand.used[3] = false;
+							gameState.hand.used[4] = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = false;
 
@@ -1420,16 +553,16 @@
 							gameState.logic.ABB = false;
 							gameState.logic.ASF = false;
 							gameState.logic.makeTermActive = false;
-							gameState.hand.selected1 = false;
-							gameState.hand.selected2 = false;
-							gameState.hand.selected3 = false;
-							gameState.hand.selected4 = false;
-							gameState.hand.selected5 = false;
-							gameState.hand.used1 = false;
-							gameState.hand.used2 = false;
-							gameState.hand.used3 = false;
-							gameState.hand.used4 = false;
-							gameState.hand.used5 = false;
+							gameState.hand.selected[0] = false;
+							gameState.hand.selected[1] = false;
+							gameState.hand.selected[2] = false;
+							gameState.hand.selected[3] = false;
+							gameState.hand.selected[4] = false;
+							gameState.hand.used[0] = false;
+							gameState.hand.used[1] = false;
+							gameState.hand.used[2] = false;
+							gameState.hand.used[3] = false;
+							gameState.hand.used[4] = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = false;
 						}
@@ -1482,16 +615,16 @@
 							gameState.logic.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
 							gameState.logic.ASF = false;
-							gameState.hand.selected1 = false;
-							gameState.hand.selected2 = false;
-							gameState.hand.selected3 = false;
-							gameState.hand.selected4 = false;
-							gameState.hand.selected5 = false;
-							gameState.hand.used1 = false;
-							gameState.hand.used2 = false;
-							gameState.hand.used3 = false;
-							gameState.hand.used4 = false;
-							gameState.hand.used5 = false;
+							gameState.hand.selected[0] = false;
+							gameState.hand.selected[1] = false;
+							gameState.hand.selected[2] = false;
+							gameState.hand.selected[3] = false;
+							gameState.hand.selected[4] = false;
+							gameState.hand.used[0] = false;
+							gameState.hand.used[1] = false;
+							gameState.hand.used[2] = false;
+							gameState.hand.used[3] = false;
+							gameState.hand.used[4] = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = false;
 							gameState.logic.makeTermActive = false;
@@ -1702,23 +835,23 @@
 
 				//Draw cards if the card isn't disabled
 				if (!gameState.player1.myHand[0].disabled) {
-					if (gameState.hand.selected1) { ctx.drawImage(gameState.player1.myHand[0].myImage, 230, 415); }
+					if (gameState.hand.selected[0]) { ctx.drawImage(gameState.player1.myHand[0].myImage, 230, 415); }
 					else { ctx.drawImage(gameState.player1.myHand[0].myImage, 230, 440); }
 				}
 				if (!gameState.player1.myHand[1].disabled) {
-					if (gameState.hand.selected2) { ctx.drawImage(gameState.player1.myHand[1].myImage, 330, 415); }
+					if (gameState.hand.selected[1]) { ctx.drawImage(gameState.player1.myHand[1].myImage, 330, 415); }
 					else { ctx.drawImage(gameState.player1.myHand[1].myImage, 330, 440); }
 				}
 				if (!gameState.player1.myHand[2].disabled) {
-					if (gameState.hand.selected3) { ctx.drawImage(gameState.player1.myHand[2].myImage, 430, 415); }
+					if (gameState.hand.selected[2]) { ctx.drawImage(gameState.player1.myHand[2].myImage, 430, 415); }
 					else { ctx.drawImage(gameState.player1.myHand[2].myImage, 430, 440); }
 				}
 				if (!gameState.player1.myHand[3].disabled) {
-					if (gameState.hand.selected4) { ctx.drawImage(gameState.player1.myHand[3].myImage, 530, 415); }
+					if (gameState.hand.selected[3]) { ctx.drawImage(gameState.player1.myHand[3].myImage, 530, 415); }
 					else { ctx.drawImage(gameState.player1.myHand[3].myImage, 530, 440); }
 				}
 				if (!gameState.player1.myHand[4].disabled) {
-					if (gameState.hand.selected5) { ctx.drawImage(gameState.player1.myHand[4].myImage, 630, 415); }
+					if (gameState.hand.selected[4]) { ctx.drawImage(gameState.player1.myHand[4].myImage, 630, 415); }
 					else { ctx.drawImage(gameState.player1.myHand[4].myImage, 630, 440); }
 				}
 				//draw clock***********
