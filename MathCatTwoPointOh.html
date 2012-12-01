@@ -228,8 +228,7 @@
 					}
 						//****************PORTRAIT PIC CHECK ______ check complete, disabling
 						/*
-						else if ((currentX > 680 && currentX < 970) && (currentY > 20 && currentY < 210))//clicked portrait
-						{
+						else if ((currentX > 680 && currentX < 970) && (currentY > 20 && currentY < 210)){//clicked portrait
 						}
 						*/
 						//*******************BONUS CHECK****************//no need to test this anymore
@@ -278,7 +277,8 @@
 
 
 					}
-					else if ((currentX > 385 && currentX < 490) && (currentY > 580 && currentY < 650)) {//clicked on SUBTRACT button
+					else if ((currentX > 385 && currentX < 490) && (currentY > 580 && currentY < 650)) {
+						//clicked on SUBTRACT button
 						handleThisClick = false;
 						if (gameState.logic.pickAsign) {
 							gameState.logic.inAddition = false;
@@ -384,13 +384,15 @@
 					else if ((currentX > 110 && currentX < 220) && (currentY > 425 && currentY < 560)) {
 						handleThisClick = false;
 						if (!gameState.player1.myDeck.isEmpty()) {
-							gameState.player1.myDeck.addToHand(gameState.hand.selected[0], gameState.hand.selected[1], gameState.hand.selected[2], gameState.hand.selected[3], gameState.hand.selected[4]
-													 , gameState.hand.used[0], gameState.hand.used[1], gameState.hand.used[2], gameState.hand.used[3], gameState.hand.used[4]);
-							if (!gameState.hand.used[0]) { gameState.hand.selected[0] = false; }
-							if (!gameState.hand.used[1]) { gameState.hand.selected[1] = false; }
-							if (!gameState.hand.used[2]) { gameState.hand.selected[2] = false; }
-							if (!gameState.hand.used[3]) { gameState.hand.selected[3] = false; }
-							if (!gameState.hand.used[4]) { gameState.hand.selected[4] = false; }
+							gameState.player1.myDeck.addToHand(gameState.hand.selected[0], gameState.hand.selected[1], 
+																  gameState.hand.selected[2], gameState.hand.selected[3], gameState.hand.selected[4]
+																, gameState.hand.used[0], gameState.hand.used[1], gameState.hand.used[2]
+																, gameState.hand.used[3], gameState.hand.used[4]);
+							if (!gameState.hand.used[0]){gameState.hand.selected[0] = false;}
+							if (!gameState.hand.used[1]){gameState.hand.selected[1] = false;}
+							if (!gameState.hand.used[2]){gameState.hand.selected[2] = false;}
+							if (!gameState.hand.used[3]){gameState.hand.selected[3] = false;}
+							if (!gameState.hand.used[4]){gameState.hand.selected[4] = false;}
 						}
 					}
 						//****CLOCK
@@ -436,8 +438,8 @@
 							if (!gameState.logic.ASF && !gameState.logic.ABB) {
 								if (gameState.logic.makeTermActive) { gameState.logic.makeTermActive = false; } else { gameState.logic.makeTermActive = true; }
 							}
-							else if (!gameState.logic.ASF && gameState.logic.ABB) {
-								if (gameState.logic.makeTermActive) {
+							else if(!gameState.logic.ASF && gameState.logic.ABB){
+								if (gameState.logic.makeTermActive){
 									gameState.logic.makeTermActive = false;
 									gameState.logic.answerSoFar = gameState.logic.answerBeingBuilt;
 									gameState.logic.answerBeingBuilt = 0;
