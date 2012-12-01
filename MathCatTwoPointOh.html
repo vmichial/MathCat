@@ -568,7 +568,8 @@
 						}
 						
 						else if(msg.skipDialog){
-							//activate skip sequence
+							msg.skipDialog = false;
+							gameState.player1.skipProblem();
 						}
 						else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
 								handleThisClick = false;

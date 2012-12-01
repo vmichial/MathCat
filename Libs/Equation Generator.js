@@ -115,8 +115,8 @@ function generateEQ(level) {
 		assemble(b, x, a, c);
 	}
 
-	//if (6 <= level) { // Level 6+
-	//}
+	if (6 <= level) { // Level 6+
+	}
 
 
 
