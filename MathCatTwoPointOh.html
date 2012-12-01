@@ -77,16 +77,8 @@
 
 		var handleThisClick = false;
 
-		var touched = false;
-		var doubletouched = false;
 		var doubleclicked = false;
 		var clicked = false;
-
-		//for the ultrabook the touch stuff isn't necessary
-		var touchDown = false;
-		var touchOnce = false;
-		var touchTime = 0;
-		var touchMaxTime = 250;
 
 		var clickDown = false;
 		var clickOnce = false;
@@ -127,11 +119,6 @@
 		var currentX = 0;
 		var currentY = 0;
 
-		function touchHandler(coors) {
-			touchSpot = "(" + coors.x + "," + coors.y + ")";
-			//this will handle changing the variables depending on game state
-			//and the touch position
-		}
 		function clickHandler(pos) {
 			clickSpot = "(" + pos.x + "," + pos.y + ")";
 			currentX = pos.x;
@@ -1680,7 +1667,6 @@
 				ctx.drawImage(img.titleScreen, 0, 0);
 				ctx.font = '20px Arial';
 				//ctx.fillText(clickSpot, 0, 20);
-				//ctx.fillText(touchSpot, 500, 20);
 			}
 			else if (gameState.location.atGameScreen) {
 				ctx.drawImage(img.gameSetting, 0, 0);
@@ -1833,14 +1819,6 @@
 				ctx.drawImage(img.gameOver, 0, 0);
 			}
 
-			clickOnce = false;
-			/*
-						if (clickDown) 
-						{
-							ctx.fillText('click~~', 12, 12);
-						}
-			*/
-			clickDown = false;
 		}
 
 		$(document).ready(function () {
@@ -1853,8 +1831,6 @@
 
 					clicked = 0;
 					doubleclicked = 0;
-					touched = 0;
-					doubletouched = 0;
 				}, 1000 / fps
 			);
 		});
