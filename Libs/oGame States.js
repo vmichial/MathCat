@@ -43,32 +43,14 @@ function GameStates() {
 		this.answered = false;
 		this.cardSelected = false;
 
-		this.makeTermActive = false;		//bool for telling us if in makeTerm mode
+		this.makeTermActive = false;	//bool for telling us if in makeTerm mode
 
-		this.inDivision = false;			//bools for the buttons
-		this.inAddition = false;			//
+		this.inDivision = false;		//bools for the buttons
+		this.inAddition = false;		//
 		this.inSubtraction = false;		//
 		this.inMultiplication = false;	//mmk
 	}
 	this.logic = new Logic();
-
-
-	function PlayerData() {
-		this.panicked = false;			//bool for telling us if panic button was pressed this equation
-
-		this.additionBonus = false;
-		this.subtractionBonus = false;
-		this.multiplyBonus = false;
-		this.divideBonus = false;
-
-		this.numAdditions = 0;
-		this.numSubtractions = 0;
-		this.numMultiplies = 0;
-		this.numDivisions = 0;
-
-		this.deckEmpty = false;
-	}
-	this.playerData = new PlayerData();
 
 
 	function Location() {
@@ -109,12 +91,12 @@ function GameStates() {
 	this.player1.initializePlayer();
 	
 	this.clickedAcard = function(cardChoice){
-						if (!this.hand.selected1 && !this.hand.used1 && !this.player1.myHand[cardChoice].disabled) {
+						if (!this.hand.selected[cardChoice] && !this.hand.used[cardChoice] && !this.player1.myHand[cardChoice].disabled) {
 							if (this.logic.pickAcard) {
 								if (!this.logic.ASF && !this.logic.ABB) {
-									this.logic.answerBeingBuilt = 0;
+									this.player1.answerBeingBuilt = 0;
 									this.logic.ABB = true;
-									this.logic.answerBeingBuilt = this.player1.myHand[cardChoice].myValue;
+									this.player1.answerBeingBuilt = this.player1.myHand[cardChoice].myValue;
 									this.logic.cardSelected = true;
 									this.logic.makeTermActive = true;
 									this.logic.pickAcard = false;
@@ -129,9 +111,9 @@ function GameStates() {
 									this.logic.inMultiplication = true;
 								}
 								else if (this.logic.ASF && !this.logic.ABB) {
-									this.logic.answerBeingBuilt = 0;
+									this.player1.answerBeingBuilt = 0;
 									this.logic.ABB = true;
-									this.logic.answerBeingBuilt = this.player1.myHand[cardChoice].myValue;
+									this.player1.answerBeingBuilt = this.player1.myHand[cardChoice].myValue;
 									this.logic.cardSelected = true;
 									this.logic.makeTermActive = true;
 									this.logic.pickAcard = false;
@@ -149,7 +131,7 @@ function GameStates() {
 									if (this.logic.inAddition || this.logic.inSubtraction || this.logic.inDivision || this.logic.inMultiplication) {
 										if (!this.hand.used1) {
 											if (this.logic.inAddition) {
-												this.logic.answerBeingBuilt += this.player1.myHand[cardChoice].myValue;
+												this.player1.answerBeingBuilt += this.player1.myHand[cardChoice].myValue;
 												this.logic.cardSelected = true;
 												this.logic.makeTermActive = true;
 												this.hand.selected[cardChoice] = true;
@@ -164,7 +146,7 @@ function GameStates() {
 												this.logic.inMultiplication = true;
 											}
 											else if (this.logic.inSubtraction) {
-												this.logic.answerBeingBuilt -= this.player1.myHand[cardChoice].myValue;
+												this.player1.answerBeingBuilt -= this.player1.myHand[cardChoice].myValue;
 												this.logic.cardSelected = true;
 												this.hand.selected[cardChoice] = true;
 												this.hand.used[cardChoice] = true;
@@ -179,9 +161,9 @@ function GameStates() {
 												this.logic.inMultiplication = true;
 											}
 											else if (this.logic.inDivision) {
-												this.logic.answerBeingBuilt /= this.player1.myHand[cardChoice].myValue;
-												this.logic.answerBeingBuilt = Math.floor(this.logic.answerBeingBuilt);
-												this.logic.answerSoFar = Math.floor(this.logic.answerSoFar);
+												this.player1.answerBeingBuilt /= this.player1.myHand[cardChoice].myValue;
+												this.player1.answerBeingBuilt = Math.floor(this.player1.answerBeingBuilt);
+												this.player1.answerSoFar = Math.floor(this.player1.answerSoFar);
 												this.logic.cardSelected = true;
 												this.hand.selected[cardChoice] = true;
 												this.hand.used[cardChoice] = true;
@@ -196,7 +178,7 @@ function GameStates() {
 												this.logic.inMultiplication = true;
 											}
 											else if (this.logic.inMultiplication) {
-												this.logic.answerBeingBuilt *= this.player1.myHand[cardChoice].myValue;
+												this.player1.answerBeingBuilt *= this.player1.myHand[cardChoice].myValue;
 												this.logic.cardSelected = true;
 												this.hand.selected[cardChoice] = true;
 												this.hand.used[cardChoice] = true;
@@ -217,7 +199,7 @@ function GameStates() {
 									if (this.logic.inAddition || this.logic.inSubtraction || this.logic.inDivision || this.logic.inMultiplication) {
 										if (!this.hand.used1) {
 											if (this.logic.inAddition) {
-												this.logic.answerBeingBuilt += this.player1.myHand[cardChoice].myValue;
+												this.player1.answerBeingBuilt += this.player1.myHand[cardChoice].myValue;
 												this.logic.makeTermActive = true;
 												this.logic.cardSelected = true;
 												this.hand.selected[cardChoice] = true;
@@ -232,7 +214,7 @@ function GameStates() {
 												this.logic.inMultiplication = true;
 											}
 											else if (this.logic.inSubtraction) {
-												this.logic.answerBeingBuilt -= this.player1.myHand[cardChoice].myValue;
+												this.player1.answerBeingBuilt -= this.player1.myHand[cardChoice].myValue;
 												this.logic.cardSelected = true;
 												this.hand.selected[cardChoice] = true;
 												this.hand.used[cardChoice] = true;
@@ -247,8 +229,8 @@ function GameStates() {
 												this.logic.inMultiplication = true;
 											}
 											else if (this.logic.inDivision) {
-												this.logic.answerBeingBuilt /= this.player1.myHand[cardChoice].myValue;
-												this.logic.answerBeingBuilt = Math.floor(this.logic.answerBeingBuilt);
+												this.player1.answerBeingBuilt /= this.player1.myHand[cardChoice].myValue;
+												this.player1.answerBeingBuilt = Math.floor(this.player1.answerBeingBuilt);
 												this.logic.cardSelected = true;
 												this.hand.selected[cardChoice] = true;
 												this.logic.makeTermActive = true;
@@ -257,14 +239,14 @@ function GameStates() {
 												this.logic.pickAsign = true;
 												msg.selectOperationDialog = true;
 												if (msg.selectCardDialog) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-												this.logic.answerSoFar = Math.floor(this.logic.answerSoFar);
+												this.player1.answerSoFar = Math.floor(this.player1.answerSoFar);
 												this.logic.inAddition = true;
 												this.logic.inSubtraction = true;
 												this.logic.inDivision = true;
 												this.logic.inMultiplication = true;
 											}
 											else if (this.logic.inMultiplication) {
-												this.logic.answerBeingBuilt *= this.player1.myHand[cardChoice].myValue;
+												this.player1.answerBeingBuilt *= this.player1.myHand[cardChoice].myValue;
 												this.logic.cardSelected = true;
 												this.hand.selected[cardChoice] = true;
 												this.logic.makeTermActive = true;

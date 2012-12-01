@@ -8,7 +8,7 @@ function Player() {
 	this.myDeck = new Deck();
 	this.myHand = [5];			//hold the current src names of cards in hand
 	this.name = "Math\n Cat";	//player name
-	this.Totalscore = 0;		//start the score at zero, this is the score for ENTIRE game
+	this.totalscore = 0;		//start the score at zero, this is the score for ENTIRE game
 	this.currentScore = 0;		//this is the score for the current HW questions
 	this.level = 1; 			//this is for the current level
 	this.problemNumber = 1;		//start at first problem
@@ -19,10 +19,22 @@ function Player() {
 	this.divideBonus = 0;		//keeps track of how many divisions have been done in HW
 	this.currentEQ = "X = 0"; 	//keeps track of current Equation for problem
 	this.currentX = 0;			//hold the value of X for current problem in HW
-	this.DeckEmpty = false;		//keep track of if the deck is empty
+	this.panicked = false;			//bool for telling us if panic button was pressed this equation
+
+	this.additionBonus = false;
+	this.subtractionBonus = false;
+	this.multiplyBonus = false;
+	this.divideBonus = false;
+
+	this.numAdditions = 0;
+	this.numSubtractions = 0;
+	this.numMultiplies = 0;
+	this.numDivisions = 0;
+
+	this.deckEmpty = false;
 	//variables for displaying info on answering questions
-	this.myAnswer = 0;//the answer you can attempt to submit
-	this.termToBuild = 0;//the term you are currently building
+	this.answerSoFar = 0;//the answer you can attempt to submit
+	this.answerBeingBuilt = 0;//the term you are currently building
 	this.answerAttempted = false;//if you have attempted an answer, display answer so far
 
 	this.initializePlayer = function () {
@@ -30,12 +42,32 @@ function Player() {
 		//call functions for the deck.
 		this.myDeck.initializeDeck();
 		this.myDeck.shuffleDeck();
-		//this.myDeck.addToHand();  //<----- Broken function ****FIXED****
 		this.myDeck.makeFirstHand();
 		this.updateHand();
+		var nexteq = generateEQ(this.level);
+		this.currentEQ = nexteq.EQ;
+		this.currentX = nexteq.answer;
 		//is all i guess is left easy function... honestly...
 		//it takes more time to make this comment than to actually
 		//code it.. but i will leave it to YOU BWAHAHAHAHAHAHA!
+	}
+	this.skipProblem = function()
+	{
+		var nextEQ;
+		
+		if((this.problemNumber+1)>10){
+			nextEQ = generateEQ(this.level+1);
+			this.level++;
+			this.problemNumber = 1;
+			this.currentEQ = nextEQ.EQ;
+			this.currentX = nextEQ.answer;
+		}
+		else{
+			nextEQ = generateEQ(this.level);
+			this.problemNumber++;
+			this.currentEQ = nextEQ.EQ;
+			this.currentX = nextEQ.answer;
+		}
 	}
 	this.updateCurrentScore = function (h1, h2, h3, h4, h5) {
 		//add code here to add to current score. 

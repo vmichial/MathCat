@@ -170,22 +170,22 @@
 						handleThisClick = false;
 						gameState.player1.totalScore = 0;
 						//math vartiables to reset
-						gameState.logic.answerSoFar = 0;
-						gameState.logic.answerBeingBuilt = 0;
+						gameState.player1.answerSoFar = 0;
+						gameState.player1.answerBeingBuilt = 0;
 						gameState.logic.ASF = false;
 						gameState.logic.ABB = false;
 						gameState.logic.pickAsign = false;
 						gameState.logic.pickAcard = true;
 						gameState.logic.cardSelected = false;
-						gameState.hand.Selected[0] = false;
+						gameState.hand.selected[0] = false;
 						gameState.hand.used[0] = false;
-						gameState.hand.Selected[1] = false;
+						gameState.hand.selected[1] = false;
 						gameState.hand.used[1] = false;
-						gameState.hand.Selected[2] = false;
+						gameState.hand.selected[2] = false;
 						gameState.hand.used[2] = false;
-						gameState.hand.Selected[3] = false;
+						gameState.hand.selected[3] = false;
 						gameState.hand.used[3] = false;
-						gameState.hand.Selected[4] = false;
+						gameState.hand.selected[4] = false;
 						gameState.hand.used[4] = false;
 						msg.selectCardDialog = true;
 						gameState.logic.inAddition = false;
@@ -254,16 +254,16 @@
 							gameState.logic.inMultiplication = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = true;
-							gameState.playerData.numAdditions++;
+							gameState.player1.numAdditions++;
 							msg.selectCardDialog = true;
 						}
 						if (gameState.logic.merge) {
 							gameState.logic.cardSelected = false;
-							gameState.logic.answerSoFar += gameState.logic.answerBeingBuilt;
+							gameState.player1.answerSoFar += gameState.player1.answerBeingBuilt;
 							gameState.logic.ASF = true;
-							gameState.logic.answerBeingBuilt = 0;
+							gameState.player1.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
-							gameState.playerData.numAdditions++;
+							gameState.player1.numAdditions++;
 							gameState.logic.merge = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = true;
@@ -289,16 +289,16 @@
 							gameState.logic.pickAsign = false;
 							gameState.logic.merge = false;
 							gameState.logic.pickAcard = true;
-							gameState.playerData.numSubtractions++;
+							gameState.player1.numSubtractions++;
 							msg.selectCardDialog = true;
 						}
 						if (gameState.logic.merge) {
 							gameState.logic.cardSelected = false;
-							gameState.logic.answerSoFar -= gameState.logic.answerBeingBuilt;
+							gameState.player1.answerSoFar -= gameState.player1.answerBeingBuilt;
 							gameState.logic.ASF = true;
-							gameState.logic.answerBeingBuilt = 0;
+							gameState.player1.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
-							gameState.playerData.numSubtractions++;
+							gameState.player1.numSubtractions++;
 							gameState.logic.merge = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = true;
@@ -322,17 +322,17 @@
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = true;
 							gameState.logic.makeTermActive = true;
-							gameState.playerData.numMultiplies++;
+							gameState.player1.numMultiplies++;
 							gameState.logic.merge = false;
 							msg.selectCardDialog = true;
 						}
 						if (gameState.logic.merge) {
 							gameState.logic.cardSelected = false;
-							gameState.logic.answerSoFar *= gameState.logic.answerBeingBuilt;
+							gameState.player1.answerSoFar *= gameState.player1.answerBeingBuilt;
 							gameState.logic.ASF = true;
-							gameState.logic.answerBeingBuilt = 0;
+							gameState.player1.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
-							gameState.playerData.numMultiplies++;
+							gameState.player1.numMultiplies++;
 							gameState.logic.merge = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = true;
@@ -356,17 +356,17 @@
 							gameState.logic.makeTermActive = true;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = true;
-							gameState.playerData.numDivisions++;
+							gameState.player1.numDivisions++;
 							msg.selectCardDialog = true;
 						}
 						if (gameState.logic.merge) {
 							gameState.logic.cardSelected = false;
-							gameState.logic.answerSoFar /= gameState.logic.answerBeingBuilt;
-							gameState.logic.answerSoFar = Math.floor(gameState.logic.answerSoFar);
+							gameState.player1.answerSoFar /= gameState.logic.answerBeingBuilt;
+							gameState.player1.answerSoFar = Math.floor(gameState.player1.answerSoFar);
 							gameState.logic.ASF = true;
 							gameState.logic.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
-							gameState.playerData.numDivisions++;
+							gameState.player1.numDivisions++;
 							gameState.logic.merge = false;
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = true;
@@ -421,14 +421,14 @@
 					}
 						//******panic button******
 					else if ((currentX > 455 && currentX < 560) && (currentY > 660 && currentY < 701)) {
-						if (gameState.playerData.panicked) {
+						if (gameState.player1.panicked) {
 							handleThisClick = false;
-							gameState.playerData.panicked = false;
+							gameState.player1.panicked = false;
 							img.panicPic.src = "Images/Buttons/panicButton.png";
 						}
 						else {
 							handleThisClick = false;
-							gameState.playerData.panicked = true;
+							gameState.player1.panicked = true;
 							img.panicPic.src = "Images/Buttons/panicButtonPressed.png";
 						}
 					}
@@ -441,8 +441,8 @@
 							else if(!gameState.logic.ASF && gameState.logic.ABB){
 								if (gameState.logic.makeTermActive){
 									gameState.logic.makeTermActive = false;
-									gameState.logic.answerSoFar = gameState.logic.answerBeingBuilt;
-									gameState.logic.answerBeingBuilt = 0;
+									gameState.player1.answerSoFar = gameState.player1.answerBeingBuilt;
+									gameState.player1.answerBeingBuilt = 0;
 									gameState.logic.ABB = false;
 									gameState.logic.ASF = true;
 									gameState.logic.inAddition = false;
@@ -479,8 +479,8 @@
 						else if (msg.restartDialog) {
 							msg.restartDialog = false;
 							gameState.logic.cardSelected = false;
-							gameState.logic.answerSoFar = 0;
-							gameState.logic.answerBeingBuilt = 0;
+							gameState.player1.answerSoFar = 0;
+							gameState.player1.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
 							gameState.logic.ASF = false;
 							gameState.logic.makeTermActive = false;
@@ -513,13 +513,13 @@
 							gameState.location.atTitleScreen = true;
 							msg.quitDialog = false;
 							msg.acceptDialog = true;
-							gameState.playerData.numAdditions = 0;
-							gameState.playerData.numSubtractions = 0;
-							gameState.playerData.numMultiplies = 0;
-							gameState.playerData.numDivisions = 0;
+							gameState.player1.numAdditions = 0;
+							gameState.player1.numSubtractions = 0;
+							gameState.player1.numMultiplies = 0;
+							gameState.player1.numDivisions = 0;
 							msg.acceptDialog = false;
-							gameState.logic.answerSoFar = 0;
-							gameState.logic.answerBeingBuilt = 0;
+							gameState.player1.answerSoFar = 0;
+							gameState.player1.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
 							gameState.logic.ASF = false;
 							gameState.logic.makeTermActive = false;
@@ -547,12 +547,12 @@
 							msg.acceptDialog = false;
 							gameState.location.atGameScreen = false;
 							gameState.location.atGameOverScreen = true;
-							gameState.playerData.numAdditions = 0;
-							gameState.playerData.numSubtractions = 0;
-							gameState.playerData.numMultiplies = 0;
-							gameState.playerData.numDivisions = 0;
-							gameState.logic.answerSoFar = 0;
-							gameState.logic.answerBeingBuilt = 0;
+							gameState.player1.numAdditions = 0;
+							gameState.player1.numSubtractions = 0;
+							gameState.player1.numMultiplies = 0;
+							gameState.player1.numDivisions = 0;
+							gameState.player1.answerSoFar = 0;
+							gameState.player1.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
 							gameState.logic.ASF = false;
 							gameState.logic.makeTermActive = false;
@@ -569,10 +569,30 @@
 							gameState.logic.pickAsign = false;
 							gameState.logic.pickAcard = false;
 						}
-						else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
-							//skip the question
+						
+						else if(msg.skipDialog){
+							//activate skip sequence
 						}
-						else {
+						else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
+								handleThisClick = false;
+								if(!gameState.logic.ASF && !gameState.logic.ABB)
+								{
+									msg.skipDialog = true;
+								}
+								else if(!gameState.logic.ASF && gameState.logic.ABB)
+								{
+									
+								}
+								else if(gameState.logic.ASF && !gameState.logic.ABB)
+								{
+								
+								}
+								else if(gameState.logic.ASF && gameState.logic.ABB)
+								{
+								
+								}
+							
+						}else {
 							handleThisClick = false;
 							msg.acceptDialog = true;
 						}
@@ -605,17 +625,22 @@
 							handleThisClick = false;
 							msg.cancelDialog = false;
 						}
+						else if(msg.skipDialog){
+							handleThisClick = false;
+							msg.skipDialog = false;
+							msg.cancelDialog = true;
+						}
 						else if (msg.failDialog) {
 							handleThisClick = false;
 							msg.failDialog = false;
 							gameState.location.atGameScreen = false;
 							gameState.location.atGameOverScreen = true;
-							gameState.playerData.numAdditions = 0;
-							gameState.playerData.numSubtractions = 0;
-							gameState.playerData.numMultiplies = 0;
-							gameState.playerData.numDivisions = 0;
-							gameState.logic.answerSoFar = 0;
-							gameState.logic.answerBeingBuilt = 0;
+							gameState.player1.numAdditions = 0;
+							gameState.player1.numSubtractions = 0;
+							gameState.player1.numMultiplies = 0;
+							gameState.player1.numDivisions = 0;
+							gameState.player1.answerSoFar = 0;
+							gameState.player1.answerBeingBuilt = 0;
 							gameState.logic.ABB = false;
 							gameState.logic.ASF = false;
 							gameState.hand.selected[0] = false;
@@ -657,10 +682,10 @@
 				//end click handle area ****gamestatus not click dependant found below****
 				gameState.player1.updateHand();
 				gameState.player1.DeckEmpty = gameState.player1.myDeck.isEmpty();
-				img.divideTimes.src = "Images/Times/times" + gameState.playerData.numDivisions + ".png";
-				img.multiTimes.src = "Images/Times/times" + gameState.playerData.numMultiplies + ".png";
-				img.minusTimes.src = "Images/Times/times" + gameState.playerData.numSubtractions + ".png";
-				img.addTimes.src = "Images/Times/times" + gameState.playerData.numAdditions + ".png";
+				img.divideTimes.src = "Images/Times/times" + gameState.player1.numDivisions + ".png";
+				img.multiTimes.src = "Images/Times/times" + gameState.player1.numMultiplies + ".png";
+				img.minusTimes.src = "Images/Times/times" + gameState.player1.numSubtractions + ".png";
+				img.addTimes.src = "Images/Times/times" + gameState.player1.numAdditions + ".png";
 				if (gameState.logic.makeTermActive) { img.makeTermPic.src = "Images/Buttons/finishTermButton.png"; }
 				else { img.makeTermPic.src = "Images/Buttons/makeTermButton.png"; }
 				//if you are at the point where no more cards exist
@@ -816,10 +841,10 @@
 				else if (gameState.mood.OMG) { ctx.drawImage(img.OMGPic, 586, -7); }
 				else { ctx.drawImage(img.excitedPic, 580, 0); }
 				//bonus stars***************
-				if ((gameState.playerData.numAdditions > 0) && !gameState.playerData.panicked) { ctx.drawImage(img.starPic, 709, 310); }
-				if ((gameState.playerData.numSubtractions > 0) && !gameState.playerData.panicked) { ctx.drawImage(img.starPic, 709, 370); }
-				if ((gameState.playerData.numMultiplies > 0) && !gameState.playerData.panicked) { ctx.drawImage(img.starPic, 708, 432); }
-				if ((gameState.playerData.numDivisions > 0) && !gameState.playerData.panicked) { ctx.drawImage(img.starPic, 707, 495); }
+				if ((gameState.player1.numAdditions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 709, 310); }
+				if ((gameState.player1.numSubtractions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 709, 370); }
+				if ((gameState.player1.numMultiplies > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 708, 432); }
+				if ((gameState.player1.numDivisions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 707, 495); }
 				//math buttons*************
 				if (gameState.logic.inAddition) { ctx.drawImage(img.plusBTN, 245, 610); }
 				else { ctx.drawImage(img.plusBTNp, 226, 595); }
@@ -866,7 +891,7 @@
 				ctx.drawImage(img.clockOnes, 170, 625);
 
 				//Draw panic button*******and bonuses********
-				if (gameState.playerData.panicked) {
+				if (gameState.player1.panicked) {
 					ctx.drawImage(img.panicPic, 460, 660); ctx.drawImage(img.noBonus, 750, 241);
 					ctx.font = '30px Arial';
 					var answer = "Answer: " + gameState.player1.currentX;
@@ -874,10 +899,10 @@
 				}
 				else {
 					ctx.drawImage(img.panicPic, 460, 660);
-					if (gameState.playerData.numAdditions > 0) { ctx.drawImage(img.addTimes, 860, 320); }
-					if (gameState.playerData.numSubtractions > 0) { ctx.drawImage(img.minusTimes, 865, 382); }
-					if (gameState.playerData.numMultiplies > 0) { ctx.drawImage(img.multiTimes, 871, 439); }
-					if (gameState.playerData.numDivisions > 0) { ctx.drawImage(img.divideTimes, 858, 499); }
+					if (gameState.player1.numAdditions > 0) { ctx.drawImage(img.addTimes, 860, 320); }
+					if (gameState.player1.numSubtractions > 0) { ctx.drawImage(img.minusTimes, 865, 382); }
+					if (gameState.player1.numMultiplies > 0) { ctx.drawImage(img.multiTimes, 871, 439); }
+					if (gameState.player1.numDivisions > 0) { ctx.drawImage(img.divideTimes, 858, 499); }
 				}
 
 				//make term Button
@@ -928,6 +953,7 @@
 				else if (msg.selectOperationDialog) { ctx.fillText(msg.selectOperationMessage, 374, 355); }
 				else if (msg.restartDialog) { ctx.fillText(msg.restartMessage, 374, 355); }
 				else if (msg.mergeDialog) { ctx.fillText(msg.mergeMessage, 374, 355); }
+				else if (msg.skipDialog) {ctx.fillText(msg.skipMessage, 374, 355);}
 
 
 
@@ -938,8 +964,8 @@
 				ctx.fillText(ASFstring, 370, 195);
 				ctx.fillText(ABBstring, 515, 195);
 				ctx.font = '50px Arial';
-				if (gameState.logic.ASF) { ctx.fillText(gameState.logic.answerSoFar, 370, 255); } else { ctx.fillText(unknown, 370, 255); }
-				if (gameState.logic.ABB) { ctx.fillText(gameState.logic.answerBeingBuilt, 540, 255); } else { ctx.fillText(unknown, 540, 255); }
+				if (gameState.logic.ASF) { ctx.fillText(gameState.player1.answerSoFar, 370, 255); } else { ctx.fillText(unknown, 370, 255); }
+				if (gameState.logic.ABB) { ctx.fillText(gameState.player1.answerBeingBuilt, 540, 255); } else { ctx.fillText(unknown, 540, 255); }
 
 				ctx.font = '20px Arial';
 				if (msg.failDialog) {

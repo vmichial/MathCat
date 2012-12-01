@@ -1,4 +1,6 @@
 ﻿function Messages() { //DIALOG variables
+	this.skipDialog = false;
+	this.skipMessage = "skip this question?";
 	this.confirmDialog = false;
 	this.confirmMessage = "accept to continue...";
 	this.quitDialog = false;
@@ -25,4 +27,5 @@
 	this.operatorTimer = 0;
 	this.gameOverTimer = 0;
 	this.mergeTimer = 0;
+	this.skipTimer = 0;
 }
