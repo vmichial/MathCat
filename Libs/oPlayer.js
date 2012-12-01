@@ -47,6 +47,31 @@ function Player() {
 		var nexteq = generateEQ(this.level);
 		this.currentEQ = nexteq.EQ;
 		this.currentX = nexteq.answer;
+		this.totalscore = 0;		
+	    this.currentScore = 0;		
+	    this.level = 1; 			
+	    this.problemNumber = 1;		
+	    this.currentBonus = 0;		
+	    this.AddBonus = 0;			
+	    this.subtractBonus = 0;		
+	    this.multiplyBonus = 0;		
+	    this.divideBonus = 0;		
+	    this.panicked = false;		
+        
+	    this.additionBonus = false;
+	    this.subtractionBonus = false;
+	    this.multiplyBonus = false;
+	    this.divideBonus = false;
+        
+	    this.numAdditions = 0;
+	    this.numSubtractions = 0;
+	    this.numMultiplies = 0;
+	    this.numDivisions = 0;
+        
+	    this.deckEmpty = false;
+	    //variables for displaying info on answering questions
+	    this.answerSoFar = 0;//the answer you can attempt to submit
+	    this.answerBeingBuilt = 0;//the term you are currently building
 		//is all i guess is left easy function... honestly...
 		//it takes more time to make this comment than to actually
 		//code it.. but i will leave it to YOU BWAHAHAHAHAHAHA!
@@ -68,6 +93,11 @@ function Player() {
 			this.currentEQ = nextEQ.EQ;
 			this.currentX = nextEQ.answer;
 		}
+		this.numAdditions = 0;
+		this.numSubtractions = 0;
+		this.numMultiplies = 0;
+		this.numDivisions = 0;
+		this.panicked = false;
 	}
 	this.updateCurrentScore = function (h1, h2, h3, h4, h5) {
 		//add code here to add to current score. 

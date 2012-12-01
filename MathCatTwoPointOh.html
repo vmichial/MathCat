@@ -151,7 +151,7 @@
 			else if (gameState.location.atTitleScreen) {
 				if (handleThisClick) {//clicke the start game buton
 					if ((currentX > 80 && currentX < 350) && (currentY > 630)) {
-						gameState.player1.myDeck.resetDeck();
+						gameState.player1.initializePlayer();
 						gameState.mood.Fearful = false;
 						gameState.mood.Excited = true;
 						gameState.mood.Celebrate = false;
@@ -168,10 +168,7 @@
 						img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
 						img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
 						handleThisClick = false;
-						gameState.player1.totalScore = 0;
 						//math vartiables to reset
-						gameState.player1.answerSoFar = 0;
-						gameState.player1.answerBeingBuilt = 0;
 						gameState.logic.ASF = false;
 						gameState.logic.ABB = false;
 						gameState.logic.pickAsign = false;
