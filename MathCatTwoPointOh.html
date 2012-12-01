@@ -131,6 +131,7 @@
 
 		function gameStatusCheck() {
 			if (gameState.location.atStartupScreen) {
+				if(handleThisClick){gameState.splash.startupTimer = 89;}
 				gameState.splash.startupTimer++;
 				if ((gameState.splash.startupTimer / fps) == 3) {
 					if (gameState.splash.showVMichial) { gameState.splash.showVMichial = false; gameState.splash.showFranciaGarcia = true; }
@@ -148,7 +149,7 @@
 
 			}
 			else if (gameState.location.atTitleScreen) {
-				if (handleThisClick) {
+				if (handleThisClick) {//clicke the start game buton
 					if ((currentX > 80 && currentX < 350) && (currentY > 630)) {
 						gameState.player1.myDeck.resetDeck();
 						gameState.mood.Fearful = false;
