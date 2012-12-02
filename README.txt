@@ -1,4 +1,4 @@
-Math Cat Goes To School (c)MathCatTeam
+Math Cat Goes To School (c)2012 MathCatTeam All rights reserved
 
 This HTML5/JAvascript game is brought to you by the 
 Contra Costa College & Intel Code for good Hackathon.
