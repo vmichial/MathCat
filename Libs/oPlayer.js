@@ -47,8 +47,8 @@ function Player() {
 		var nexteq = generateEQ(this.level);
 		this.currentEQ = nexteq.EQ;
 		this.currentX = nexteq.answer;
-		this.totalscore = 123456;		
-	    this.currentScore = 123456;		
+		this.totalScore = 0;		
+	    this.currentScore = 0;		
 	    this.level = 1; 			
 	    this.problemNumber = 1;		
 	    this.currentBonus = 0;		
@@ -107,7 +107,7 @@ function Player() {
 		//and how many were used
 		this.totalScore -= this.currentScore;
 		this.currentScore += this.myHand[cardChoice].myValue;
-		this.totalScore += this.currentscore;		
+		this.totalScore += this.currentScore;		
 	}
 	this.nextProblem = function (newEQ, newX) {
 		//insert code here to advance to the next problem generate new EQ and X
