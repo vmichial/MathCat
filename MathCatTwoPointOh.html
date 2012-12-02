@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="Libs/Equation Generator.js"></script>
 	<script type="text/javascript" src="Libs/Deck.js"></script>
 	<script type="text/javascript" src="Libs/jquery.js"></script>
-
+	
 	<script type="text/javascript" src="Libs/oPlayer.js"></script>
 	<script type="text/javascript" src="Libs/oDeck.js"></script>
 	<script type="text/javascript" src="Libs/oImages.js"></script>
@@ -23,7 +23,6 @@
 		gameState = new GameStates();
 		msg = new Messages();
 		img = new Images();
-
 		//this function gets the position of the mouse event and return the coordinates for use!
 		function getPosition(mouseEvent, gameCanvas) {
 			var x, y;//the X and Y to be returned
@@ -108,11 +107,6 @@
 			}).mouseout(function (mouseEvent) {
 			});
 		});
-
-
-
-
-
 		var touchSpot = new String();
 		var clickSpot = new String();
 
@@ -146,7 +140,6 @@
 					}
 					gameState.splash.startupTimer = 0;
 				}
-
 			}
 			else if (gameState.location.atTitleScreen) {
 				if (handleThisClick) {//clicke the start game buton
@@ -198,7 +191,6 @@
 				}
 			}
 			else if (gameState.location.atGameScreen) {
-
 				//if there is a click to worry about
 				if (handleThisClick) {
 
@@ -240,7 +232,8 @@
 						}
 						*/
 						//*************MATH BUTTONS***************************
-					else if ((currentX > 270 && currentX < 360) && (currentY > 615 && currentY < 685)) {//clicked on ADD button
+					else if ((currentX > 270 && currentX < 360) && (currentY > 615 && currentY < 685)) {
+						//clicked on ADD button
 						handleThisClick = false;
 						if (gameState.logic.pickAsign) {
 							gameState.logic.cardSelected = false;
@@ -271,8 +264,9 @@
 							gameState.logic.makeTermActive = false;
 							msg.selectCardDialog = true;
 						}
-
-
+						if(gameState.logic.pickAcard){
+							msg.selectCardDialog = true;
+						}
 					}
 					else if ((currentX > 385 && currentX < 490) && (currentY > 580 && currentY < 650)) {
 						//clicked on SUBTRACT button
@@ -306,8 +300,9 @@
 							gameState.logic.makeTermActive = false;
 							msg.selectCardDialog = true;
 						}
-
-
+						if(gameState.logic.pickAcard){
+							msg.selectCardDialog = true;
+						}
 					}
 					else if ((currentX > 520 && currentX < 635) && (currentY > 585 && currentY < 650)) {//clicked on MULTIPLY button
 						handleThisClick = false;
@@ -340,8 +335,9 @@
 							gameState.logic.makeTermActive = false;
 							msg.selectCardDialog = true;
 						}
-
-
+						if(gameState.logic.pickAcard){
+							msg.selectCardDialog = true;
+						}
 					}
 					else if ((currentX > 645 && currentX < 750) && (currentY > 600 && currentY < 680)) {//clicked on DIVIDE button
 						handleThisClick = false;
@@ -374,8 +370,9 @@
 							gameState.logic.makeTermActive = false;
 							msg.selectCardDialog = true;
 						}
-
-
+						if(gameState.logic.pickAcard){
+							msg.selectCardDialog = true;
+						}
 					}
 						//clicked on DECK
 					else if ((currentX > 110 && currentX < 220) && (currentY > 425 && currentY < 560)) {
@@ -408,9 +405,6 @@
 							gameState.time.timeRemaining = 99;
 							gameState.time.tensTime = 9;
 							gameState.time.onesTime = 9;
-
-
-
 							img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
 							img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
 						}
@@ -583,27 +577,55 @@
 								}
 								else if(!gameState.logic.ASF && gameState.logic.ABB)
 								{
-									
+									//send ABB to ASF
 								}
 								else if(gameState.logic.ASF && !gameState.logic.ABB)
 								{
-								
+									var correct = gameState.player1.checkAnswer();
+									if(!correct){
+										msg.wrongDialog = true;
+										gameState.player1.wrongAnswer();
+										msg.restartDialog = false;
+										gameState.logic.cardSelected = false;
+										gameState.logic.ABB = false;
+										gameState.logic.ASF = false;
+										gameState.logic.makeTermActive = false;
+										gameState.hand.selected[0] = false;
+										gameState.hand.selected[1] = false;
+										gameState.hand.selected[2] = false;
+										gameState.hand.selected[3] = false;
+										gameState.hand.selected[4] = false;
+										gameState.hand.used[0] = false;
+										gameState.hand.used[1] = false;
+										gameState.hand.used[2] = false;
+										gameState.hand.used[3] = false;
+										gameState.hand.used[4] = false;
+										gameState.logic.pickAsign = false;
+										gameState.logic.pickAcard = false;
+										gameState.logic.pickAsign = false;
+										gameState.logic.pickAcard = true;
+										gameState.logic.inAddition = false;
+										gameState.logic.inSubtraction = false;
+										gameState.logic.inDivision = false;
+										gameState.logic.inMultiplication = false;
+									}
+									else{
+										msg.correctDialog = true;
+										gameState.player1.correctAnswer();
+									}
 								}
 								else if(gameState.logic.ASF && gameState.logic.ABB)
 								{
-								
-								}
-							
+									//merge mode
+								}							
 						}else {
 							handleThisClick = false;
 							msg.acceptDialog = true;
 						}
-
-
 					}
 						//Cancel button click****************
 					else if ((currentX > 875) && (currentY > 640)) {
-						if (msg.acceptDialog) {
+						if (msg.acceptDialog){
 							handleThisClick = false;
 							msg.acceptDialog = false;
 						}
@@ -678,7 +700,6 @@
 							msg.quitDialog = true;
 						}
 					}
-
 					handleThisClick = false;
 				}
 				//end click handle area ****gamestatus not click dependant found below****
@@ -752,7 +773,6 @@
 						img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
 						img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
 						//need clock8.png from Joy or any number with an 8 is DERP!
-
 						gameState.time.clockTimer = 0;
 					}
 				}
@@ -776,6 +796,14 @@
 				if (msg.mergeDialog) {
 					msg.mergeTimer++;
 					if ((msg.mergeTimer / fps) == 3) { msg.mergeDialog = false; msg.mergeTimer = 0; }
+				}
+				else if(msg.correctDialog){
+					msg.correctTimer++;
+					if((msg.correctTimer / fps) == 3){msg.correctDialog = false; msg.correctTimer = 0;}
+				}
+				else if(msg.wrongDialog){
+					msg.wrongTimer++;
+					if((msg.wrongTimer / fps) == 30){msg.wrongDialog = false; msg.wrongTimer = 0;}
 				}
 				//make sure conditional buttons update regardless of click
 				if (gameState.logic.makeTermActive) {
@@ -806,13 +834,9 @@
 					gameState.location.atStartupScreen = true;
 				}
 			}
-
 			handleThisClick = false;
 			clicked = false;
-
 		}
-
-
 		// ****************** DRAW FUNCTION STARTS HERE ****************************
 		function draw(ctx) {
 			ctx.clearRect(0, 0, 1000, 700);
@@ -923,16 +947,9 @@
 				ctx.fillText(level, 360, 44);
 				ctx.fillText(problem, 360, 66);
 
-
-
 				//put up the player name on the book
 				ctx.font = '20px Arial';
 				ctx.fillText(gameState.player1.name, 78, 120);
-
-				//draw score
-				//ctx.fillText(gameState.player1.totalScore,190,150);
-
-				//
 
 				//drawEQ
 				ctx.font = '50px Arial';
@@ -956,8 +973,8 @@
 				else if (msg.restartDialog) { ctx.fillText(msg.restartMessage, 374, 355); }
 				else if (msg.mergeDialog) { ctx.fillText(msg.mergeMessage, 374, 355); }
 				else if (msg.skipDialog) {ctx.fillText(msg.skipMessage, 374, 355);}
-
-
+				else if(msg.correctDialog){ctx.fillText(msg.correctMessage, 374, 355);}
+				else if(msg.wrongDialog){ctx.fillText(msg.wrongMessage, 374, 355);}
 
 				ctx.font = '15px Arial';
 				var unknown = '_';
@@ -975,16 +992,11 @@
 					ctx.fillText(msg.confirmMessage, 374, 355);
 					ctx.fillText(msg.failMessage, 374, 295);
 				}
-
-
-				//more stuff
 			}
 			else if (gameState.location.atGameOverScreen) {
 				ctx.drawImage(img.gameOver, 0, 0);
 			}
-
 		}
-
 		$(document).ready(function () {
 			var GameLoop = setInterval(
 				function () {

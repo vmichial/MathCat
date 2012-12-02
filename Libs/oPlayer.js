@@ -47,8 +47,8 @@ function Player() {
 		var nexteq = generateEQ(this.level);
 		this.currentEQ = nexteq.EQ;
 		this.currentX = nexteq.answer;
-		this.totalscore = 0;		
-	    this.currentScore = 0;		
+		this.totalscore = 123456;		
+	    this.currentScore = 123456;		
 	    this.level = 1; 			
 	    this.problemNumber = 1;		
 	    this.currentBonus = 0;		
@@ -98,83 +98,16 @@ function Player() {
 		this.numMultiplies = 0;
 		this.numDivisions = 0;
 		this.panicked = false;
-	}
-	this.updateCurrentScore = function (h1, h2, h3, h4, h5) {
+		this.answerSoFar = 0;
+		this.answerBeingBuilt = 0;
+	}	
+	this.addCardToScore = function (cardChoice) {
 		//add code here to add to current score. 
 		//this goes up depending on what cards are used
 		//and how many were used
-		var addCardScore = 0;
-		//h1	
-		if (h1 == true) {
-			for (var i = 0; i < 52; i++) {
-				if (this.myDeck.inHand[i].here == true) {
-					addCardScore = addCardScore + this.myDeck.inHand[i].myValue;
-					break;
-				}
-			}
-		}
-		//h2
-		if (h2 == true) {
-			var numTrue = 0;
-			for (var i = 0; i < 52; i++) {
-
-				if (this.myDeck.inHand[i].here == true) {
-					numTrue = numTrue + 1;
-					if (numTrue == 2) {
-						addCardScore = addCardScore + this.myDeck.inHand[i].myValue;
-						break;
-					}
-				}
-			}
-		}
-		//h3	
-		if (h3 == true) {
-			var numTrue = 0;
-			for (var i = 0; i < 52; i++) {
-
-				if (this.myDeck.inHand[i].here == true) {
-					numTrue = numTrue + 1;
-					if (numTrue == 3) {
-						addCardScore = addCardScore + this.myDeck.inHand[i].myValue;
-						break;
-					}
-				}
-			}
-		}
-		//h4	
-		if (h4 == true) {
-			var numTrue = 0;
-			for (var i = 0; i < 52; i++) {
-
-				if (this.myDeck.inHand[i].here == true) {
-					numTrue = numTrue + 1;
-					if (numTrue == 4) {
-						addCardScore = addCardScore + this.myDeck.inHand[i].myValue;
-						break;
-					}
-				}
-			}
-		}
-		//h5	
-		if (h5 == true) {
-			var numTrue = 0;
-			for (var i = 0; i < 52; i++) {
-
-				if (this.myDeck.inHand[i].here == true) {
-					numTrue = numTrue + 1;
-					if (numTrue == 5) {
-						addCardScore = addCardScore + this.myDeck.inHand[i].myValue;
-						break;
-					}
-				}
-			}
-		}
-		this.currentScore += addCardScore;
-	}
-	this.updateTotalScore = function () {
-		//this is called when a problem is finished, it should add the 
-		//currentScore to the TotalScore. and reset anything to what it needs to be
-		this.Totalscore = this.currentScore + this.currentBonus;
+		this.totalScore -= this.currentScore;
+		this.currentScore += this.myHand[cardChoice].myValue;
+		this.totalScore += this.currentscore;		
 	}
 	this.nextProblem = function (newEQ, newX) {
 		//insert code here to advance to the next problem generate new EQ and X
@@ -200,7 +133,28 @@ function Player() {
 		var totalMultiply = 0.4 * this.currentScore * this.multiplyBonus;
 		var totalDivision = 0.5 * this.currentScore * this.divideBonus;
 		this.currentScore = this.currentScore + totalDivision + totalMultiply + totalSubtract + totalAdd;
+	}	
+	this.checkAnswer = function() {
+		if(this.answerSoFar == this.currentX){return true;}
+		else return false;
 	}
+	this.wrongAnswer = function(){
+		this.numAdditions = 0;
+		this.numSubtractions = 0;
+		this.numMultiplies = 0;
+		this.numDivisions = 0;
+		this.answerSoFar = 0;
+		this.answerBeingBuilt = 0;
+	}
+	this.correctAnswer = function(){
+		
+	}
+	this.updateTotalScore = function () {
+		//this is called when a problem is finished, it should add the 
+		//currentScore to the TotalScore. and reset anything to what it needs to be
+		this.Totalscore += this.currentScore + this.currentBonus;
+	}
+
 	this.updateHand = function () {
 		//whatever cards are inHand, we need these card pictures displayed.
 		//hold those cards data in the array, use this function to populate 

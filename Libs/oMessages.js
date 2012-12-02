@@ -19,6 +19,10 @@
 	this.restartMessage = "restart this question?";
 	this.mergeDialog = false;
 	this.mergeMessage = "Select an operator to merge";
+	this.correctDiaog = false;
+	this.correctMessage = "Answer Correct!";
+	this.wrongDialog = false;
+	this.wrongMessage = "Answer Incorrect!";
 
 	//Timers for certain messages
 	this.acceptTimer = 0;
@@ -28,4 +32,6 @@
 	this.gameOverTimer = 0;
 	this.mergeTimer = 0;
 	this.skipTimer = 0;
+	this.wrongTimer = 0;
+	this.correctTimer = 0;
 }

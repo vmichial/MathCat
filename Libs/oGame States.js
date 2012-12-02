@@ -94,8 +94,9 @@ function GameStates() {
 	this.player1.initializePlayer();
 	
 	this.clickedAcard = function(cardChoice){
-						if (!this.hand.selected[cardChoice] && !this.hand.used[cardChoice] && !this.player1.myHand[cardChoice].disabled) {
-							if (this.logic.pickAcard) {
+						if (!this.hand.selected[cardChoice] && !this.hand.used[cardChoice] && !this.player1.myHand[cardChoice].disabled) { 
+							if (this.logic.pickAcard){
+								this.player1.addCardToScore(cardChoice);
 								if (!this.logic.ASF && !this.logic.ABB) {
 									this.player1.answerBeingBuilt = 0;
 									this.logic.ABB = true;
@@ -248,7 +249,7 @@ function GameStates() {
 												this.logic.inDivision = true;
 												this.logic.inMultiplication = true;
 											}
-											else if (this.logic.inMultiplication) {
+											else if (this.logic.inMultiplication){
 												this.player1.answerBeingBuilt *= this.player1.myHand[cardChoice].myValue;
 												this.logic.cardSelected = true;
 												this.hand.selected[cardChoice] = true;
@@ -263,11 +264,16 @@ function GameStates() {
 												this.logic.inDivision = true;
 												this.logic.inMultiplication = true;
 											}
+											
 										}
-									}
+									}									
+									
 								}
-
+								
 							}
+							else if(this.logic.pickAsign){
+												msg.selectOperationDialog = true;
+											}
 						}
 	}
 }
