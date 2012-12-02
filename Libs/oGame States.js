@@ -58,6 +58,9 @@ function GameStates() {
 		this.atTitleScreen = false;		//bool for at title screen, true means, show title and play title music
 		this.atGameScreen = false;		//bool for at game screen, do the game loop for this portion
 		this.atGameOverScreen = false;	//oh so sad, true if you just phail hard
+		this.atWelcomeScreen = false;
+		this.atLevelSummary = false;
+		this.atNextLevel = false;
 		this.atEndScreen = false;
 	}
 	this.location = new Location();
