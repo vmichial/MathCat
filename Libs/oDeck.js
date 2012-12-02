@@ -115,17 +115,11 @@ function Deck() {
 	this.resetDeck = function () {
 		//add code here to reset the deck. just set all the bools to
 		//show that all cards are inDeck. then we can do another hand
-		for (var i = 0; i < this.MAX_DECK_SIZE; i++) {
-			this.inDeck[i].here = true;
-			this.inHand[i].here = false;
-			this.used[i].here = false;
-			this.inHand[i].disabled = false;
-			this.inDeck[i].disabled = false;
-			this.used[i].disabled = false;
+
 			this.initializeDeck();
 			this.shuffleDeck();
 			this.makeFirstHand();
-		}
+		
 	}
 	this.isEmpty = function () {
 		//check the used array, if its all true on here, return true.

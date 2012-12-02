@@ -26,12 +26,14 @@ function GameStates() {
 		this.used[2] = false;
 		this.used[3] = false;
 		this.used[4] = false;
+		
 	}
 	this.hand = new Hand();
 
 
 	function Logic() {
 		//math logic for cards variable
+		this.UILocked = false;
 		this.isIdle = true;
 		this.pickAcard = true;
 		this.pickAsign = false;
@@ -275,5 +277,25 @@ function GameStates() {
 												msg.selectOperationDialog = true;
 											}
 						}
+	}
+	this.allCardsFalse = function(){
+		this.hand.selected[0] = false;
+		this.hand.used[0] = false;
+		this.hand.selected[1] = false;
+		this.hand.used[1] = false;
+		this.hand.selected[2] = false;
+		this.hand.used[2] = false;
+		this.hand.selected[3] = false;
+		this.hand.used[3] = false;
+		this.hand.selected[4] = false;
+		this.hand.used[4] = false;
+	}
+	this.addTime = function(){
+		if((this.time.timeRemaining+15) >= 99){
+			this.time.timeRemaining = 100;
+		}
+		else{
+			this.time.timeRemaining += 15;
+		}
 	}
 }

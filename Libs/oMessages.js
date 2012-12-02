@@ -23,6 +23,8 @@
 	this.correctMessage = "Answer Correct!";
 	this.wrongDialog = false;
 	this.wrongMessage = "Answer Incorrect!";
+	this.panicDialog = false;
+	this.panicMessage = "You already panicked!";
 
 	//Timers for certain messages
 	this.acceptTimer = 0;
@@ -34,4 +36,5 @@
 	this.skipTimer = 0;
 	this.wrongTimer = 0;
 	this.correctTimer = 0;
+	this.panicTimer = 0;
 }

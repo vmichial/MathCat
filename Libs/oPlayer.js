@@ -44,12 +44,13 @@ function Player() {
 		this.myDeck.shuffleDeck();
 		this.myDeck.makeFirstHand();
 		this.updateHand();
+	    this.level = 1; 		
 		var nexteq = generateEQ(this.level);
 		this.currentEQ = nexteq.EQ;
 		this.currentX = nexteq.answer;
 		this.totalScore = 0;		
 	    this.currentScore = 0;		
-	    this.level = 1; 			
+			
 	    this.problemNumber = 1;		
 	    this.currentBonus = 0;		
 	    this.AddBonus = 0;			
@@ -76,9 +77,33 @@ function Player() {
 		//it takes more time to make this comment than to actually
 		//code it.. but i will leave it to YOU BWAHAHAHAHAHAHA!
 	}
+	this.restartProblem = function(){
+		this.totalScore -= this.currentScore;
+		this.currentScore = 0;
+		
+		this.additionBonus = false;
+	    this.subtractionBonus = false;
+	    this.multiplyBonus = false;
+	    this.divideBonus = false;
+        
+	    this.numAdditions = 0;
+	    this.numSubtractions = 0;
+	    this.numMultiplies = 0;
+	    this.numDivisions = 0;
+		
+		this.additionBonus = false;
+	    this.subtractionBonus = false;
+	    this.multiplyBonus = false;
+	    this.divideBonus = false;
+		
+		this.answerSofar = 0;
+		this.answerBeingBuilt = 0;		
+	}
 	this.skipProblem = function()
 	{
 		var nextEQ;
+		this.totalScore -= this.currentScore;
+		this.currentScore = 0;
 		
 		if((this.problemNumber+1)>10){
 			nextEQ = generateEQ(this.level+1);
@@ -93,6 +118,7 @@ function Player() {
 			this.currentEQ = nextEQ.EQ;
 			this.currentX = nextEQ.answer;
 		}
+
 		this.numAdditions = 0;
 		this.numSubtractions = 0;
 		this.numMultiplies = 0;
@@ -100,6 +126,11 @@ function Player() {
 		this.panicked = false;
 		this.answerSoFar = 0;
 		this.answerBeingBuilt = 0;
+		
+		this.additionBonus = false;
+	    this.subtractionBonus = false;
+	    this.multiplyBonus = false;
+	    this.divideBonus = false;
 	}	
 	this.addCardToScore = function (cardChoice) {
 		//add code here to add to current score. 
@@ -109,45 +140,76 @@ function Player() {
 		this.currentScore += this.myHand[cardChoice].myValue;
 		this.totalScore += this.currentScore;		
 	}
-	this.nextProblem = function (newEQ, newX) {
+	this.advanceProblem = function () {
 		//insert code here to advance to the next problem generate new EQ and X
 		//and bump up the problem number
 		this.problemNumber = this.problemNumber + 1;
-		this.currentEQ = newEQ;
-		this.currentX = newX;
+		var nexteq = generateEQ(this.level);
+		this.currentEQ = nexteq.EQ;
+		this.currentX = nexteq.answer;
+		
+		this.addBonuses(this.panicked);
+		this.answerSoFar = 0;
+		this.answerBeingBuilt = 0;
+		this.panicked = false;
+		
+		this.additionBonus = false;
+	    this.subtractionBonus = false;
+	    this.multiplyBonus = false;
+	    this.divideBonus = false;
 	}
-	this.nextLevel = function (newEQ, newX) {
+	this.advanceLevel = function () {
 		//add code here for progressing the player to the next level
 		//set all values appropriately
-		this.level = this.level + 1;
-		this.currentEQ = newEQ;
-		this.currentX = newX;
+		this.level++;
+		this.problemNumber = 1;
+		var nexteq = generateEQ(this.level);
+		this.currentEQ = nexteq.EQ;
+		this.currentX = nexteq.answer;
+		
+		this.addBonuses(this.panicked);
+		this.answerSoFar = 0;
+		this.answerBeingBuilt = 0;
+		this.panicked = false;
+		
+		this.additionBonus = false;
+	    this.subtractionBonus = false;
+	    this.multiplyBonus = false;
+	    this.divideBonus = false;
+		
+		this.myDeck.resetDeck();
+		this.updateHand();
 	}
-	this.updateBonus = function () {
+	this.addBonuses = function (panicStatus) {
 		//um...update the bonuses
 		//if the player presses the '+''-''*''/' buttons
 		//add one to the correct bonus, if they cancel, set to zero.
 		//you figure out how to handle cancels or what not
-		var totalAdd = 0.2 * this.currentScore * this.AddBonus;
-		var totalSubtract = 0.3 * this.currentScore * this.subtractBonus;
-		var totalMultiply = 0.4 * this.currentScore * this.multiplyBonus;
-		var totalDivision = 0.5 * this.currentScore * this.divideBonus;
-		this.currentScore = this.currentScore + totalDivision + totalMultiply + totalSubtract + totalAdd;
+		
+		//remove any bonuses they have not kept going. only reqard streaks that continue
+		if(!this.additionBonus){this.numAdditions = 0;}
+	    if(!this.subtractionBonus){this.numSubtractions = 0;}
+	    if(!this.multiplyBonus){this.numMultiplies = 0;}
+	    if(!this.divideBonus){this.numDivisions = 0;}
+		
+		var totalAdd = 0;
+		var totalSubtract = 0;
+		var totalMultiply = 0;
+		var totalDivision = 0;
+		if(!panicStatus){
+			if(this.additionBonus){totalAdd = Math.floor(0.2 * this.currentScore * this.numAdditions);}
+			if(this.subtractBonus){totalSubtract = Math.floor(0.3 * this.currentScore * this.numSubtractions);}
+			if(this.multiplyBonus){totalMultiply = Math.floor(0.4 * this.currentScore * this.numMultiplies);}
+			if(this.divideBonus){totalDivision = Math.floor(0.5 * this.currentScore * this.numDivisions);}
+		}
+		this.totalScore -= this.currentScore;
+		this.currentScore += (totalDivision + totalMultiply + totalSubtract + totalAdd);
+		this.totalScore += this.currentScore;
+		this.currentScore = 0;
 	}	
 	this.checkAnswer = function() {
 		if(this.answerSoFar == this.currentX){return true;}
 		else return false;
-	}
-	this.wrongAnswer = function(){
-		this.numAdditions = 0;
-		this.numSubtractions = 0;
-		this.numMultiplies = 0;
-		this.numDivisions = 0;
-		this.answerSoFar = 0;
-		this.answerBeingBuilt = 0;
-	}
-	this.correctAnswer = function(){
-		
 	}
 	this.updateTotalScore = function () {
 		//this is called when a problem is finished, it should add the 
