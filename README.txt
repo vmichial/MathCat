@@ -7,3 +7,147 @@ All images and code are created by the MAthCat team:
 Michial Green II - Contra Costa College
 Joy Clayton - Contra Costa College
 Edward Thang - Contra Costa College
+Francia Garcia - Contra Costa College
+
+---------------------------------------------------------------
+
+Gameplay:
+
+objective:	 
+Solve mental math problems in your head and combine cards
+with math operators to give an answer for X. The time is
+always ticking, so be quick! solve as many as you can and
+try to get a really high score!
+
+How to play:
+
+---CREATING TERMS---
+You have to combine cards to make your answers.
+you will have a linear equation appear on the 
+homework sheet and you must determine the value
+of X that satisfies the equation.
+
+you start by selecting a card, this lets you start 
+creating a term (a mathematical term) the value of
+the card you select will be shown on the homework
+sheet under "current term"
+
+at this point you can choose to either:
+A) press accept - this will make the current term your answer
+B) press "finish term" - this will finish the term, making it your answer
+C)press an operator button (+-*/) - this will allow you to select another card.
+	if you select the (+) button, the next card you select will be added to current term.
+	if you select the (-) button, the next card you select will be subtracted from current term.
+	if you select the (*) button, the next card will be multiplied by the current term.
+	if you select the (/) button, the next card will be the divisor of the current term.
+D)press the cancel button - this will allow you to restart the question
+
+if you chose to make a term you answer, you can choose to select another card.
+this will let you start building another term. in the exact same fashion as before.
+
+once you have two term like this:
+
+-----------------------------
+your answer:	current term:
+
+    15		      10
+-----------------------------
+
+at this point you can choose to either:
+A)press accept to enter merge mode - this lets you select an operator to combine the current term to your answer.
+B)press "finish term" to enter merge - **same as with accept button**
+C)press cancel button - this will allow you to restart the question.
+
+if you are in merge mode you will see a message:
+"select an operator to merge"
+
+assuming you have the same terms as the example before:
+
+-----------------------------
+your answer:	current term:
+
+    15		      10
+-----------------------------
+
+pressing the addition(+) button will change your answer to 25, which is 15+10
+pressing the subtract(-) button will change your answer to 5, which is 15-10
+pressing the multiply(*) button will change your answer to 150, which is 15*10
+pressing the division(/) button will change your answer to 1, which is 15/10 **ROUNDED DOWN**
+
+NOTE: IT IS IMPORTANT TO REMEMBER THAT ALL DECIMAL ANSWERS GET ROUNDED DOWN TO THE NEAREST WHOLE NUMBER!
+      USE THIS TO YOUR ADVANTAGE!
+
+if you ever only have an answer but no current term you can choose to submit that answer.
+if you have something like this:
+-----------------------------
+your answer:	current term:
+
+    15		      __
+-----------------------------
+
+pressing the accept button will check if the answer is correct. if it is you will move on to the next problem.
+if your answer is incorrect you will have to restart the question.
+
+At anytime you can click on the deck (the card with a picture of a mouse) to dump your hand.
+any cards that are not currently being used for creating a term will be discarded and replaced by
+the next cards in your deck.
+
+the deck consists of 52 cards.
+13 green cards numbered 1-13
+13 blue cards numbered 1-13
+13 purple cards numbered 1-13
+13 brown cards numbered 1-13
+
+(this is the same as a poker deck only J=11, Q=12, and K=13)
+
+--Bonuses and scoring--
+selecting a card will add that card's value to your score.
+choosing an operator will give you +1 to its respective bonus.
+
+every problem has a current Score that you don't see, and the total score you do see.
+selecting a card adds its value to your current score.
+when you submit a question and it is correct, the current score will be increased by bonuses.
+
+if you have an addition bonus, 0.2*(the number of additions)*(current Score) is that total bonus
+if you have a subtraction bonus, 0.3*(the number of subtractions)*(current score) is the total
+if you have a multiplication bonus, 0.4*(the number of multiplies)*(currentScore) is the total
+if you have a division bonus, 0.5*(the number of divisions)*(currentScore) is the total
+
+if you use an operator you get it's bonus, and it stacks with the bonuses from previous questions.
+if you keep using that operator successfully you will build the stacks up and increase your scoring potential.
+if you have stacks of a particular bonus, but do not use it in your current answer, you lose the stacks for that bonus.
+all bonuses max out their number of stacks at 9.
+
+this means the max bonus you can get is 1.8times for adding, 2.7times for subtracting, 3.6times for multiplying, and 4.5times for divisions
+if you restart a question you lose all of your bonuses.
+if you have an incorrect answer, you lose all of your bonuses.
+
+at any time in the game you can press the panic button to see the current value of X, however doing so will make you ineligible for
+having the bonuses added to your score for the current question. and you cannot see how many stacks you have made forthe duration
+of the question. if you satisfy the conditions of the streak however the stacks will build, and you can work to get them in the next
+question.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+if you run out of time, you fail, and can only quit by pressing accept or cancel.
+
+HINTS:
+save your '1' cards for easy divisions, you get a free division by dividing by 1!
+
+additions are EASY to perform, and you have a high chance of getting 9 stacks
+
+you have to use merge to do complex terms like (5-10)/(5*5/5)  [which is -1 with two divisions, a multiply and a subtraction bonus!]
+
+if you want to use a card, but the rest of the hand is no help, select it, then dump the others!
+
+Its better to panic than run out of time!
+
+when you advance to a new level, your deck is refreshed and shuffled! you have 52 more cards so go nuts!
+
+don't Click too fast! If you have to restart the question you will lose your bonus!
+
+HAVE FUN!
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+	 

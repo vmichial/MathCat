@@ -414,21 +414,9 @@
 					//else if ((currentX > 0 && currentX < 125) && (currentY > 590 && currentY < 701)) {//clicked on Clock, disabled for now
 					//	
 					//}
-					//*****************TIME CHECK
+					//*****************TIME CHECK ************** DISABLED!
 					else if ((currentX > 126 && currentX < 270) && (currentY > 590 && currentY < 701)) {
-						if(!gameState.logic.UILocked){
-							if (gameState.time.followTime == true) {
-								handleThisClick = false;
-								gameState.time.followTime = false;
-								gameState.time.clockTimer = 0;
-								gameState.time.timeRemaining = 99;
-								gameState.time.tensTime = 9;
-								gameState.time.onesTime = 9;
-								img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
-								img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
-							}
-							else { handleThisClick = false; gameState.time.followTime = true; }
-						}
+						
 					}
 						//******panic button******
 					else if ((currentX > 455 && currentX < 560) && (currentY > 660 && currentY < 701)) {
