@@ -17,13 +17,13 @@
 
 	this.gameOver.src = "Images/Backgrounds/GameOver.png";
 	
-	this.table = new Image();
+	this.Table = new Image();
 	
-	this.table.src = "Images/Misc/table.png":
+	this.Table.src = "Images/Misc/table.png";
 	
-	this.frame = new Image();
+	this.Frame = new Image();
 	
-	this.frame.src = "Images/Misc/frame.png";
+	this.Frame.src = "Images/Misc/frame.png";
 
 	//deck image
 
