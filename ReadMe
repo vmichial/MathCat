@@ -102,21 +102,22 @@ the deck consists of 52 cards.
 13 purple cards numbered 1-13
 13 brown cards numbered 1-13
 
-(this is the same as a poker deck only J=11, Q=12, and K=13)
+(this is the same as a poker deck only A=1, J=11, Q=12, and K=13)
 
 --Bonuses and scoring--
 selecting a card will add that card's value to your score.
 choosing an operator will give you +1 to its respective bonus.
 
-every problem has a current Score that you don't see, and the total score you do see.
-selecting a card adds its value to your current score.
-when you submit a question and it is correct, the current score will be increased by bonuses.
+every problem has a current Score that you don't see, while total score you do see.
+selecting a card adds its value to your current score, and is shown in total score.
+when you submit a question and it is correct, the current score will be increased by bonuses amd added to the total score.
 
 if you have an addition bonus, 0.2*(the number of additions)*(current Score) is that total bonus
 if you have a subtraction bonus, 0.3*(the number of subtractions)*(current score) is the total
 if you have a multiplication bonus, 0.4*(the number of multiplies)*(currentScore) is the total
 if you have a division bonus, 0.5*(the number of divisions)*(currentScore) is the total
 
+these bonuses are added to the current score and made part of the total score when a question is correct.
 if you use an operator you get it's bonus, and it stacks with the bonuses from previous questions.
 if you keep using that operator successfully you will build the stacks up and increase your scoring potential.
 if you have stacks of a particular bonus, but do not use it in your current answer, you lose the stacks for that bonus.
@@ -137,7 +138,7 @@ if you run out of time, you fail, and can only quit by pressing accept or cancel
 HINTS:
 save your '1' cards for easy divisions, you get a free division by dividing by 1!
 
-additions are EASY to perform, and you have a high chance of getting 9 stacks
+additions and subtractions are EASY to perform, and you have a high chance of getting 9 stacks
 
 you have to use merge to do complex terms like (5-10)/(5*5/5)  [which is -1 with two divisions, a multiply and a subtraction bonus!]
 
@@ -147,11 +148,9 @@ Its better to panic than run out of time!
 
 when you advance to a new level, your deck is refreshed and shuffled! you have 52 more cards so go nuts!
 
-don't Click too fast! If you have to restart the question you will lose your bonus!
+don't Click too fast! If you have to restart the question you will lose your bonuses!
 
 HAVE FUN!
 ----------------------------------------------------------------------------------------------------------------------------------------
-
-
-
+please Email any errors found to ccc.parallel@gmail.com
 	 
