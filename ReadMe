@@ -110,7 +110,7 @@ choosing an operator will give you +1 to its respective bonus.
 
 every problem has a current Score that you don't see, while total score you do see.
 selecting a card adds its value to your current score, and is shown in total score.
-when you submit a question and it is correct, the current score will be increased by bonuses amd added to the total score.
+when you submit a question and it is correct, the current score will be increased by bonuses and added to the total score.
 
 if you have an addition bonus, 0.2*(the number of additions)*(current Score) is that total bonus
 if you have a subtraction bonus, 0.3*(the number of subtractions)*(current score) is the total
