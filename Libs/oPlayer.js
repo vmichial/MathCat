@@ -111,6 +111,8 @@ function Player() {
 			this.problemNumber = 1;
 			this.currentEQ = nextEQ.EQ;
 			this.currentX = nextEQ.answer;
+			this.myDeck.resetDeck();
+			this.updateHand();
 		}
 		else{
 			nextEQ = generateEQ(this.level);
