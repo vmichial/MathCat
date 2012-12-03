@@ -36,6 +36,8 @@ function Player() {
 	this.answerSoFar = 0;//the answer you can attempt to submit
 	this.answerBeingBuilt = 0;//the term you are currently building
 	this.answerAttempted = false;//if you have attempted an answer, display answer so far
+	
+	this.numLevels = 15;
 
 	this.initializePlayer = function () {
 		//ADD CODE HERE FOR SETTING THE PLAYER UP AT GAME START
@@ -105,7 +107,7 @@ function Player() {
 		this.totalScore -= this.currentScore;
 		this.currentScore = 0;
 		
-		if((this.problemNumber+1)>10){
+		if((this.problemNumber+1)>this.numLevels){
 			nextEQ = generateEQ(this.level+1);
 			this.level++;
 			this.problemNumber = 1;
@@ -213,12 +215,6 @@ function Player() {
 		if(this.answerSoFar == this.currentX){return true;}
 		else return false;
 	}
-	this.updateTotalScore = function () {
-		//this is called when a problem is finished, it should add the 
-		//currentScore to the TotalScore. and reset anything to what it needs to be
-		this.Totalscore += this.currentScore + this.currentBonus;
-	}
-
 	this.updateHand = function () {
 		//whatever cards are inHand, we need these card pictures displayed.
 		//hold those cards data in the array, use this function to populate 

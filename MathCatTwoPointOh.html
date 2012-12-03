@@ -637,7 +637,7 @@
 									}
 									else{//answer correct
 										msg.correctDialog = true;
-										if(gameState.player1.problemNumber == 10){
+										if(gameState.player1.problemNumber == gameState.player1.numLevels){
 											gameState.player1.advanceLevel();
 											gameState.player1.myDeck.addToHand(!gameState.hand.selected[0], !gameState.hand.selected[1], 
 																  !gameState.hand.selected[2], !gameState.hand.selected[3], !gameState.hand.selected[4]
