@@ -102,7 +102,7 @@ function generateEQ(level, MAX_NUM) {
 				if (xFrac) lhs[o1] = pm(eq.a) + '÷x';
 				else lhs[o1] = 'x÷' + pm(eq.a);
 			} else {
-				lhs[o1] = pm(eq.a) + '•x';
+				lhs[o1] = pm(eq.a) + 'x';
 			}
 		} else {
 			lhs[o1] = 'x';
@@ -120,7 +120,7 @@ function generateEQ(level, MAX_NUM) {
 		ans.EQ += ' = ' + eq.b;
 	}
 	//========================
-	
+
 
 
 	//========================
@@ -142,6 +142,7 @@ function generateEQ(level, MAX_NUM) {
 				break;
 
 			case 4: // ax = b
+				while (eq.b == 0) eq.init(roll(MAX_NUM));
 				while (temp == 0) temp = roll(MAX_NUM);
 				eq.mul(temp);
 				break;
@@ -162,6 +163,8 @@ function generateEQ(level, MAX_NUM) {
 				break;
 
 			case 7: // ax +- c1... = b
+				while (eq.b == 0) eq.init(roll(MAX_NUM));
+				while (temp == 0) temp = roll(MAX_NUM);
 				eq.mul(roll(MAX_NUM / 3 * 2));
 				break;
 
@@ -172,7 +175,10 @@ function generateEQ(level, MAX_NUM) {
 
 			case 10: // x/*a +- c1... = b
 				if (roll(10) % 2 == 0) eq.seedDiv(roll(MAX_NUM / 3 * 2));
-				else eq.mul(roll(MAX_NUM / 3 * 2));
+				else {
+					while (eq.b == 0) eq.init(roll(MAX_NUM));
+					eq.mul(roll(MAX_NUM / 3 * 2));
+				}
 				break;
 		}
 
