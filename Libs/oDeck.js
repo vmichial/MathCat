@@ -1,4 +1,13 @@
-﻿//the deck class. represents the relavant data to manage a deck
+﻿//the card class, represents the relavant data for a CARD
+function Card(value, color, used) {
+	this.here = used;			//used as a flag for if it is in a particular spot, hand, deck, or used
+	this.myValue = value;		//in integer value for doing math with
+	this.myColor = color;		//a string for holding the color, used in making the name of the image
+	this.myImage = new Image();	//make an image variable
+	this.rank = 0;
+	this.disabled = false;
+};
+//the deck class. represents the relavant data to manage a deck
 //including which cards are in the deck, in the player's hand
 //and which have been used.
 function Deck() {

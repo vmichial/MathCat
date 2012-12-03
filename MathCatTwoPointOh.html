@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="Libs/Deck.js"></script>
 	<script type="text/javascript" src="Libs/jquery.js"></script>
 	
+	<script type="text/javascript" src="Libs/oTransitions.js"></script>
 	<script type="text/javascript" src="Libs/oPlayer.js"></script>
 	<script type="text/javascript" src="Libs/oDeck.js"></script>
 	<script type="text/javascript" src="Libs/oImages.js"></script>
@@ -54,16 +55,7 @@
 		//	**************************************************************************************************************
 
 
-		//the card class, represents the relavant data for a CARD
 
-		function Card(value, color, used) {
-			this.here = used;			//used as a flag for if it is in a particular spot, hand, deck, or used
-			this.myValue = value;		//in integer value for doing math with
-			this.myColor = color;		//a string for holding the color, used in making the name of the image
-			this.myImage = new Image();	//make an image variable
-			this.rank = 0;
-			this.disabled = false;
-		};
 
 		//***************************END DECK
 		//		************************************************************************************************
