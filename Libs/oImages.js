@@ -16,6 +16,14 @@
 	this.gameOver = new Image();
 
 	this.gameOver.src = "Images/Backgrounds/GameOver.png";
+	
+	this.table = new Image();
+	
+	this.table.src = "Images/Misc/table.png":
+	
+	this.frame = new Image();
+	
+	this.frame.src = "Images/Misc/frame.png";
 
 	//deck image
 
