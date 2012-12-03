@@ -791,19 +791,19 @@
 						}
 						if (gameState.time.timeRemaining <= 30) {
 							gameState.time.outOfTime = false;
-							gameState.mood.Fearful = true;
+							gameState.mood.Fearful = false;
 							gameState.mood.Excited = false;
 							gameState.mood.Celebrate = false;
-							gameState.mood.Confused = false;
+							gameState.mood.Confused = true;
 							gameState.mood.Dead = false;
 							gameState.mood.OMG = false;
 						}
 						if (gameState.time.timeRemaining <= 15) {
 							gameState.time.outOfTime = false;
-							gameState.mood.Fearful = false;
+							gameState.mood.Fearful = true;
 							gameState.mood.Excited = false;
 							gameState.mood.Celebrate = false;
-							gameState.mood.Confused = true;
+							gameState.mood.Confused = false;
 							gameState.mood.Dead = false;
 							gameState.mood.OMG = false;
 						}
