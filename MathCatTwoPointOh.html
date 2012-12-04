@@ -412,7 +412,8 @@
 							}
 							else {
 								handleThisClick = false;
-								gameState.player1.panicked = true;							
+								gameState.player1.panicked = true;
+								gameState.time.followTime = false;								
 							}
 						}
 					}
@@ -565,6 +566,7 @@
 						else if(msg.skipDialog){
 							msg.skipDialog = false;
 							gameState.player1.skipProblem();
+							gameState.time.followTime = true;
 						}
 						else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
 								handleThisClick = false;
@@ -641,6 +643,7 @@
 										gameState.logic.ABB = false;
 										gameState.logic.ASF = false;
 										gameState.addTime();
+										gameState.time.followTime = true;
 									}
 								}
 								else if(gameState.logic.ASF && gameState.logic.ABB)
@@ -765,7 +768,7 @@
 					//that are based on time
 					gameState.time.clockTimer++;
 					if ((gameState.time.clockTimer / fps) == 1) {
-						if (gameState.time.timeRemaining == 99) {
+						if (gameState.time.timeRemaining >30) {
 							gameState.time.outOfTime = false;
 							gameState.mood.Fearful = false;
 							gameState.mood.Excited = true;
@@ -813,16 +816,26 @@
 							msg.failDialog = true;
 						}
 						else { gameState.time.timeRemaining--; }
-
-						gameState.time.onesTime = gameState.time.timeRemaining % 10;
-						var tempTime = gameState.time.timeRemaining - gameState.time.onesTime;
-						gameState.time.tensTime = tempTime / 10;
-						img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
-						img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
-						//need clock8.png from Joy or any number with an 8 is DERP!
 						gameState.time.clockTimer = 0;
 					}
 				}
+				//always update time pics
+				gameState.time.onesTime = gameState.time.timeRemaining % 10;
+				var tempTime = gameState.time.timeRemaining - gameState.time.onesTime;
+				gameState.time.tensTime = tempTime / 10;
+				img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
+				img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
+				
+				//make mathcat look happy after panic is pressed
+				if(gameState.player1.panicked){
+					gameState.mood.Fearful = false;
+					gameState.mood.Excited = true;
+					gameState.mood.Celebrate = false;
+					gameState.mood.Confused = false;
+					gameState.mood.OMG = false;
+					gameState.mood.Dead = false;
+				}
+				
 				// make dialog choices linger a bit
 				if (msg.selectCardDialog) {
 					msg.cardTimer++;

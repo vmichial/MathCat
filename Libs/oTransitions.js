@@ -33,13 +33,13 @@ function Transitions(){
 	//the player what level they are on
 	//and giving a ready start
 	function startLevel(playerData){
-		this.clickHandler(click){
+		this.clickHandler = function(click){
 			
 		}		
-		this.proceed(){
+		this.proceed = function(){
 			
 		}
-		this.draw(ctx){
+		this.draw = function(ctx){
 		
 		}
 		

@@ -295,7 +295,7 @@ function GameStates() {
 			this.time.timeRemaining = 100;
 		}
 		else{
-			this.time.timeRemaining += 15;
+			this.time.timeRemaining += 16;
 		}
 	}
 }
