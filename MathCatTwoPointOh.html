@@ -24,6 +24,8 @@
 		gameState = new GameStates();
 		msg = new Messages();
 		img = new Images();
+		trans = new Transitions();
+
 		//this function gets the position of the mouse event and return the coordinates for use!
 		function getPosition(mouseEvent, gameCanvas) {
 			var x, y;//the X and Y to be returned
@@ -109,340 +111,339 @@
 		//		**************************GAME STATUS CHECK STARTS HERE**********************
 
 		function gameStatusCheck() {
-			if (gameState.location.atStartupScreen) {
-				if(handleThisClick){gameState.splash.startupTimer = 89;}
-				gameState.splash.startupTimer++;
-				if ((gameState.splash.startupTimer / fps) == 3) {
-					if (gameState.splash.showVMichial) { gameState.splash.showVMichial = false; gameState.splash.showJYC = true; }
-					else if (gameState.splash.showFranciaGarcia) { gameState.splash.showFranciaGarcia = false; gameState.splash.showJYC = true; }
-					else if (gameState.splash.showJYC) { gameState.splash.showJYC = false; gameState.splash.showEdward = true; }
-					else if (gameState.splash.showEdward) { gameState.splash.showEdward = false; gameState.splash.showCodeForGood = true; }
-					else if (gameState.splash.showCodeForGood) {
-						gameState.splash.showCodeForGood = false;
-						gameState.splash.showVMichial = true;
-						gameState.location.atStartupScreen = false;
-						gameState.location.atTitleScreen = true;
-					}
-					gameState.splash.startupTimer = 0;
-				}
-			}
-			else if (gameState.location.atTitleScreen) {
-				if (handleThisClick) {//clicke the start game buton
-					if ((currentX > 80 && currentX < 350) && (currentY > 630)) {
-						gameState.player1.initializePlayer();
-						gameState.mood.Fearful = false;
-						gameState.mood.Excited = true;
-						gameState.mood.Celebrate = false;
-						gameState.mood.Confused = false;
-						gameState.mood.Dead = false;
-						gameState.mood.OMG = false;
-						gameState.location.atTitleScreen = false;
-						gameState.location.atGameScreen = true;
-						gameState.time.timeRemaining = 99;
-						gameState.time.followTime = false;
-						gameState.time.outOfTime = false;
-						gameState.time.tensTime = 9;
-						gameState.time.onesTime = 9;
-						img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
-						img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
-						handleThisClick = false;
-						//math vartiables to reset
-						gameState.logic.ASF = false;
-						gameState.logic.ABB = false;
-						gameState.logic.pickAsign = false;
-						gameState.logic.pickAcard = true;
-						gameState.logic.cardSelected = false;
-						gameState.hand.selected[0] = false;
-						gameState.hand.used[0] = false;
-						gameState.hand.selected[1] = false;
-						gameState.hand.used[1] = false;
-						gameState.hand.selected[2] = false;
-						gameState.hand.used[2] = false;
-						gameState.hand.selected[3] = false;
-						gameState.hand.used[3] = false;
-						gameState.hand.selected[4] = false;
-						gameState.hand.used[4] = false;
-						msg.selectCardDialog = true;
-						gameState.logic.inAddition = false;
-						gameState.logic.inSubtraction = false;
-						gameState.logic.inDivision = false;
-						gameState.logic.inMultiplication = false;
-						gameState.time.followTime = true;
-					}
-					else if ((currentX > 730 && currentX < 960) && (currentY > 630)) {
-						gameState.location.atTitleScreen = false;
-						gameState.location.atEndScreen = true;
-						handleThisClick = false;
+			if (trans.transitionInProgress()){
+			}else {
+				if (gameState.location.atStartupScreen) {
+					if (handleThisClick) { gameState.splash.startupTimer = 89; }
+					gameState.splash.startupTimer++;
+					if ((gameState.splash.startupTimer / fps) == 3) {
+						if (gameState.splash.showVMichial) { gameState.splash.showVMichial = false; gameState.splash.showJYC = true; }
+						else if (gameState.splash.showFranciaGarcia) { gameState.splash.showFranciaGarcia = false; gameState.splash.showJYC = true; }
+						else if (gameState.splash.showJYC) { gameState.splash.showJYC = false; gameState.splash.showEdward = true; }
+						else if (gameState.splash.showEdward) { gameState.splash.showEdward = false; gameState.splash.showCodeForGood = true; }
+						else if (gameState.splash.showCodeForGood) {
+							gameState.splash.showCodeForGood = false;
+							gameState.splash.showVMichial = true;
+							gameState.location.atStartupScreen = false;
+							gameState.location.atTitleScreen = true;
+						}
+						gameState.splash.startupTimer = 0;
 					}
 				}
-			}
-			else if (gameState.location.atGameScreen) {
-				//if there is a click to worry about
-				if (handleThisClick) {
-				
-					
+				else if (gameState.location.atTitleScreen) {
+					if (handleThisClick) {//clicke the start game buton
+						if ((currentX > 80 && currentX < 350) && (currentY > 630)) {
+							gameState.player1.initializePlayer();
+							gameState.mood.Fearful = false;
+							gameState.mood.Excited = true;
+							gameState.mood.Celebrate = false;
+							gameState.mood.Confused = false;
+							gameState.mood.Dead = false;
+							gameState.mood.OMG = false;
+							gameState.location.atTitleScreen = false;
+							gameState.location.atGameScreen = true;
+							gameState.time.timeRemaining = 99;
+							gameState.time.followTime = false;
+							gameState.time.outOfTime = false;
+							gameState.time.tensTime = 9;
+							gameState.time.onesTime = 9;
+							img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
+							img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
+							handleThisClick = false;
+							//math vartiables to reset
+							gameState.logic.ASF = false;
+							gameState.logic.ABB = false;
+							gameState.logic.pickAsign = false;
+							gameState.logic.pickAcard = true;
+							gameState.logic.cardSelected = false;
+							gameState.hand.selected[0] = false;
+							gameState.hand.used[0] = false;
+							gameState.hand.selected[1] = false;
+							gameState.hand.used[1] = false;
+							gameState.hand.selected[2] = false;
+							gameState.hand.used[2] = false;
+							gameState.hand.selected[3] = false;
+							gameState.hand.used[3] = false;
+							gameState.hand.selected[4] = false;
+							gameState.hand.used[4] = false;
+							msg.selectCardDialog = true;
+							gameState.logic.inAddition = false;
+							gameState.logic.inSubtraction = false;
+							gameState.logic.inDivision = false;
+							gameState.logic.inMultiplication = false;
+							gameState.time.followTime = true;
+						}
+						else if ((currentX > 730 && currentX < 960) && (currentY > 630)) {
+							gameState.location.atTitleScreen = false;
+							gameState.location.atEndScreen = true;
+							handleThisClick = false;
+						}
+					}
+				}
+				else if (gameState.location.atGameScreen) {
+					//if there is a click to worry about
+					if (handleThisClick) {
+						//**************CARDS CHECK
+						if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
+							//card 1 selected
+							if (!gameState.logic.UILocked) { gameState.clickedAcard(0); }
+						}
+						else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
+							//clicked in area for card 2
+							if (!gameState.logic.UILocked) { gameState.clickedAcard(1); }
+						}
+						else if ((currentX > 425 && currentX < 525) && (currentY > 440 && currentY < 580)) {
+							//clicked in area for card 3
+							if (!gameState.logic.UILocked) { gameState.clickedAcard(2); }
+						}
+						else if ((currentX > 525 && currentX < 625) && (currentY > 440 && currentY < 580)) {
+							//clicked in area for card 4
+							if (!gameState.logic.UILocked) { gameState.clickedAcard(3); }
+						}
+						else if ((currentX > 625 && currentX < 725) && (currentY > 440 && currentY < 580)) {
+							//clicked in area for card 5
+							if (!gameState.logic.UILocked) { gameState.clickedAcard(4); }
+						}
+							//****************PORTRAIT PIC CHECK ______ check complete, disabling
+							/*
+							else if ((currentX > 680 && currentX < 970) && (currentY > 20 && currentY < 210)){//clicked portrait
+							}
+							*/
+							//*******************BONUS CHECK****************//no need to test this anymore
+							/*
+							else if ((currentX > 740 && currentX < 940) && (currentY > 340 && currentY < 375)) {//clicked on addition bonus
+							}
+							else if ((currentX > 740 && currentX < 940) && (currentY > 400 && currentY < 435)) {//clicked on subtraction bonus
+							}
+							else if ((currentX > 740 && currentX < 940) && (currentY > 450 && currentY < 495)) {//clicked on multplication bonus
+							}
+							else if ((currentX > 740 && currentX < 940) && (currentY > 530 && currentY < 550)) {//clicked on division bonus
+							}
+							*/
+							//*************MATH BUTTONS***************************
+						else if ((currentX > 270 && currentX < 360) && (currentY > 615 && currentY < 685)) {
+							//clicked on ADD button
+							handleThisClick = false;
+							if (!gameState.logic.UILocked) {
+								if (gameState.logic.pickAsign) {
+									gameState.player1.additionBonus = true;
+									gameState.logic.cardSelected = false;
+									gameState.logic.makeTermActive = true;
+									gameState.logic.inAddition = true;
+									gameState.logic.inSubtraction = false;
+									gameState.logic.inDivision = false;
+									gameState.logic.inMultiplication = false;
+									gameState.logic.pickAsign = false;
+									gameState.logic.pickAcard = true;
+									gameState.player1.numAdditions++;
+									msg.selectCardDialog = true;
+								}
+								if (gameState.logic.merge) {
+									gameState.player1.additionBonus = true;
+									gameState.logic.cardSelected = false;
+									gameState.player1.answerSoFar += gameState.player1.answerBeingBuilt;
+									gameState.logic.ASF = true;
+									gameState.player1.answerBeingBuilt = 0;
+									gameState.logic.ABB = false;
+									gameState.player1.numAdditions++;
+									gameState.logic.merge = false;
+									gameState.logic.pickAsign = false;
+									gameState.logic.pickAcard = true;
+									gameState.logic.inAddition = false;
+									gameState.logic.inSubtraction = false;
+									gameState.logic.inMultiplication = false;
+									gameState.logic.inDivision = false;
+									gameState.logic.makeTermActive = false;
+									msg.selectCardDialog = true;
+								}
+								if (gameState.logic.pickAcard) {
+									msg.selectCardDialog = true;
+								}
+							}
+						}
+						else if ((currentX > 385 && currentX < 490) && (currentY > 580 && currentY < 650)) {
+							//clicked on SUBTRACT button
+							handleThisClick = false;
+							if (!gameState.logic.UILocked) {
+								if (gameState.logic.pickAsign) {
+									gameState.player1.subtractionBonus = true;
+									gameState.logic.inAddition = false;
+									gameState.logic.makeTermActive = true;
+									gameState.logic.inSubtraction = true;
+									gameState.logic.inDivision = false;
+									gameState.logic.inMultiplication = false;
+									gameState.logic.pickAsign = false;
+									gameState.logic.merge = false;
+									gameState.logic.pickAcard = true;
+									gameState.player1.numSubtractions++;
+									msg.selectCardDialog = true;
+								}
+								if (gameState.logic.merge) {
+									gameState.player1.subtractionBonus = true;
+									gameState.logic.cardSelected = false;
+									gameState.player1.answerSoFar -= gameState.player1.answerBeingBuilt;
+									gameState.logic.ASF = true;
+									gameState.player1.answerBeingBuilt = 0;
+									gameState.logic.ABB = false;
+									gameState.player1.numSubtractions++;
+									gameState.logic.merge = false;
+									gameState.logic.pickAsign = false;
+									gameState.logic.pickAcard = true;
+									gameState.logic.inAddition = false;
+									gameState.logic.inSubtraction = false;
+									gameState.logic.inMultiplication = false;
+									gameState.logic.inDivision = false;
+									gameState.logic.makeTermActive = false;
+									msg.selectCardDialog = true;
+								}
+								if (gameState.logic.pickAcard) {
+									msg.selectCardDialog = true;
+								}
+							}
+						}
+						else if ((currentX > 520 && currentX < 635) && (currentY > 585 && currentY < 650)) {//clicked on MULTIPLY button
+							handleThisClick = false;
+							if (!gameState.logic.UILocked) {
+								if (gameState.logic.pickAsign) {
+									gameState.player1.multiplyBonus = true;
+									gameState.logic.inAddition = false;
+									gameState.logic.inSubtraction = false;
+									gameState.logic.inDivision = false;
+									gameState.logic.inMultiplication = true;
+									gameState.logic.pickAsign = false;
+									gameState.logic.pickAcard = true;
+									gameState.logic.makeTermActive = true;
+									gameState.player1.numMultiplies++;
+									gameState.logic.merge = false;
+									msg.selectCardDialog = true;
+								}
+								if (gameState.logic.merge) {
+									gameState.player1.multiplyBonus = true;
+									gameState.logic.cardSelected = false;
+									gameState.player1.answerSoFar *= gameState.player1.answerBeingBuilt;
+									gameState.logic.ASF = true;
+									gameState.player1.answerBeingBuilt = 0;
+									gameState.logic.ABB = false;
+									gameState.player1.numMultiplies++;
+									gameState.logic.merge = false;
+									gameState.logic.pickAsign = false;
+									gameState.logic.pickAcard = true;
+									gameState.logic.inAddition = false;
+									gameState.logic.inSubtraction = false;
+									gameState.logic.inMultiplication = false;
+									gameState.logic.inDivision = false;
+									gameState.logic.makeTermActive = false;
+									msg.selectCardDialog = true;
+								}
+								if (gameState.logic.pickAcard) {
+									msg.selectCardDialog = true;
+								}
+							}
+						}
+						else if ((currentX > 645 && currentX < 750) && (currentY > 600 && currentY < 680)) {//clicked on DIVIDE button
+							handleThisClick = false;
+							if (!gameState.logic.UILocked) {
+								if (gameState.logic.pickAsign) {
+									gameState.logic.inAddition = false;
+									gameState.logic.inSubtraction = false;
+									gameState.logic.inDivision = true;
+									gameState.logic.inMultiplication = false;
+									gameState.logic.makeTermActive = true;
+									gameState.logic.pickAsign = false;
+									gameState.logic.pickAcard = true;
+									gameState.player1.numDivisions++;
+									gameState.player1.divideBonus = true;
+									msg.selectCardDialog = true;
+								}
+								if (gameState.logic.merge) {
+									gameState.logic.cardSelected = false;
+									gameState.player1.answerSoFar /= gameState.logic.answerBeingBuilt;
+									gameState.player1.answerSoFar = Math.floor(gameState.player1.answerSoFar);
+									gameState.logic.ASF = true;
+									gameState.logic.answerBeingBuilt = 0;
+									gameState.logic.ABB = false;
+									gameState.player1.numDivisions++;
+									gameState.player1.divideBonus = true;
+									gameState.logic.merge = false;
+									gameState.logic.pickAsign = false;
+									gameState.logic.pickAcard = true;
+									gameState.logic.inAddition = false;
+									gameState.logic.inSubtraction = false;
+									gameState.logic.inMultiplication = false;
+									gameState.logic.inDivision = false;
+									gameState.logic.makeTermActive = false;
+									msg.selectCardDialog = true;
+								}
+								if (gameState.logic.pickAcard) {
+									msg.selectCardDialog = true;
+								}
+							}
+						}
+							//clicked on DECK
+						else if ((currentX > 110 && currentX < 220) && (currentY > 425 && currentY < 560)) {
+							handleThisClick = false;
+							if (!gameState.logic.UILocked) {
+								if (!gameState.player1.myDeck.isEmpty()) {
+									gameState.player1.myDeck.addToHand(gameState.hand.selected[0], gameState.hand.selected[1],
+																	  gameState.hand.selected[2], gameState.hand.selected[3], gameState.hand.selected[4]
+																	, gameState.hand.used[0], gameState.hand.used[1], gameState.hand.used[2]
+																	, gameState.hand.used[3], gameState.hand.used[4]);
+									if (!gameState.hand.used[0]) { gameState.hand.selected[0] = false; }
+									if (!gameState.hand.used[1]) { gameState.hand.selected[1] = false; }
+									if (!gameState.hand.used[2]) { gameState.hand.selected[2] = false; }
+									if (!gameState.hand.used[3]) { gameState.hand.selected[3] = false; }
+									if (!gameState.hand.used[4]) { gameState.hand.selected[4] = false; }
+								}
+							}
+						}
+							//****CLOCK
+							//else if ((currentX > 0 && currentX < 125) && (currentY > 590 && currentY < 701)) {//clicked on Clock, disabled for now
+							//	
+							//}
+							//*****************TIME CHECK ************** DISABLED!
+						else if ((currentX > 126 && currentX < 270) && (currentY > 590 && currentY < 701)) {
 
-					//**************CARDS CHECK
-					if ((currentX > 225 && currentX < 325) && (currentY > 440 && currentY < 580)) {
-						//card 1 selected
-						if(!gameState.logic.UILocked){gameState.clickedAcard(0);}
-					}
-					else if ((currentX > 325 && currentX < 425) && (currentY > 440 && currentY < 580)) {
-						//clicked in area for card 2
-						if(!gameState.logic.UILocked){gameState.clickedAcard(1);}
-					}
-					else if ((currentX > 425 && currentX < 525) && (currentY > 440 && currentY < 580)) {
-						//clicked in area for card 3
-						if(!gameState.logic.UILocked){gameState.clickedAcard(2);}
-					}
-					else if ((currentX > 525 && currentX < 625) && (currentY > 440 && currentY < 580)) {
-						//clicked in area for card 4
-						if(!gameState.logic.UILocked){gameState.clickedAcard(3);}
-					}
-					else if ((currentX > 625 && currentX < 725) && (currentY > 440 && currentY < 580)) {
-						//clicked in area for card 5
-						if(!gameState.logic.UILocked){gameState.clickedAcard(4);}
-					}
-						//****************PORTRAIT PIC CHECK ______ check complete, disabling
-						/*
-						else if ((currentX > 680 && currentX < 970) && (currentY > 20 && currentY < 210)){//clicked portrait
 						}
-						*/
-						//*******************BONUS CHECK****************//no need to test this anymore
-						/*
-						else if ((currentX > 740 && currentX < 940) && (currentY > 340 && currentY < 375)) {//clicked on addition bonus
-						}
-						else if ((currentX > 740 && currentX < 940) && (currentY > 400 && currentY < 435)) {//clicked on subtraction bonus
-						}
-						else if ((currentX > 740 && currentX < 940) && (currentY > 450 && currentY < 495)) {//clicked on multplication bonus
-						}
-						else if ((currentX > 740 && currentX < 940) && (currentY > 530 && currentY < 550)) {//clicked on division bonus
-						}
-						*/
-						//*************MATH BUTTONS***************************
-					else if ((currentX > 270 && currentX < 360) && (currentY > 615 && currentY < 685)) {
-						//clicked on ADD button
-						handleThisClick = false;
-					if(!gameState.logic.UILocked){							
-							if (gameState.logic.pickAsign) {
-								gameState.player1.additionBonus = true;
-								gameState.logic.cardSelected = false;
-								gameState.logic.makeTermActive = true;
-								gameState.logic.inAddition = true;
-								gameState.logic.inSubtraction = false;
-								gameState.logic.inDivision = false;
-								gameState.logic.inMultiplication = false;
-								gameState.logic.pickAsign = false;
-								gameState.logic.pickAcard = true;
-								gameState.player1.numAdditions++;
-								msg.selectCardDialog = true;
-							}
-							if (gameState.logic.merge) {
-								gameState.player1.additionBonus = true;
-								gameState.logic.cardSelected = false;
-								gameState.player1.answerSoFar += gameState.player1.answerBeingBuilt;
-								gameState.logic.ASF = true;
-								gameState.player1.answerBeingBuilt = 0;
-								gameState.logic.ABB = false;
-								gameState.player1.numAdditions++;
-								gameState.logic.merge = false;
-								gameState.logic.pickAsign = false;
-								gameState.logic.pickAcard = true;
-								gameState.logic.inAddition = false;
-								gameState.logic.inSubtraction = false;
-								gameState.logic.inMultiplication = false;
-								gameState.logic.inDivision = false;
-								gameState.logic.makeTermActive = false;
-								msg.selectCardDialog = true;
-							}
-							if(gameState.logic.pickAcard){
-								msg.selectCardDialog = true;
-							}
-						}
-					}
-					else if ((currentX > 385 && currentX < 490) && (currentY > 580 && currentY < 650)) {
-						//clicked on SUBTRACT button
-						handleThisClick = false;
-						if(!gameState.logic.UILocked){
-							if (gameState.logic.pickAsign) {
-								gameState.player1.subtractionBonus = true;
-								gameState.logic.inAddition = false;
-								gameState.logic.makeTermActive = true;
-								gameState.logic.inSubtraction = true;
-								gameState.logic.inDivision = false;
-								gameState.logic.inMultiplication = false;
-								gameState.logic.pickAsign = false;
-								gameState.logic.merge = false;
-								gameState.logic.pickAcard = true;
-								gameState.player1.numSubtractions++;
-								msg.selectCardDialog = true;
-							}
-							if (gameState.logic.merge) {
-								gameState.player1.subtractionBonus = true;
-								gameState.logic.cardSelected = false;
-								gameState.player1.answerSoFar -= gameState.player1.answerBeingBuilt;
-								gameState.logic.ASF = true;
-								gameState.player1.answerBeingBuilt = 0;
-								gameState.logic.ABB = false;
-								gameState.player1.numSubtractions++;
-								gameState.logic.merge = false;
-								gameState.logic.pickAsign = false;
-								gameState.logic.pickAcard = true;
-								gameState.logic.inAddition = false;
-								gameState.logic.inSubtraction = false;
-								gameState.logic.inMultiplication = false;
-								gameState.logic.inDivision = false;
-								gameState.logic.makeTermActive = false;
-								msg.selectCardDialog = true;
-							}
-							if(gameState.logic.pickAcard){
-								msg.selectCardDialog = true;
-							}
-						}
-					}
-					else if ((currentX > 520 && currentX < 635) && (currentY > 585 && currentY < 650)) {//clicked on MULTIPLY button
-						handleThisClick = false;
-						if(!gameState.logic.UILocked){
-							if (gameState.logic.pickAsign) {
-								gameState.player1.multiplyBonus = true;
-								gameState.logic.inAddition = false;
-								gameState.logic.inSubtraction = false;
-								gameState.logic.inDivision = false;
-								gameState.logic.inMultiplication = true;
-								gameState.logic.pickAsign = false;
-								gameState.logic.pickAcard = true;
-								gameState.logic.makeTermActive = true;
-								gameState.player1.numMultiplies++;
-								gameState.logic.merge = false;
-								msg.selectCardDialog = true;
-							}
-							if (gameState.logic.merge) {
-								gameState.player1.multiplyBonus = true;
-								gameState.logic.cardSelected = false;
-								gameState.player1.answerSoFar *= gameState.player1.answerBeingBuilt;
-								gameState.logic.ASF = true;
-								gameState.player1.answerBeingBuilt = 0;
-								gameState.logic.ABB = false;
-								gameState.player1.numMultiplies++;
-								gameState.logic.merge = false;
-								gameState.logic.pickAsign = false;
-								gameState.logic.pickAcard = true;
-								gameState.logic.inAddition = false;
-								gameState.logic.inSubtraction = false;
-								gameState.logic.inMultiplication = false;
-								gameState.logic.inDivision = false;
-								gameState.logic.makeTermActive = false;
-								msg.selectCardDialog = true;
-							}
-							if(gameState.logic.pickAcard){
-								msg.selectCardDialog = true;
-							}
-						}
-					}
-					else if ((currentX > 645 && currentX < 750) && (currentY > 600 && currentY < 680)) {//clicked on DIVIDE button
-						handleThisClick = false;
-						if(!gameState.logic.UILocked){
-							if (gameState.logic.pickAsign) {
-								gameState.logic.inAddition = false;
-								gameState.logic.inSubtraction = false;
-								gameState.logic.inDivision = true;
-								gameState.logic.inMultiplication = false;
-								gameState.logic.makeTermActive = true;
-								gameState.logic.pickAsign = false;
-								gameState.logic.pickAcard = true;
-								gameState.player1.numDivisions++;
-								gameState.player1.divideBonus = true;
-								msg.selectCardDialog = true;
-							}
-							if (gameState.logic.merge) {
-								gameState.logic.cardSelected = false;
-								gameState.player1.answerSoFar /= gameState.logic.answerBeingBuilt;
-								gameState.player1.answerSoFar = Math.floor(gameState.player1.answerSoFar);
-								gameState.logic.ASF = true;
-								gameState.logic.answerBeingBuilt = 0;
-								gameState.logic.ABB = false;
-								gameState.player1.numDivisions++;
-								gameState.player1.divideBonus = true;
-								gameState.logic.merge = false;
-								gameState.logic.pickAsign = false;
-								gameState.logic.pickAcard = true;
-								gameState.logic.inAddition = false;
-								gameState.logic.inSubtraction = false;
-								gameState.logic.inMultiplication = false;
-								gameState.logic.inDivision = false;
-								gameState.logic.makeTermActive = false;
-								msg.selectCardDialog = true;
-							}
-							if(gameState.logic.pickAcard){
-								msg.selectCardDialog = true;
-							}
-						}
-					}
-						//clicked on DECK
-					else if ((currentX > 110 && currentX < 220) && (currentY > 425 && currentY < 560)) {
-						handleThisClick = false;
-						if(!gameState.logic.UILocked){
-							if (!gameState.player1.myDeck.isEmpty()) {
-								gameState.player1.myDeck.addToHand(gameState.hand.selected[0], gameState.hand.selected[1], 
-																  gameState.hand.selected[2], gameState.hand.selected[3], gameState.hand.selected[4]
-																, gameState.hand.used[0], gameState.hand.used[1], gameState.hand.used[2]
-																, gameState.hand.used[3], gameState.hand.used[4]);
-							if (!gameState.hand.used[0]){gameState.hand.selected[0] = false;}
-							if (!gameState.hand.used[1]){gameState.hand.selected[1] = false;}
-							if (!gameState.hand.used[2]){gameState.hand.selected[2] = false;}
-							if (!gameState.hand.used[3]){gameState.hand.selected[3] = false;}
-							if (!gameState.hand.used[4]){gameState.hand.selected[4] = false;}
-							}
-						}
-					}
-					//****CLOCK
-					//else if ((currentX > 0 && currentX < 125) && (currentY > 590 && currentY < 701)) {//clicked on Clock, disabled for now
-					//	
-					//}
-					//*****************TIME CHECK ************** DISABLED!
-					else if ((currentX > 126 && currentX < 270) && (currentY > 590 && currentY < 701)) {
-						
-					}
-						//******panic button******
-					else if ((currentX > 455 && currentX < 560) && (currentY > 660 && currentY < 701)) {
-						if(!gameState.logic.UILocked){
-							if (gameState.player1.panicked) {
-								handleThisClick = false;
-								msg.panicDialog = true;							
-							}
-							else {
-								handleThisClick = false;
-								gameState.player1.panicked = true;
-								gameState.time.followTime = false;								
-							}
-						}
-					}
-						//make term button
-					else if ((currentX > 775 && currentX < 950) && (currentY > 585 && currentY < 641)) {
-						if(!gameState.logic.UILocked){
-							if (gameState.logic.pickAcard || gameState.logic.pickAsign) {
-								if (!gameState.logic.ASF && !gameState.logic.ABB) {
-									if (gameState.logic.makeTermActive) { gameState.logic.makeTermActive = false; } else { gameState.logic.makeTermActive = true; }
+							//******panic button******
+						else if ((currentX > 455 && currentX < 560) && (currentY > 660 && currentY < 701)) {
+							if (!gameState.logic.UILocked) {
+								if (gameState.player1.panicked) {
+									handleThisClick = false;
+									msg.panicDialog = true;
 								}
-								else if(!gameState.logic.ASF && gameState.logic.ABB){
-									if (gameState.logic.makeTermActive){
-										gameState.logic.makeTermActive = false;
-										gameState.player1.answerSoFar = gameState.player1.answerBeingBuilt;
-										gameState.player1.answerBeingBuilt = 0;
-										gameState.logic.ABB = false;
-										gameState.logic.ASF = true;
-										gameState.logic.inAddition = false;
-										gameState.logic.inSubtraction = false;
-										gameState.logic.inMultiplication = false;
-										gameState.logic.inDivision = false;
-										gameState.logic.pickAsign = false;
-										msg.selectCardDialog = true;
-										gameState.logic.pickAcard = true;
-										gameState.logic.merge = false;
+								else {
+									handleThisClick = false;
+									gameState.player1.panicked = true;
+									gameState.time.followTime = false;
+								}
+							}
+						}
+							//make term button
+						else if ((currentX > 775 && currentX < 950) && (currentY > 585 && currentY < 641)) {
+							if (!gameState.logic.UILocked) {
+								if (gameState.logic.pickAcard || gameState.logic.pickAsign) {
+									if (!gameState.logic.ASF && !gameState.logic.ABB) {
+										if (gameState.logic.makeTermActive) { gameState.logic.makeTermActive = false; } else { gameState.logic.makeTermActive = true; }
 									}
-								}
-								else if (gameState.logic.ASF && !gameState.logic.ABB) {
-									if (gameState.logic.makeTermActive) { gameState.logic.makeTermActive = false; } else { gameState.logic.makeTermActive = true; }
+									else if (!gameState.logic.ASF && gameState.logic.ABB) {
+										if (gameState.logic.makeTermActive) {
+											gameState.logic.makeTermActive = false;
+											gameState.player1.answerSoFar = gameState.player1.answerBeingBuilt;
+											gameState.player1.answerBeingBuilt = 0;
+											gameState.logic.ABB = false;
+											gameState.logic.ASF = true;
+											gameState.logic.inAddition = false;
+											gameState.logic.inSubtraction = false;
+											gameState.logic.inMultiplication = false;
+											gameState.logic.inDivision = false;
+											gameState.logic.pickAsign = false;
+											msg.selectCardDialog = true;
+											gameState.logic.pickAcard = true;
+											gameState.logic.merge = false;
+										}
+									}
+									else if (gameState.logic.ASF && !gameState.logic.ABB) {
+										if (gameState.logic.makeTermActive) { gameState.logic.makeTermActive = false; } else { gameState.logic.makeTermActive = true; }
 									}
 									else if (gameState.logic.ASF && gameState.logic.ABB) {
 										gameState.logic.pickAcard = false;
@@ -454,129 +455,127 @@
 										gameState.logic.inDivision = true;
 										gameState.logic.merge = true;
 									}
+								}
 							}
 						}
-					}
-				
-				//end of UILock if the accept button and cancel button are never locked
-						//********Accept Button*******
-					else if ((currentX > 750 && currentX < 876) && (currentY > 640)) {
-						if (msg.acceptDialog) {
-							handleThisClick = false;
-							msg.acceptDialog = false;
-						}
-						else if (msg.restartDialog) {
-							msg.restartDialog = false;
-							gameState.logic.cardSelected = false;
-							gameState.player1.restartProblem();
-							gameState.player1.answerSoFar = 0;
-							gameState.player1.answerBeingBuilt = 0;
-							gameState.player1.numAdditions = 0;
-							gameState.player1.numSubtractions = 0;
-							gameState.player1.numDivisions = 0;
-							gameState.player1.numMultiplies = 0;
-							gameState.logic.ABB = false;
-							gameState.logic.ASF = false;
-							gameState.logic.makeTermActive = false;
-							gameState.hand.selected[0] = false;
-							gameState.hand.selected[1] = false;
-							gameState.hand.selected[2] = false;
-							gameState.hand.selected[3] = false;
-							gameState.hand.selected[4] = false;
-							gameState.hand.used[0] = false;
-							gameState.hand.used[1] = false;
-							gameState.hand.used[2] = false;
-							gameState.hand.used[3] = false;
-							gameState.hand.used[4] = false;
-							gameState.logic.pickAsign = false;
-							gameState.logic.pickAcard = false;
-							gameState.logic.pickAsign = false;
-							gameState.logic.pickAcard = true;
-							gameState.logic.inAddition = false;
-							gameState.logic.inSubtraction = false;
-							gameState.logic.inDivision = false;
-							gameState.logic.inMultiplication = false;
-						}
-						else if (msg.confirmDialog) {
-							handleThisClick = false;
-							msg.acceptDialog = true;
-						}
-						else if (msg.quitDialog) {
-							handleThisClick = false;
-							gameState.location.atGameScreen = false;
-							gameState.location.atTitleScreen = true;
-							msg.quitDialog = false;
-							msg.acceptDialog = true;
-							gameState.player1.numAdditions = 0;
-							gameState.player1.numSubtractions = 0;
-							gameState.player1.numMultiplies = 0;
-							gameState.player1.numDivisions = 0;
-							msg.acceptDialog = false;
-							gameState.player1.answerSoFar = 0;
-							gameState.player1.answerBeingBuilt = 0;
-							gameState.logic.ABB = false;
-							gameState.logic.ASF = false;
-							gameState.logic.makeTermActive = false;
-							gameState.hand.selected[0] = false;
-							gameState.hand.selected[1] = false;
-							gameState.hand.selected[2] = false;
-							gameState.hand.selected[3] = false;
-							gameState.hand.selected[4] = false;
-							gameState.hand.used[0] = false;
-							gameState.hand.used[1] = false;
-							gameState.hand.used[2] = false;
-							gameState.hand.used[3] = false;
-							gameState.hand.used[4] = false;
-							gameState.logic.pickAsign = false;
-							gameState.logic.pickAcard = false;
 
-						}
-						else if (msg.cancelDialog) {
-							handleThisClick = false;
-							msg.cancelDialog = false;
-						}
-						else if (msg.failDialog) {
-							handleThisClick = false;
-							msg.failDialog = false;
-							msg.acceptDialog = false;
-							gameState.location.atGameScreen = false;
-							gameState.location.atGameOverScreen = true;
-							gameState.player1.numAdditions = 0;
-							gameState.player1.numSubtractions = 0;
-							gameState.player1.numMultiplies = 0;
-							gameState.player1.numDivisions = 0;
-							gameState.player1.answerSoFar = 0;
-							gameState.player1.answerBeingBuilt = 0;
-							gameState.logic.ABB = false;
-							gameState.logic.ASF = false;
-							gameState.logic.makeTermActive = false;
-							gameState.hand.selected[0] = false;
-							gameState.hand.selected[1] = false;
-							gameState.hand.selected[2] = false;
-							gameState.hand.selected[3] = false;
-							gameState.hand.selected[4] = false;
-							gameState.hand.used[0] = false;
-							gameState.hand.used[1] = false;
-							gameState.hand.used[2] = false;
-							gameState.hand.used[3] = false;
-							gameState.hand.used[4] = false;
-							gameState.logic.pickAsign = false;
-							gameState.logic.pickAcard = false;
-						}						
-						else if(msg.skipDialog){
-							msg.skipDialog = false;
-							gameState.player1.skipProblem();
-							gameState.time.followTime = true;
-						}
-						else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
+							//end of UILock if the accept button and cancel button are never locked
+							//********Accept Button*******
+						else if ((currentX > 750 && currentX < 876) && (currentY > 640)) {
+							if (msg.acceptDialog) {
 								handleThisClick = false;
-								if(!gameState.logic.ASF && !gameState.logic.ABB)
-								{
+								msg.acceptDialog = false;
+							}
+							else if (msg.restartDialog) {
+								msg.restartDialog = false;
+								gameState.logic.cardSelected = false;
+								gameState.player1.restartProblem();
+								gameState.player1.answerSoFar = 0;
+								gameState.player1.answerBeingBuilt = 0;
+								gameState.player1.numAdditions = 0;
+								gameState.player1.numSubtractions = 0;
+								gameState.player1.numDivisions = 0;
+								gameState.player1.numMultiplies = 0;
+								gameState.logic.ABB = false;
+								gameState.logic.ASF = false;
+								gameState.logic.makeTermActive = false;
+								gameState.hand.selected[0] = false;
+								gameState.hand.selected[1] = false;
+								gameState.hand.selected[2] = false;
+								gameState.hand.selected[3] = false;
+								gameState.hand.selected[4] = false;
+								gameState.hand.used[0] = false;
+								gameState.hand.used[1] = false;
+								gameState.hand.used[2] = false;
+								gameState.hand.used[3] = false;
+								gameState.hand.used[4] = false;
+								gameState.logic.pickAsign = false;
+								gameState.logic.pickAcard = false;
+								gameState.logic.pickAsign = false;
+								gameState.logic.pickAcard = true;
+								gameState.logic.inAddition = false;
+								gameState.logic.inSubtraction = false;
+								gameState.logic.inDivision = false;
+								gameState.logic.inMultiplication = false;
+							}
+							else if (msg.confirmDialog) {
+								handleThisClick = false;
+								msg.acceptDialog = true;
+							}
+							else if (msg.quitDialog) {
+								handleThisClick = false;
+								gameState.location.atGameScreen = false;
+								gameState.location.atTitleScreen = true;
+								msg.quitDialog = false;
+								msg.acceptDialog = true;
+								gameState.player1.numAdditions = 0;
+								gameState.player1.numSubtractions = 0;
+								gameState.player1.numMultiplies = 0;
+								gameState.player1.numDivisions = 0;
+								msg.acceptDialog = false;
+								gameState.player1.answerSoFar = 0;
+								gameState.player1.answerBeingBuilt = 0;
+								gameState.logic.ABB = false;
+								gameState.logic.ASF = false;
+								gameState.logic.makeTermActive = false;
+								gameState.hand.selected[0] = false;
+								gameState.hand.selected[1] = false;
+								gameState.hand.selected[2] = false;
+								gameState.hand.selected[3] = false;
+								gameState.hand.selected[4] = false;
+								gameState.hand.used[0] = false;
+								gameState.hand.used[1] = false;
+								gameState.hand.used[2] = false;
+								gameState.hand.used[3] = false;
+								gameState.hand.used[4] = false;
+								gameState.logic.pickAsign = false;
+								gameState.logic.pickAcard = false;
+
+							}
+							else if (msg.cancelDialog) {
+								handleThisClick = false;
+								msg.cancelDialog = false;
+							}
+							else if (msg.failDialog) {
+								handleThisClick = false;
+								msg.failDialog = false;
+								msg.acceptDialog = false;
+								gameState.location.atGameScreen = false;
+								gameState.location.atGameOverScreen = true;
+								gameState.player1.numAdditions = 0;
+								gameState.player1.numSubtractions = 0;
+								gameState.player1.numMultiplies = 0;
+								gameState.player1.numDivisions = 0;
+								gameState.player1.answerSoFar = 0;
+								gameState.player1.answerBeingBuilt = 0;
+								gameState.logic.ABB = false;
+								gameState.logic.ASF = false;
+								gameState.logic.makeTermActive = false;
+								gameState.hand.selected[0] = false;
+								gameState.hand.selected[1] = false;
+								gameState.hand.selected[2] = false;
+								gameState.hand.selected[3] = false;
+								gameState.hand.selected[4] = false;
+								gameState.hand.used[0] = false;
+								gameState.hand.used[1] = false;
+								gameState.hand.used[2] = false;
+								gameState.hand.used[3] = false;
+								gameState.hand.used[4] = false;
+								gameState.logic.pickAsign = false;
+								gameState.logic.pickAcard = false;
+							}
+							else if (msg.skipDialog) {
+								msg.skipDialog = false;
+								gameState.player1.skipProblem();
+								gameState.time.followTime = true;
+							}
+							else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
+								handleThisClick = false;
+								if (!gameState.logic.ASF && !gameState.logic.ABB) {
 									msg.skipDialog = true;
 								}
-								else if(!gameState.logic.ASF && gameState.logic.ABB)
-								{//move ABB into ASF
-									if (gameState.logic.makeTermActive){
+								else if (!gameState.logic.ASF && gameState.logic.ABB) {//move ABB into ASF
+									if (gameState.logic.makeTermActive) {
 										gameState.logic.makeTermActive = false;
 										gameState.player1.answerSoFar = gameState.player1.answerBeingBuilt;
 										gameState.player1.answerBeingBuilt = 0;
@@ -592,10 +591,9 @@
 										gameState.logic.merge = false;
 									}
 								}
-								else if(gameState.logic.ASF && !gameState.logic.ABB)
-								{//check if answer correct
+								else if (gameState.logic.ASF && !gameState.logic.ABB) {//check if answer correct
 									var correct = gameState.player1.checkAnswer();
-									if(!correct){//wrong answer
+									if (!correct) {//wrong answer
 										msg.wrongDialog = true;
 										gameState.player1.restartProblem();
 										msg.restartDialog = false;
@@ -622,19 +620,19 @@
 										gameState.logic.inDivision = false;
 										gameState.logic.inMultiplication = false;
 									}
-									else{//answer correct
+									else {//answer correct
 										msg.correctDialog = true;
-										if(gameState.player1.problemNumber == gameState.player1.numLevels){
+										if (gameState.player1.problemNumber == gameState.player1.numLevels) {
 											gameState.player1.advanceLevel();
-											gameState.player1.myDeck.addToHand(!gameState.hand.selected[0], !gameState.hand.selected[1], 
+											gameState.player1.myDeck.addToHand(!gameState.hand.selected[0], !gameState.hand.selected[1],
 																  !gameState.hand.selected[2], !gameState.hand.selected[3], !gameState.hand.selected[4]
 																, !gameState.hand.used[0], !gameState.hand.used[1], !gameState.hand.used[2]
 																, !gameState.hand.used[3], !gameState.hand.used[4]);
 											gameState.allCardsFalse();
 										}
-										else{
+										else {
 											gameState.player1.advanceProblem();
-											gameState.player1.myDeck.addToHand(!gameState.hand.selected[0], !gameState.hand.selected[1], 
+											gameState.player1.myDeck.addToHand(!gameState.hand.selected[0], !gameState.hand.selected[1],
 																  !gameState.hand.selected[2], !gameState.hand.selected[3], !gameState.hand.selected[4]
 																, !gameState.hand.used[0], !gameState.hand.used[1], !gameState.hand.used[2]
 																, !gameState.hand.used[3], !gameState.hand.used[4]);
@@ -646,8 +644,7 @@
 										gameState.time.followTime = true;
 									}
 								}
-								else if(gameState.logic.ASF && gameState.logic.ABB)
-								{//goto merge
+								else if (gameState.logic.ASF && gameState.logic.ABB) {//goto merge
 									gameState.logic.pickAcard = false;
 									gameState.logic.pickAsign = false;
 									msg.mergeDialog = true;
@@ -656,410 +653,417 @@
 									gameState.logic.inMultiplication = true;
 									gameState.logic.inDivision = true;
 									gameState.logic.merge = true;
-								}							
+								}
+							}
+							else {
+								handleThisClick = false;
+								msg.acceptDialog = true;
+							}
 						}
-						else {
-							handleThisClick = false;
-							msg.acceptDialog = true;
-						}
-					}
-						//Cancel button click****************
-					else if ((currentX > 875) && (currentY > 640)) {
-						if (msg.acceptDialog){
-							handleThisClick = false;
-							msg.acceptDialog = false;
-						}
-						else if (msg.restartDialog) {
-							handleThisClick = false;
-							msg.restartDialog = false;
-							msg.cancelDialog = true;
-						}
-						else if (msg.confirmDialog) {
-							handleThisClick = false;
-							msg.confirmDialog = false;
-							msg.cancelDialog = true;
-						}
-						else if (msg.quitDialog) {
-							handleThisClick = false;
-							msg.quitDialog = false;
-							msg.cancelDialog = true;
+							//Cancel button click****************
+						else if ((currentX > 875) && (currentY > 640)) {
+							if (msg.acceptDialog) {
+								handleThisClick = false;
+								msg.acceptDialog = false;
+							}
+							else if (msg.restartDialog) {
+								handleThisClick = false;
+								msg.restartDialog = false;
+								msg.cancelDialog = true;
+							}
+							else if (msg.confirmDialog) {
+								handleThisClick = false;
+								msg.confirmDialog = false;
+								msg.cancelDialog = true;
+							}
+							else if (msg.quitDialog) {
+								handleThisClick = false;
+								msg.quitDialog = false;
+								msg.cancelDialog = true;
 
-						}
-						else if (msg.cancelDialog) {
-							handleThisClick = false;
-							msg.cancelDialog = false;
-						}
-						else if(msg.skipDialog){
-							handleThisClick = false;
-							msg.skipDialog = false;
-							msg.cancelDialog = true;
-						}
-						else if (msg.failDialog) {
-							handleThisClick = false;
-							msg.failDialog = false;
-							gameState.location.atGameScreen = false;
-							gameState.location.atGameOverScreen = true;
-							gameState.player1.numAdditions = 0;
-							gameState.player1.numSubtractions = 0;
-							gameState.player1.numMultiplies = 0;
-							gameState.player1.numDivisions = 0;
-							gameState.player1.answerSoFar = 0;
-							gameState.player1.answerBeingBuilt = 0;
-							gameState.logic.ABB = false;
-							gameState.logic.ASF = false;
-							gameState.hand.selected[0] = false;
-							gameState.hand.selected[1] = false;
-							gameState.hand.selected[2] = false;
-							gameState.hand.selected[3] = false;
-							gameState.hand.selected[4] = false;
-							gameState.hand.used[0] = false;
-							gameState.hand.used[1] = false;
-							gameState.hand.used[2] = false;
-							gameState.hand.used[3] = false;
-							gameState.hand.used[4] = false;
-							gameState.logic.pickAsign = false;
-							gameState.logic.pickAcard = false;
-							gameState.logic.makeTermActive = false;
-						}
-						else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
-							if (!gameState.logic.ASF && !gameState.logic.ABB) {
+							}
+							else if (msg.cancelDialog) {
+								handleThisClick = false;
+								msg.cancelDialog = false;
+							}
+							else if (msg.skipDialog) {
+								handleThisClick = false;
+								msg.skipDialog = false;
+								msg.cancelDialog = true;
+							}
+							else if (msg.failDialog) {
+								handleThisClick = false;
+								msg.failDialog = false;
+								gameState.location.atGameScreen = false;
+								gameState.location.atGameOverScreen = true;
+								gameState.player1.numAdditions = 0;
+								gameState.player1.numSubtractions = 0;
+								gameState.player1.numMultiplies = 0;
+								gameState.player1.numDivisions = 0;
+								gameState.player1.answerSoFar = 0;
+								gameState.player1.answerBeingBuilt = 0;
+								gameState.logic.ABB = false;
+								gameState.logic.ASF = false;
+								gameState.hand.selected[0] = false;
+								gameState.hand.selected[1] = false;
+								gameState.hand.selected[2] = false;
+								gameState.hand.selected[3] = false;
+								gameState.hand.selected[4] = false;
+								gameState.hand.used[0] = false;
+								gameState.hand.used[1] = false;
+								gameState.hand.used[2] = false;
+								gameState.hand.used[3] = false;
+								gameState.hand.used[4] = false;
+								gameState.logic.pickAsign = false;
+								gameState.logic.pickAcard = false;
+								gameState.logic.makeTermActive = false;
+							}
+							else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
+								if (!gameState.logic.ASF && !gameState.logic.ABB) {
+									msg.quitDialog = true;
+								}
+								else if (!gameState.logic.ASF && gameState.logic.ABB) {
+									msg.restartDialog = true;
+								}
+								else if (gameState.logic.ASF && gameState.logic.ABB) {
+									msg.restartDialog = true;
+								}
+								else if (gameState.logic.ASF && !gameState.logic.ABB) {
+									msg.restartDialog = true;
+								}
+							}
+							else {
+								handleThisClick = false;
 								msg.quitDialog = true;
 							}
-							else if (!gameState.logic.ASF && gameState.logic.ABB) {
-								msg.restartDialog = true;
-							}
-							else if (gameState.logic.ASF && gameState.logic.ABB) {
-								msg.restartDialog = true;
-							}
-							else if (gameState.logic.ASF && !gameState.logic.ABB) {
-								msg.restartDialog = true;
-							}
 						}
-						else {
-							handleThisClick = false;
-							msg.quitDialog = true;
-						}
+						handleThisClick = false;
 					}
-					handleThisClick = false;
-				}
-				//************************************************************************
-				//end click handle area ****gamestatus not click dependant found below****
-				//************************************************************************
-				//check if UI should be locked
-				//UI locking makes it so only the accept and cancel buttons work.
-				//otherwise after failing a test someone can continue solving questions
-				if(msg.failDialog){gameState.logic.UILocked = true;}
-				else{gameState.logic.UILocked = false;}
-				
-				//update image sources for things on the screen
-				gameState.player1.updateHand();
-				gameState.player1.DeckEmpty = gameState.player1.myDeck.isEmpty();
-				img.divideTimes.src = "Images/Times/times" + gameState.player1.numDivisions + ".png";
-				img.multiTimes.src = "Images/Times/times" + gameState.player1.numMultiplies + ".png";
-				img.minusTimes.src = "Images/Times/times" + gameState.player1.numSubtractions + ".png";
-				img.addTimes.src = "Images/Times/times" + gameState.player1.numAdditions + ".png";
-				if (gameState.logic.makeTermActive) { img.makeTermPic.src = "Images/Buttons/finishTermButton.png"; }
-				else { img.makeTermPic.src = "Images/Buttons/makeTermButton.png"; }
-				//make sure the panic button is displayed correctly
-				if(gameState.player1.panicked){img.panicPic.src = "Images/Buttons/panicButtonPressed.png";}
-				else{img.panicPic.src = "Images/Buttons/panicButton.png";}
-				
-				if (gameState.time.followTime) {//this handles the clock counter and changes any dependent event bools
-					//that are based on time
-					gameState.time.clockTimer++;
-					if ((gameState.time.clockTimer / fps) == 1) {
-						if (gameState.time.timeRemaining >30) {
-							gameState.time.outOfTime = false;
-							gameState.mood.Fearful = false;
-							gameState.mood.Excited = true;
-							gameState.mood.Celebrate = false;
-							gameState.mood.Confused = false;
-							gameState.mood.Dead = false;
-							gameState.mood.OMG = false;
-						}
-						if (gameState.time.timeRemaining <= 30) {
-							gameState.time.outOfTime = false;
-							gameState.mood.Fearful = false;
-							gameState.mood.Excited = false;
-							gameState.mood.Celebrate = false;
-							gameState.mood.Confused = true;
-							gameState.mood.Dead = false;
-							gameState.mood.OMG = false;
-						}
-						if (gameState.time.timeRemaining <= 15) {
-							gameState.time.outOfTime = false;
-							gameState.mood.Fearful = true;
-							gameState.mood.Excited = false;
-							gameState.mood.Celebrate = false;
-							gameState.mood.Confused = false;
-							gameState.mood.Dead = false;
-							gameState.mood.OMG = false;
-						}
-						if (gameState.time.timeRemaining < 3) {
-							gameState.time.outOfTime = false;
-							gameState.mood.Fearful = false;
-							gameState.mood.Excited = false;
-							gameState.mood.Celebrate = false;
-							gameState.mood.Confused = false;
-							gameState.mood.Dead = false;
-							gameState.mood.OMG = true;
-						}
-						if (gameState.time.timeRemaining == 0) {
-							gameState.time.followTime = false;
-							gameState.mood.Fearful = false;
-							gameState.mood.Excited = false;
-							gameState.mood.Celebrate = false;
-							gameState.mood.Confused = false;
-							gameState.mood.OMG = false;
-							gameState.mood.Dead = true;
-							gameState.time.outOfTime = true;
-							msg.failDialog = true;
-						}
-						else { gameState.time.timeRemaining--; }
-						gameState.time.clockTimer = 0;
-					}
-				}
-				//always update time pics
-				gameState.time.onesTime = gameState.time.timeRemaining % 10;
-				var tempTime = gameState.time.timeRemaining - gameState.time.onesTime;
-				gameState.time.tensTime = tempTime / 10;
-				img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
-				img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
-				
-				//make mathcat look happy after panic is pressed
-				if(gameState.player1.panicked){
-					gameState.mood.Fearful = false;
-					gameState.mood.Excited = true;
-					gameState.mood.Celebrate = false;
-					gameState.mood.Confused = false;
-					gameState.mood.OMG = false;
-					gameState.mood.Dead = false;
-				}
-				
-				// make dialog choices linger a bit
-				if (msg.selectCardDialog) {
-					msg.cardTimer++;
-					if ((msg.cardTimer / fps) == 3) { msg.selectCardDialog = false; msg.cardTimer = 0; }
-				}
-				if (msg.selectOperationDialog) {
-					msg.operatorTimer++;
-					if ((msg.operatorTimer / fps) == 3) { msg.selectOperationDialog = false; msg.operatorTimer = 0; }
-				}
-				if (msg.acceptDialog) {
-					msg.acceptTimer++;
-					if ((msg.acceptTimer / fps) == 3) { msg.acceptDialog = false; msg.acceptTimer = 0; }
-				}
-				if (msg.cancelDialog) {
-					msg.cancelTimer++;
-					if ((msg.cancelTimer / fps) == 3) { msg.cancelDialog = false; msg.cancelTimer = 0; }
-				}
-				if (msg.mergeDialog) {
-					msg.mergeTimer++;
-					if ((msg.mergeTimer / fps) == 3) { msg.mergeDialog = false; msg.mergeTimer = 0; }
-				}
-				if(msg.correctDialog){
-					msg.correctTimer++;
-					if((msg.correctTimer / fps) == 3){msg.correctDialog = false; msg.correctTimer = 0;}
-				}
-				if(msg.wrongDialog){
-					msg.wrongTimer++;
-					if((msg.wrongTimer / fps) == 3){msg.wrongDialog = false; msg.wrongTimer = 0;}
-				}
-				if(msg.panicDialog){
-					msg.panicTimer++;
-					if((msg.panicTimer / fps) == 3){msg.panicDialog = false; msg.panicTimer = 0;}
-				}
-				//make sure conditional buttons update regardless of click
-				if (gameState.logic.makeTermActive) {
+					//************************************************************************
+					//end click handle area ****gamestatus not click dependant found below****
+					//************************************************************************
+					//check if UI should be locked
+					//UI locking makes it so only the accept and cancel buttons work.
+					//otherwise after failing a test someone can continue solving questions
+					if (msg.failDialog) { gameState.logic.UILocked = true; }
+					else { gameState.logic.UILocked = false; }
 
-					img.makeTermPic.src = "Images/Buttons/finishTermButton.png";
+					//update image sources for things on the screen
+					gameState.player1.updateHand();
+					gameState.player1.DeckEmpty = gameState.player1.myDeck.isEmpty();
+					img.divideTimes.src = "Images/Times/times" + gameState.player1.numDivisions + ".png";
+					img.multiTimes.src = "Images/Times/times" + gameState.player1.numMultiplies + ".png";
+					img.minusTimes.src = "Images/Times/times" + gameState.player1.numSubtractions + ".png";
+					img.addTimes.src = "Images/Times/times" + gameState.player1.numAdditions + ".png";
+					if (gameState.logic.makeTermActive) { img.makeTermPic.src = "Images/Buttons/finishTermButton.png"; }
+					else { img.makeTermPic.src = "Images/Buttons/makeTermButton.png"; }
+					//make sure the panic button is displayed correctly
+					if (gameState.player1.panicked) { img.panicPic.src = "Images/Buttons/panicButtonPressed.png"; }
+					else { img.panicPic.src = "Images/Buttons/panicButton.png"; }
+
+					if (gameState.time.followTime) {//this handles the clock counter and changes any dependent event bools
+						//that are based on time
+						gameState.time.clockTimer++;
+						if ((gameState.time.clockTimer / fps) == 1) {
+							if (gameState.time.timeRemaining > 30) {
+								gameState.time.outOfTime = false;
+								gameState.mood.Fearful = false;
+								gameState.mood.Excited = true;
+								gameState.mood.Celebrate = false;
+								gameState.mood.Confused = false;
+								gameState.mood.Dead = false;
+								gameState.mood.OMG = false;
+							}
+							if (gameState.time.timeRemaining <= 30) {
+								gameState.time.outOfTime = false;
+								gameState.mood.Fearful = false;
+								gameState.mood.Excited = false;
+								gameState.mood.Celebrate = false;
+								gameState.mood.Confused = true;
+								gameState.mood.Dead = false;
+								gameState.mood.OMG = false;
+							}
+							if (gameState.time.timeRemaining <= 15) {
+								gameState.time.outOfTime = false;
+								gameState.mood.Fearful = true;
+								gameState.mood.Excited = false;
+								gameState.mood.Celebrate = false;
+								gameState.mood.Confused = false;
+								gameState.mood.Dead = false;
+								gameState.mood.OMG = false;
+							}
+							if (gameState.time.timeRemaining < 3) {
+								gameState.time.outOfTime = false;
+								gameState.mood.Fearful = false;
+								gameState.mood.Excited = false;
+								gameState.mood.Celebrate = false;
+								gameState.mood.Confused = false;
+								gameState.mood.Dead = false;
+								gameState.mood.OMG = true;
+							}
+							if (gameState.time.timeRemaining == 0) {
+								gameState.time.followTime = false;
+								gameState.mood.Fearful = false;
+								gameState.mood.Excited = false;
+								gameState.mood.Celebrate = false;
+								gameState.mood.Confused = false;
+								gameState.mood.OMG = false;
+								gameState.mood.Dead = true;
+								gameState.time.outOfTime = true;
+								msg.failDialog = true;
+							}
+							else { gameState.time.timeRemaining--; }
+							gameState.time.clockTimer = 0;
+						}
+					}
+					//always update time pics
+					gameState.time.onesTime = gameState.time.timeRemaining % 10;
+					var tempTime = gameState.time.timeRemaining - gameState.time.onesTime;
+					gameState.time.tensTime = tempTime / 10;
+					img.clockTens.src = "Images/Clock/clock" + gameState.time.tensTime + ".png";
+					img.clockOnes.src = "Images/Clock/clock" + gameState.time.onesTime + ".png";
+
+					//make mathcat look happy after panic is pressed
+					if (gameState.player1.panicked) {
+						gameState.mood.Fearful = false;
+						gameState.mood.Excited = true;
+						gameState.mood.Celebrate = false;
+						gameState.mood.Confused = false;
+						gameState.mood.OMG = false;
+						gameState.mood.Dead = false;
+					}
+
+					// make dialog choices linger a bit
+					if (msg.selectCardDialog) {
+						msg.cardTimer++;
+						if ((msg.cardTimer / fps) == 3) { msg.selectCardDialog = false; msg.cardTimer = 0; }
+					}
+					if (msg.selectOperationDialog) {
+						msg.operatorTimer++;
+						if ((msg.operatorTimer / fps) == 3) { msg.selectOperationDialog = false; msg.operatorTimer = 0; }
+					}
+					if (msg.acceptDialog) {
+						msg.acceptTimer++;
+						if ((msg.acceptTimer / fps) == 3) { msg.acceptDialog = false; msg.acceptTimer = 0; }
+					}
+					if (msg.cancelDialog) {
+						msg.cancelTimer++;
+						if ((msg.cancelTimer / fps) == 3) { msg.cancelDialog = false; msg.cancelTimer = 0; }
+					}
+					if (msg.mergeDialog) {
+						msg.mergeTimer++;
+						if ((msg.mergeTimer / fps) == 3) { msg.mergeDialog = false; msg.mergeTimer = 0; }
+					}
+					if (msg.correctDialog) {
+						msg.correctTimer++;
+						if ((msg.correctTimer / fps) == 3) { msg.correctDialog = false; msg.correctTimer = 0; }
+					}
+					if (msg.wrongDialog) {
+						msg.wrongTimer++;
+						if ((msg.wrongTimer / fps) == 3) { msg.wrongDialog = false; msg.wrongTimer = 0; }
+					}
+					if (msg.panicDialog) {
+						msg.panicTimer++;
+						if ((msg.panicTimer / fps) == 3) { msg.panicDialog = false; msg.panicTimer = 0; }
+					}
+					//make sure conditional buttons update regardless of click
+					if (gameState.logic.makeTermActive) {
+
+						img.makeTermPic.src = "Images/Buttons/finishTermButton.png";
+					}
+					else {
+						img.makeTermPic.src = "Images/Buttons/makeTermButton.png";
+					}
+					//edward score code
+					var i = 0, num = gameState.player1.totalScore;
+					for (; (0 < num) && (i < 7) ; i++) {
+						var digit = num % 10;
+						num = Math.floor(num / 10);
+						img.scorePics[i].src = "Images/Score/score" + digit + ".png";
+					}
+					for (; i < 7; i++) img.scorePics[i].src = "Images/Score/score0.png";
 				}
-				else {
-					img.makeTermPic.src = "Images/Buttons/makeTermButton.png";
+				else if (gameState.location.atGameOverScreen) {
+					msg.gameOverTimer++;
+					if (handleThisClick) {
+						gameState.location.atGameOverScreen = false;
+						gameState.location.atStartupScreen = true;
+					}
+					else if ((msg.gameOverTimer / fps) == 6) {
+						msg.gameOverTimer = 0;
+						gameState.location.atGameOverScreen = false;
+						gameState.location.atStartupScreen = true;
+					}
 				}
-				//edward score code
-				var i = 0, num = gameState.player1.totalScore;
-				for (; (0 < num) && (i < 7) ; i++) {
-					var digit = num % 10;
-					num = Math.floor(num / 10);
-					img.scorePics[i].src = "Images/Score/score" + digit + ".png";
-				}
-				for (; i < 7; i++) img.scorePics[i].src = "Images/Score/score0.png";
+				handleThisClick = false;
+				clicked = false;
 			}
-			else if (gameState.location.atGameOverScreen) {
-				msg.gameOverTimer++;
-				if (handleThisClick) {
-					gameState.location.atGameOverScreen = false;
-					gameState.location.atStartupScreen = true;
-				}
-				else if ((msg.gameOverTimer / fps) == 6) {
-					msg.gameOverTimer = 0;
-					gameState.location.atGameOverScreen = false;
-					gameState.location.atStartupScreen = true;
-				}
-			}
-			handleThisClick = false;
-			clicked = false;
 		}
 		// ****************** DRAW FUNCTION STARTS HERE ****************************
 		function draw(ctx) {
 			ctx.clearRect(0, 0, 1000, 700);
-			if (gameState.location.atEndScreen) {
-				ctx.drawImage(img.endScreen, 0, 0);
-			}
-			else if (gameState.location.atStartupScreen) {
-				if (gameState.splash.showCodeForGood) { ctx.drawImage(img.CodeForGood, 0, 0); }
-				else if (gameState.splash.showJYC) { ctx.drawImage(img.JYC, 0, 0); }
-				else if (gameState.splash.showVMichial) { ctx.drawImage(img.VMichial, 0, 0); }
-				else if (gameState.splash.showFranciaGarcia) { ctx.drawImage(img.France, 0, 0); }
-				else if (gameState.splash.showEdward) { ctx.drawImage(img.Thang, 0, 0); }
-			}
-			else if (gameState.location.atTitleScreen) {
-				ctx.drawImage(img.titleScreen, 0, 0);
-				ctx.font = '20px Arial';
-				//ctx.fillText(clickSpot, 0, 20);
-			}
-			else if (gameState.location.atGameScreen) {
-				ctx.drawImage(img.gameSetting, 0, 0);
-
-				//draw the math cat gameState.mood. face*********
-				if (gameState.mood.Excited) { ctx.drawImage(img.excitedPic, 580, 0); }
-				else if (gameState.mood.Fearful) { ctx.drawImage(img.worryPic, 615, -38); }
-				else if (gameState.mood.Celebrate) { ctx.drawImage(img.celebratePic, 580, -13); }
-				else if (gameState.mood.Confused) { ctx.drawImage(img.confusedPic, 605, -40); }
-				else if (gameState.mood.Dead) { ctx.drawImage(img.deadPic, 605, -34); }
-				else if (gameState.mood.OMG) { ctx.drawImage(img.OMGPic, 586, -7); }
-				else { ctx.drawImage(img.excitedPic, 580, 0); }
-				//bonus stars***************
-				if ((gameState.player1.numAdditions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 709, 310); }
-				if ((gameState.player1.numSubtractions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 709, 370); }
-				if ((gameState.player1.numMultiplies > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 708, 432); }
-				if ((gameState.player1.numDivisions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 707, 495); }
-				//math buttons*************
-				if (gameState.logic.inAddition) { ctx.drawImage(img.plusBTN, 245, 610); }
-				else { ctx.drawImage(img.plusBTNp, 226, 595); }
-
-				if (gameState.logic.inSubtraction) { ctx.drawImage(img.minusBTN, 360, 572); }
-				else { ctx.drawImage(img.minusBTNp, 342, 558); }
-
-				if (gameState.logic.inMultiplication) { ctx.drawImage(img.multiBTN, 502, 577); }
-				else { ctx.drawImage(img.multiBTNp, 479, 562); }
-
-				if (gameState.logic.inDivision) { ctx.drawImage(img.divideBTN, 621, 600); }
-				else { ctx.drawImage(img.divideBTNp, 602, 589); }
-
-				//Draw Deck*************
-				if (!gameState.player1.DeckEmpty) { ctx.drawImage(img.cardBack, 120, 440); }
-
-				//Draw cards if the card isn't disabled
-				if (!gameState.player1.myHand[0].disabled) {
-					if (gameState.hand.selected[0]) { ctx.drawImage(gameState.player1.myHand[0].myImage, 230, 415); }
-					else { ctx.drawImage(gameState.player1.myHand[0].myImage, 230, 440); }
+			if (trans.transitionInProgress()) {
+			}else{
+				if (gameState.location.atEndScreen) {
+					ctx.drawImage(img.endScreen, 0, 0);
 				}
-				if (!gameState.player1.myHand[1].disabled) {
-					if (gameState.hand.selected[1]) { ctx.drawImage(gameState.player1.myHand[1].myImage, 330, 415); }
-					else { ctx.drawImage(gameState.player1.myHand[1].myImage, 330, 440); }
+				else if (gameState.location.atStartupScreen) {
+					if (gameState.splash.showCodeForGood) { ctx.drawImage(img.CodeForGood, 0, 0); }
+					else if (gameState.splash.showJYC) { ctx.drawImage(img.JYC, 0, 0); }
+					else if (gameState.splash.showVMichial) { ctx.drawImage(img.VMichial, 0, 0); }
+					else if (gameState.splash.showFranciaGarcia) { ctx.drawImage(img.France, 0, 0); }
+					else if (gameState.splash.showEdward) { ctx.drawImage(img.Thang, 0, 0); }
 				}
-				if (!gameState.player1.myHand[2].disabled) {
-					if (gameState.hand.selected[2]) { ctx.drawImage(gameState.player1.myHand[2].myImage, 430, 415); }
-					else { ctx.drawImage(gameState.player1.myHand[2].myImage, 430, 440); }
+				else if (gameState.location.atTitleScreen) {
+					ctx.drawImage(img.titleScreen, 0, 0);
+					ctx.font = '20px Arial';
+					//ctx.fillText(clickSpot, 0, 20);
 				}
-				if (!gameState.player1.myHand[3].disabled) {
-					if (gameState.hand.selected[3]) { ctx.drawImage(gameState.player1.myHand[3].myImage, 530, 415); }
-					else { ctx.drawImage(gameState.player1.myHand[3].myImage, 530, 440); }
+				else if (gameState.location.atGameScreen) {
+					ctx.drawImage(img.gameSetting, 0, 0);
+
+					//draw the math cat gameState.mood. face*********
+					if (gameState.mood.Excited) { ctx.drawImage(img.excitedPic, 580, 0); }
+					else if (gameState.mood.Fearful) { ctx.drawImage(img.worryPic, 615, -38); }
+					else if (gameState.mood.Celebrate) { ctx.drawImage(img.celebratePic, 580, -13); }
+					else if (gameState.mood.Confused) { ctx.drawImage(img.confusedPic, 605, -40); }
+					else if (gameState.mood.Dead) { ctx.drawImage(img.deadPic, 605, -34); }
+					else if (gameState.mood.OMG) { ctx.drawImage(img.OMGPic, 586, -7); }
+					else { ctx.drawImage(img.excitedPic, 580, 0); }
+					//bonus stars***************
+					if ((gameState.player1.numAdditions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 709, 310); }
+					if ((gameState.player1.numSubtractions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 709, 370); }
+					if ((gameState.player1.numMultiplies > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 708, 432); }
+					if ((gameState.player1.numDivisions > 0) && !gameState.player1.panicked) { ctx.drawImage(img.starPic, 707, 495); }
+					//math buttons*************
+					if (gameState.logic.inAddition) { ctx.drawImage(img.plusBTN, 245, 610); }
+					else { ctx.drawImage(img.plusBTNp, 226, 595); }
+
+					if (gameState.logic.inSubtraction) { ctx.drawImage(img.minusBTN, 360, 572); }
+					else { ctx.drawImage(img.minusBTNp, 342, 558); }
+
+					if (gameState.logic.inMultiplication) { ctx.drawImage(img.multiBTN, 502, 577); }
+					else { ctx.drawImage(img.multiBTNp, 479, 562); }
+
+					if (gameState.logic.inDivision) { ctx.drawImage(img.divideBTN, 621, 600); }
+					else { ctx.drawImage(img.divideBTNp, 602, 589); }
+
+					//Draw Deck*************
+					if (!gameState.player1.DeckEmpty) {
+						ctx.drawImage(img.cardBack, 120, 440);
+						ctx.fillText((gameState.player1.myDeck.MAX_DECK_SIZE - gameState.player1.myDeck.numUsed), 185, 460);
+					}
+
+					//Draw cards if the card isn't disabled
+					if (!gameState.player1.myHand[0].disabled) {
+						if (gameState.hand.selected[0]) { ctx.drawImage(gameState.player1.myHand[0].myImage, 230, 415); }
+						else { ctx.drawImage(gameState.player1.myHand[0].myImage, 230, 440); }
+					}
+					if (!gameState.player1.myHand[1].disabled) {
+						if (gameState.hand.selected[1]) { ctx.drawImage(gameState.player1.myHand[1].myImage, 330, 415); }
+						else { ctx.drawImage(gameState.player1.myHand[1].myImage, 330, 440); }
+					}
+					if (!gameState.player1.myHand[2].disabled) {
+						if (gameState.hand.selected[2]) { ctx.drawImage(gameState.player1.myHand[2].myImage, 430, 415); }
+						else { ctx.drawImage(gameState.player1.myHand[2].myImage, 430, 440); }
+					}
+					if (!gameState.player1.myHand[3].disabled) {
+						if (gameState.hand.selected[3]) { ctx.drawImage(gameState.player1.myHand[3].myImage, 530, 415); }
+						else { ctx.drawImage(gameState.player1.myHand[3].myImage, 530, 440); }
+					}
+					if (!gameState.player1.myHand[4].disabled) {
+						if (gameState.hand.selected[4]) { ctx.drawImage(gameState.player1.myHand[4].myImage, 630, 415); }
+						else { ctx.drawImage(gameState.player1.myHand[4].myImage, 630, 440); }
+					}
+					//draw clock***********
+					if (!gameState.time.outOfTime) { ctx.drawImage(img.clockHappyPic, -6, 572); }
+					else { ctx.drawImage(img.clockSadPic, -6, 572); }
+
+					//drawTime************
+					ctx.drawImage(img.clockTens, 110, 625);
+					ctx.drawImage(img.clockOnes, 170, 625);
+
+					//Draw panic button*******and bonuses********
+					if (gameState.player1.panicked) {
+						ctx.drawImage(img.panicPic, 460, 660); ctx.drawImage(img.noBonus, 750, 241);
+						ctx.font = '30px Arial';
+						var answer = "Answer: " + gameState.player1.currentX;
+						ctx.fillText(answer, 430, 410);
+					}
+					else {
+						ctx.drawImage(img.panicPic, 460, 660);
+						if (gameState.player1.numAdditions > 0) { ctx.drawImage(img.addTimes, 860, 320); }
+						if (gameState.player1.numSubtractions > 0) { ctx.drawImage(img.minusTimes, 865, 382); }
+						if (gameState.player1.numMultiplies > 0) { ctx.drawImage(img.multiTimes, 871, 439); }
+						if (gameState.player1.numDivisions > 0) { ctx.drawImage(img.divideTimes, 858, 499); }
+					}
+
+					//make term Button
+					ctx.drawImage(img.makeTermPic, 790, 600);
+
+					//accept button
+					ctx.drawImage(img.acceptPic, 760, 650);
+
+					//cancel button
+					ctx.drawImage(img.cancelPic, 885, 650);
+
+					//draw level number and  problem number
+					var level = "Level:  " + gameState.player1.level;
+					var problem = "Problem:  " + gameState.player1.problemNumber;
+					ctx.font = '15px Arial';
+					ctx.fillText(level, 360, 44);
+					ctx.fillText(problem, 360, 66);
+
+					//put up the player name on the book
+					ctx.font = '20px Arial';
+					ctx.fillText(gameState.player1.name, 78, 120);
+
+					//drawEQ
+					ctx.font = '25px Arial';
+					ctx.fillText(gameState.player1.currentEQ, 354, 170);
+
+					var scoreY = 140;
+					var scoreX = 157;
+					var scoreXstep = 20;
+					for (var i = 0; i < 7; i++) {
+						ctx.drawImage(img.scorePics[6 - i], scoreX + (i * scoreXstep), scoreY);
+					}
+
+					ctx.font = '20px Arial';
+					//******dialogs************
+					if (msg.confirmDialog) { ctx.fillText(msg.confirmMessage, 374, 355); }
+					else if (msg.quitDialog) { ctx.fillText(msg.quitMessage, 374, 355); }
+					else if (msg.acceptDialog) { ctx.fillText(msg.acceptMessage, 374, 355); }
+					else if (msg.cancelDialog) { ctx.fillText(msg.cancelMessage, 374, 355); }
+					else if (msg.selectCardDialog) { ctx.fillText(msg.selectCardMessage, 374, 355); }
+					else if (msg.selectOperationDialog) { ctx.fillText(msg.selectOperationMessage, 374, 355); }
+					else if (msg.restartDialog) { ctx.fillText(msg.restartMessage, 374, 355); }
+					else if (msg.mergeDialog) { ctx.fillText(msg.mergeMessage, 374, 355); }
+					else if (msg.skipDialog) { ctx.fillText(msg.skipMessage, 374, 355); }
+					else if (msg.correctDialog) { ctx.fillText(msg.correctMessage, 374, 355); }
+					else if (msg.wrongDialog) { ctx.fillText(msg.wrongMessage, 374, 355); }
+					else if (msg.panicDialog) { ctx.fillText(msg.panicMessage, 374, 355); }
+
+					ctx.font = '15px Arial';
+					var unknown = '_';
+					var ABBstring = "current term:"
+					var ASFstring = "your answer:"
+					ctx.fillText(ASFstring, 370, 195);
+					ctx.fillText(ABBstring, 515, 195);
+					ctx.font = '50px Arial';
+					if (gameState.logic.ASF) { ctx.fillText(gameState.player1.answerSoFar, 370, 255); } else { ctx.fillText(unknown, 370, 255); }
+					if (gameState.logic.ABB) { ctx.fillText(gameState.player1.answerBeingBuilt, 540, 255); } else { ctx.fillText(unknown, 540, 255); }
+
+					ctx.font = '20px Arial';
+					if (msg.failDialog) {
+						ctx.drawImage(img.failStampPic, -284, -280);
+						ctx.fillText(msg.confirmMessage, 374, 355);
+						ctx.fillText(msg.failMessage, 374, 295);
+					}
 				}
-				if (!gameState.player1.myHand[4].disabled) {
-					if (gameState.hand.selected[4]) { ctx.drawImage(gameState.player1.myHand[4].myImage, 630, 415); }
-					else { ctx.drawImage(gameState.player1.myHand[4].myImage, 630, 440); }
+				else if (gameState.location.atGameOverScreen) {
+					ctx.drawImage(img.gameOver, 0, 0);
 				}
-				//draw clock***********
-				if (!gameState.time.outOfTime) { ctx.drawImage(img.clockHappyPic, -6, 572); }
-				else { ctx.drawImage(img.clockSadPic, -6, 572); }
-
-				//drawTime************
-				ctx.drawImage(img.clockTens, 110, 625);
-				ctx.drawImage(img.clockOnes, 170, 625);
-
-				//Draw panic button*******and bonuses********
-				if (gameState.player1.panicked) {
-					ctx.drawImage(img.panicPic, 460, 660); ctx.drawImage(img.noBonus, 750, 241);
-					ctx.font = '30px Arial';
-					var answer = "Answer: " + gameState.player1.currentX;
-					ctx.fillText(answer, 430, 410);
-				}
-				else {
-					ctx.drawImage(img.panicPic, 460, 660);
-					if (gameState.player1.numAdditions > 0) { ctx.drawImage(img.addTimes, 860, 320); }
-					if (gameState.player1.numSubtractions > 0) { ctx.drawImage(img.minusTimes, 865, 382); }
-					if (gameState.player1.numMultiplies > 0) { ctx.drawImage(img.multiTimes, 871, 439); }
-					if (gameState.player1.numDivisions > 0) { ctx.drawImage(img.divideTimes, 858, 499); }
-				}
-
-				//make term Button
-				ctx.drawImage(img.makeTermPic, 790, 600);
-
-				//accept button
-				ctx.drawImage(img.acceptPic, 760, 650);
-
-				//cancel button
-				ctx.drawImage(img.cancelPic, 885, 650);
-
-				//draw level number and  problem number
-				var level = "Level:  " + gameState.player1.level;
-				var problem = "Problem:  " + gameState.player1.problemNumber;
-				ctx.font = '15px Arial';
-				ctx.fillText(level, 360, 44);
-				ctx.fillText(problem, 360, 66);
-
-				//put up the player name on the book
-				ctx.font = '20px Arial';
-				ctx.fillText(gameState.player1.name, 78, 120);
-
-				//drawEQ
-				ctx.font = '25px Arial';
-				ctx.fillText(gameState.player1.currentEQ, 354, 170);
-
-				var scoreY = 140;
-				var scoreX = 157;
-				var scoreXstep = 20;
-				for (var i = 0; i < 7; i++) {
-					ctx.drawImage(img.scorePics[6 - i], scoreX + (i * scoreXstep), scoreY);
-				}
-
-				ctx.font = '20px Arial';
-				//******dialogs************
-				if(msg.confirmDialog) {ctx.fillText(msg.confirmMessage, 374, 355);}
-				else if(msg.quitDialog) {ctx.fillText(msg.quitMessage, 374, 355);}
-				else if(msg.acceptDialog) {ctx.fillText(msg.acceptMessage, 374, 355);}
-				else if(msg.cancelDialog) {ctx.fillText(msg.cancelMessage, 374, 355);}
-				else if(msg.selectCardDialog) {ctx.fillText(msg.selectCardMessage, 374, 355);}
-				else if(msg.selectOperationDialog) {ctx.fillText(msg.selectOperationMessage, 374, 355);}
-				else if(msg.restartDialog) {ctx.fillText(msg.restartMessage, 374, 355);}
-				else if(msg.mergeDialog) {ctx.fillText(msg.mergeMessage, 374, 355);}
-				else if(msg.skipDialog) {ctx.fillText(msg.skipMessage, 374, 355);}
-				else if(msg.correctDialog){ctx.fillText(msg.correctMessage, 374, 355);}
-				else if(msg.wrongDialog){ctx.fillText(msg.wrongMessage, 374, 355);}
-				else if(msg.panicDialog){ctx.fillText(msg.panicMessage, 374, 355);}
-
-				ctx.font = '15px Arial';
-				var unknown = '_';
-				var ABBstring = "current term:"
-				var ASFstring = "your answer:"
-				ctx.fillText(ASFstring, 370, 195);
-				ctx.fillText(ABBstring, 515, 195);
-				ctx.font = '50px Arial';
-				if (gameState.logic.ASF) { ctx.fillText(gameState.player1.answerSoFar, 370, 255); } else { ctx.fillText(unknown, 370, 255); }
-				if (gameState.logic.ABB) { ctx.fillText(gameState.player1.answerBeingBuilt, 540, 255); } else { ctx.fillText(unknown, 540, 255); }
-
-				ctx.font = '20px Arial';
-				if (msg.failDialog) {
-					ctx.drawImage(img.failStampPic, -284, -280);
-					ctx.fillText(msg.confirmMessage, 374, 355);
-					ctx.fillText(msg.failMessage, 374, 295);
-				}
-			}
-			else if (gameState.location.atGameOverScreen) {
-				ctx.drawImage(img.gameOver, 0, 0);
 			}
 		}
 		$(document).ready(function () {
