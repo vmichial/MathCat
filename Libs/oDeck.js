@@ -100,10 +100,28 @@ function Deck() {
 		//set the card used, and make a new card with the same rank.
 		//if the card needs to be dumped but there are no cards in the deck
 		//leave the card, in hand, but disable it
-
+		
+		//derps @ cardsRemaning <= 5;FIX IT FELIX!
 		for (var i = 0; i < 5 ; i++) {
 			if (!selections[i]) {
-				if (cardsRemaining > 0) {
+				if(cardsRemaining <= 0){
+					this.inHand[handIndices[i]].disabled = true;
+					this.inDeck[handIndices[i]].disabled = true;
+					this.used[handIndices[i]].disabled = true;
+					this.numUsed++;
+					cardsRemaining--;
+				}
+				else if(cardsRemaining < 5){
+					this.inHand[handIndices[i]].here = false;
+					this.used[handIndices[i]].here = true;
+					//now to make the rank the same, so the card is displayed in the correct spot
+					this.inHand[this.numUsed].rank = this.inHand[handIndices[i]].rank;
+					this.inHand[this.numUsed].here = true;
+					this.inDeck[this.numUsed].here = false;
+					this.numUsed++;
+					cardsRemaining--;
+				}
+				else if (cardsRemaining > 0) {
 					this.inHand[handIndices[i]].here = false;
 					this.used[handIndices[i]].here = true;
 					//now to make the rank the same, so the card is displayed in the correct spot
