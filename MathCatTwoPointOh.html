@@ -594,6 +594,7 @@
 								else if (gameState.logic.ASF && !gameState.logic.ABB) {//check if answer correct
 									var correct = gameState.player1.checkAnswer();
 									if (!correct) {//wrong answer
+									msg.derpPic = true;
 										msg.wrongDialog = true;
 										gameState.player1.restartProblem();
 										msg.restartDialog = false;
@@ -621,6 +622,7 @@
 										gameState.logic.inMultiplication = false;
 									}
 									else {//answer correct
+										msg.yayPic = true;
 										msg.correctDialog = true;
 										if (gameState.player1.problemNumber == gameState.player1.numLevels) {
 											gameState.player1.advanceLevel();
@@ -642,6 +644,7 @@
 										gameState.logic.ASF = false;
 										gameState.addTime();
 										gameState.time.followTime = true;
+
 									}
 								}
 								else if (gameState.logic.ASF && gameState.logic.ABB) {//goto merge
@@ -831,6 +834,34 @@
 						gameState.mood.Confused = false;
 						gameState.mood.OMG = false;
 						gameState.mood.Dead = false;
+					}
+					//make MathCat celebrate if he gets a question correct
+					if(msg.yayPic){
+						msg.yayTimer++;
+							gameState.mood.Fearful = false;
+							gameState.mood.Excited = false;
+							gameState.mood.Celebrate = true;
+							gameState.mood.Confused = false;
+							gameState.mood.OMG = false;
+							gameState.mood.Dead = false;
+						if((msg.yayTimer / fps) == 2){
+							msg.yayPic = false; msg.yayTimer = 0;
+
+						}
+					}
+					//make mathcat look confused if he gets question wrong
+					else if(msg.derpPic){
+						msg.derpTimer++;
+							gameState.mood.Fearful = false;
+							gameState.mood.Excited = false;
+							gameState.mood.Celebrate = false;
+							gameState.mood.Confused = true;
+							gameState.mood.OMG = false;
+							gameState.mood.Dead = false;
+						if((msg.derpTimer / fps) == 2){
+							msg.derpPic = false; msg.derpTimer = 0;
+
+						}
 					}
 
 					// make dialog choices linger a bit
