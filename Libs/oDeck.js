@@ -23,8 +23,7 @@ function Deck() {
 	this.MAX_DECK_SIZE = 52;
 	this.x_size = 90;
 	this.y_size = 120;
-	this.firstCard = 0;
-	this.lastCard = 4;
+	this.handSize = 5;
 
 	this.initializeDeck = function () {
 		var color = ["blue", "brown", "green", "purple"];
@@ -76,68 +75,65 @@ function Deck() {
 		this.firstCard = 0;
 		this.lastCard = 4;
 	}
-	this.addToHand = function (h1, h2, h3, h4, h5, H1, H2, H3, H4, H5) {
-		var cardsRemaining = this.MAX_DECK_SIZE - this.numUsed;
-		var handIndices = [5];
-		var selections = [5];
-		if (h1 && H1) { selections[0] = true; } else { selections[0] = false; }
-		if (h2 && H2) { selections[1] = true; } else { selections[1] = false; }
-		if (h3 && H3) { selections[2] = true; } else { selections[2] = false; }
-		if (h4 && H4) { selections[3] = true; } else { selections[3] = false; }
-		if (h5 && H5) { selections[4] = true; } else { selections[4] = false; }
-		//find the indices of the cards to be dumped in rank order
-		for (var i = 0; i < 5; i++) {
-			for (var j = 0; j < this.numUsed; j++) {
-				if ((this.inHand[j].here) && (this.inHand[j].rank == (i + 1))) {
+	
+	this.addToHand = function(h1,h2,h3,h4,h5,H1,H2,H3,H4,H5){
+		//goal is to add to hand, first know certain info
+		var cardsLeft = this.MAX_DECK_SIZE - this.numUsed;//how many cards are left
+		var handIndices = [this.handSize];//will hold the hand indices of the cards in hand
+		var selections = [this.handSize];//will tell if the card in X position is selected
+		
+		//first get the indices of the cards in hand, make sure later that
+		//there is always a card in hand so it doesn't derp
+		for(var i = 0; i < this.handSize; i++){
+			for(var j = 0; j<this.numUsed ; j++){
+				if((this.inHand[j].here) && (this.inHand[j].rank == i+1)){
 					handIndices[i] = j;
 				}
 			}
 		}
-
-		//now loop from i = 0 to i = 4, so long as there is a card in the deck
-		//check if the card whose rank is i+1 needs to be dumped
-		//if the card needs to be dumped, and there is a card in the deck
-		//set the card used, and make a new card with the same rank.
-		//if the card needs to be dumped but there are no cards in the deck
-		//leave the card, in hand, but disable it
 		
-		//derps @ cardsRemaning <= 5;FIX IT FELIX!
-		for (var i = 0; i < 5 ; i++) {
-			if (!selections[i]) {
-				if(cardsRemaining <= 0){
-					this.inHand[handIndices[i]].disabled = true;
-					this.inDeck[handIndices[i]].disabled = true;
-					this.used[handIndices[i]].disabled = true;
-					this.numUsed++;
-					cardsRemaining--;
+		//now that we have found which cards are where in the correct ranking order
+		//lets populate the selections array to say which cards are selected
+		if(h1 || H1){selections[0] = true;}else{selections[0] = false;}
+		if(h2 || H2){selections[1] = true;}else{selections[1] = false;}
+		if(h3 || H3){selections[2] = true;}else{selections[2] = false;}
+		if(h4 || H4){selections[3] = true;}else{selections[3] = false;}
+		if(h5 || H5){selections[4] = true;}else{selections[4] = false;}
+		
+		//now assuming we don't derp this is what we do. 
+		//if there are no cardsLeft, just disable the cards not selected
+		//if there are between 1 and 5 cards remaining...um stuff
+		//if there are more than 5 cards remaining, diable the current card at 
+		//the current loop rank, make the card at numUsed have loop rank,
+		//set current card to false inHand and true used, and make the card
+		//at numUsed true inHand and false inDeck and increment numUsed up
+		
+		for(var c = 0; c < this.handSize; c++){
+			if(!selections[c]){//a card not selected must be dumped
+				
+				if(cardsLeft <= 0 && (this.numUsed >= this.MAX_DECK_SIZE)){
+					this.inHand[handIndices[c]].disabled = true;
+					this.inDeck[handIndices[c]].disabled = true;
+					this.used[handIndices[c]].disabled = true;
 				}
-				else if(cardsRemaining < 5){
-					this.inHand[handIndices[i]].here = false;
-					this.used[handIndices[i]].here = true;
-					//now to make the rank the same, so the card is displayed in the correct spot
-					this.inHand[this.numUsed].rank = this.inHand[handIndices[i]].rank;
+				//else if(cardsLeft <= this.handSize){
+				//	
+				//}
+				else if(cardsLeft > 0){
+					this.inHand[this.numUsed].rank = this.inHand[handIndices[c]].rank;
 					this.inHand[this.numUsed].here = true;
 					this.inDeck[this.numUsed].here = false;
+					
+					this.inHand[handIndices[c]].here = false;
+					this.used[handIndices[c]].here = true;
+					
+					cardsLeft--;
 					this.numUsed++;
-					cardsRemaining--;
 				}
-				else if (cardsRemaining > 0) {
-					this.inHand[handIndices[i]].here = false;
-					this.used[handIndices[i]].here = true;
-					//now to make the rank the same, so the card is displayed in the correct spot
-					this.inHand[this.numUsed].rank = this.inHand[handIndices[i]].rank;
-					this.inHand[this.numUsed].here = true;
-					this.inDeck[this.numUsed].here = false;
-					this.numUsed++;
-					cardsRemaining--;
-				}
-				else {
-					this.inHand[handIndices[i]].disabled = true;
-				}
-
 			}
 		}
 	}
+
 
 	this.resetDeck = function () {
 		//add code here to reset the deck. just set all the bools to
