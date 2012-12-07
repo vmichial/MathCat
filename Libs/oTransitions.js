@@ -27,12 +27,22 @@ function Transitions(){
 		else{return false;}
 	}
 	
+	this.update = function(click,pos){
+	
+	}
+	
+	this.draw = function(){
+		if(startLevelActive){this.levelStart.draw();}
+		else if(levelSummaryActive){this.levelSummary.draw();}
+		else if(gameEndActive){this.endGame.draw();}
+	}
+	
 	this.startTransition = function(transName,gameStatus){
 		this.intransition = true;
 		var funcName = ((transName == 'undefined') ? "badName" : transName);
 		switch (funcName) {
 			case "badName":
-				this.intransition = false;
+				this.inTransition = false;
 				break;
 			case "levelStart":
 				this.startLevelActive = true;
@@ -46,16 +56,16 @@ function Transitions(){
 				this.gameEndActive = true;
 				this.gameEnd.init(gameStatus);
 				break;
-		}
-
-	
+		}	
 	}
+	
+	
 	
 	//start level hijacks the game by telling
 	//the player what level they are on
 	//and giving a ready start
 	function startLevel(){
-		this.clickHandler = function(click){
+		this.clickHandler = function(click,position){
 			
 		}		
 		this.proceed = function(){
@@ -69,12 +79,13 @@ function Transitions(){
 		}
 		
 	}
+	this.levelStart = new startLevel();
 	
 	//Level summary tells the player how they did
 	//on the previous questions in the last homework
 	//level
 	function levelSummary() {
-		this.clickHandler = function (click) {
+		this.clickHandler = function (click,position) {
 
 		}
 		this.proceed = function () {
@@ -87,12 +98,13 @@ function Transitions(){
 
 		}
 	}
+	this.summary = new levelSummary();
 
 	//endgame function gives the player a rundown of everything
 	//they did, from score, level reached, and grades for tests.
 	//this will be followed by the game over state, after some encouraging
 	function gameEnd(){
-		this.clickHandler = function (click) {
+		this.clickHandler = function (click,position) {
 
 		}
 		this.proceed = function () {
@@ -105,6 +117,7 @@ function Transitions(){
 
 		}
 	}
+	this.endGame = new gameEnd();
 
 
 }
