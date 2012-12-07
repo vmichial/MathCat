@@ -357,7 +357,7 @@
 								}
 								if (gameState.logic.merge) {
 									gameState.logic.cardSelected = false;
-									gameState.player1.answerSoFar /= gameState.logic.answerBeingBuilt;
+									gameState.player1.answerSoFar /= gameState.player1.answerBeingBuilt;
 									gameState.player1.answerSoFar = Math.floor(gameState.player1.answerSoFar);
 									gameState.logic.ASF = true;
 									gameState.logic.answerBeingBuilt = 0;
