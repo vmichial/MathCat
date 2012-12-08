@@ -991,7 +991,7 @@
 					else { ctx.drawImage(img.divideBTNp, 602, 589); }
 
 					//Draw Deck*************
-					ctx.fillText(gameState.player1.myDeck.numUsed,120,440);
+					//ctx.fillText(gameState.player1.myDeck.numUsed,120,440);
 					if (!gameState.player1.DeckEmpty) {
 						ctx.drawImage(img.cardBack, 120, 440);
 						ctx.fillText((gameState.player1.myDeck.MAX_DECK_SIZE - gameState.player1.myDeck.numUsed), 185, 460);

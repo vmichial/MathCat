@@ -75,10 +75,28 @@ function Player() {
 	    //variables for displaying info on answering questions
 	    this.answerSoFar = 0;//the answer you can attempt to submit
 	    this.answerBeingBuilt = 0;//the term you are currently building
-		//is all i guess is left easy function... honestly...
-		//it takes more time to make this comment than to actually
-		//code it.. but i will leave it to YOU BWAHAHAHAHAHAHA!
 	}
+	//this small object is for holding the problem needed to recap a level
+	function problemData(){
+		this.EQ;
+		this.answered = false;
+		this.panic = false;	
+	}
+	//this small object will summarize the level's information
+	function levelData(){
+		this.scoreSoFar;
+		this.problems = [this.numLevels];
+		for(var i = 0; i<this.numLevels; i++){
+			this.problems[i] = new problemData();
+		}
+		this.averageCorrect;
+		this.highestAdd = 0;
+		this.highestSub = 0;
+		this.highestMult = 0;
+		this.highestDiv = 0;
+	}
+	this.SummaryData = new Array();
+	
 	this.restartProblem = function(){
 		this.totalScore -= this.currentScore;
 		this.currentScore = 0;
