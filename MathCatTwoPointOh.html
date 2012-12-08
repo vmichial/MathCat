@@ -114,8 +114,10 @@
 			if (trans.transitionInProgress()){
 				if(handleThisClick){
 					trans.update(currentX,currentY);
-				}
-				trans.proceed();
+				}				
+				handleThisClick = false;
+				trans.proceed();//proceed modifies update handles clicks
+
 			}else {
 				if (gameState.location.atStartupScreen) {
 					if (handleThisClick) { gameState.splash.startupTimer = 89; }
@@ -176,6 +178,7 @@
 							gameState.logic.inDivision = false;
 							gameState.logic.inMultiplication = false;
 							gameState.time.followTime = true;
+							trans.startTransition("levelStart",gameState);
 						}
 						else if ((currentX > 730 && currentX < 960) && (currentY > 630)) {
 							gameState.location.atTitleScreen = false;
@@ -569,9 +572,12 @@
 								gameState.logic.pickAcard = false;
 							}
 							else if (msg.skipDialog) {
+								var currentLevel = gameState.player1.level;
 								msg.skipDialog = false;
 								gameState.player1.skipProblem();
+								var nextLevel = gameState.player1.level;
 								gameState.time.followTime = true;
+								if(nextLevel != currentLevel){trans.startTransition('levelStart',gameState);}
 							}
 							else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
 								handleThisClick = false;
@@ -635,6 +641,7 @@
 																, !gameState.hand.used[0], !gameState.hand.used[1], !gameState.hand.used[2]
 																, !gameState.hand.used[3], !gameState.hand.used[4]);
 											gameState.allCardsFalse();
+											trans.startTransition("levelStart",gameState);
 										}
 										else {
 											gameState.player1.advanceProblem();
@@ -935,8 +942,7 @@
 			}
 		}
 		// ****************** DRAW FUNCTION STARTS HERE ****************************
-		function draw(ctx) {
-			ctx.clearRect(0, 0, 1000, 700);
+		function draw(ctx) {		
 			if (trans.transitionInProgress()) {
 				trans.draw(ctx);
 			}else{

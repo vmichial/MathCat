@@ -25,70 +25,6 @@ function Transitions(){
 	this.levelSummaryActive = false;
 	this.gameEndActive = false;
 
-	this.transitionInProgress = function(){
-		if(this.inTransition){return true;}
-		else{return false;}
-	}
-	
-	//update works like it should in the main page
-	//look for what should change based on the click
-	//positions, only call it if a click needs handling
-	this.update = function(posX,posY){
-		if(this.startLevelActive){
-			this.levelStart.clickHandler(posX,posY);
-		}
-		else if(this.levelSummaryActive){
-			this.summary.clickHandler(posX,posY);
-		}
-		else if(this.gameEndActive){
-			this.endGame.clickHandler(posX,posY);
-		}	
-	}
-	//proceed means do the suff you have to do in your
-	//transition, if that is making cutscenes or fetching
-	//and altering data, just make the correct sub object work it
-	this.proceed = function(){
-		if(this.startLevelActive){
-			this.startLevelActive = this.levelStart.proceed();
-		}
-		else if(this.levelSummaryactive){
-			this.levelSummaryActive = this.summary.proceed();
-		}
-		else if(this.gameEndActive){
-			this.gameEndActive = this.endGame.proceed();
-		}
-		else{
-			this.inTransition = false;
-		}
-	}
-	
-	this.draw = function(context){
-		if(startLevelActive){this.levelStart.draw(context);}
-		else if(levelSummaryActive){this.levelSummary.draw(context);}
-		else if(gameEndActive){this.endGame.draw(context);}
-	}
-	
-	this.startTransition = function(transName,gameStatus){
-		this.intransition = true;
-		var funcName = ((transName == 'undefined') ? "badName" : transName);
-		switch (funcName) {
-			case "badName":
-				this.inTransition = false;
-				break;
-			case "levelStart":
-				this.startLevelActive = true;
-				this.levelStart.init(gameStatus);
-				break;
-			case "levelSummary":
-				this.levelSummaryActive = true;
-				this.summary.init(gameStatus);
-				break;
-			case "gameEnd":
-				this.gameEndActive = true;
-				this.endGame.init(gameStatus);
-				break;
-		}	
-	}
 	
 	
 	
@@ -97,19 +33,40 @@ function Transitions(){
 	//and giving a ready start
 	function startLevel(){
 		this.currentState;
+		this.frame = new Image();
+		this.BG = new Image();
+		this.text = 'LEVEL';
+		
+		this.frame.src = "Images/Misc/frame.png";
+		this.BG.src = "Images/Misc/table.png";
+		
+		this.Timer = 0;
+		this.fps = 30;
 	
 		this.clickHandler = function(posX,posY){
-			
+			this.Timer = 149;
 		}		
 		this.proceed = function(){
+			this.Timer++;
+			if((this.Timer/this.fps)>=5){
+				return false;
+			}
+			else{return true;}
 			//proceed must return true if the transition is not over
 			//and false to signal it is done
 		}
 		this.draw = function(ctx){
-		
+			ctx.clearRect(0, 0, 1000, 700)
+			ctx.drawImage(this.BG,0,0);
+			ctx.drawImage(this.frame,340,110);
+			ctx.font = '20px Arial';
+			ctx.fillText(this.text,455,170);
+			ctx.font = '60px Arial';
+			ctx.fillText(this.currentState.player1.level,470,260);
 		}
 		this.init = function (gameStatus) {
 			this.currentState = gameStatus;
+			this.Timer = 0;
 		}
 		
 	}
@@ -158,6 +115,72 @@ function Transitions(){
 		}
 	}
 	this.endGame = new gameEnd();
+	
+	this.transitionInProgress = function(){
+		if(this.inTransition){return true;}
+		else{return false;}
+	}
+	
+	//update works like it should in the main page
+	//look for what should change based on the click
+	//positions, only call it if a click needs handling
+	this.update = function(posX,posY){
+		if(this.startLevelActive){
+			this.levelStart.clickHandler(posX,posY);
+		}
+		else if(this.levelSummaryActive){
+			this.summary.clickHandler(posX,posY);
+		}
+		else if(this.gameEndActive){
+			this.endGame.clickHandler(posX,posY);
+		}	
+	}
+	//proceed means do the suff you have to do in your
+	//transition, if that is making cutscenes or fetching
+	//and altering data, just make the correct sub object work it
+	this.proceed = function(){
+		if(this.startLevelActive){
+			this.startLevelActive = this.levelStart.proceed();
+		}
+		else if(this.levelSummaryactive){
+			this.levelSummaryActive = this.summary.proceed();
+		}
+		else if(this.gameEndActive){
+			this.gameEndActive = this.endGame.proceed();
+		}
+		else{
+			this.inTransition = false;
+		}
+	}
+	
+	this.draw = function(context){
+		if(this.startLevelActive){this.levelStart.draw(context);}
+		else if(this.levelSummaryActive){this.levelSummary.draw(context);}
+		else if(this.gameEndActive){this.endGame.draw(context);}
+	}
+	
+	this.startTransition = function(transName,gameStatus){
+		this.inTransition = true;
+		var funcName = ((transName == 'undefined') ? "badName" : transName);
+		switch (funcName) {
+			case "badName":
+				this.inTransition = false;
+				break;
+			case "levelStart":
+				this.startLevelActive = true;
+				this.levelStart.init(gameStatus);
+				break;
+			case "levelSummary":
+				this.levelSummaryActive = true;
+				this.summary.init(gameStatus);
+				break;
+			case "gameEnd":
+				this.gameEndActive = true;
+				this.endGame.init(gameStatus);
+				break;
+		}	
+	}
+	
 
 
 }
