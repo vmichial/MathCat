@@ -112,6 +112,10 @@
 
 		function gameStatusCheck() {
 			if (trans.transitionInProgress()){
+				if(handleThisClick){
+					trans.update(currentX,currentY);
+				}
+				trans.proceed();
 			}else {
 				if (gameState.location.atStartupScreen) {
 					if (handleThisClick) { gameState.splash.startupTimer = 89; }
@@ -934,6 +938,7 @@
 		function draw(ctx) {
 			ctx.clearRect(0, 0, 1000, 700);
 			if (trans.transitionInProgress()) {
+				trans.draw(ctx);
 			}else{
 				if (gameState.location.atEndScreen) {
 					ctx.drawImage(img.endScreen, 0, 0);

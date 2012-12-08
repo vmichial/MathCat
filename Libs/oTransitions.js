@@ -4,7 +4,7 @@
 	in a string perameter which is the name of your transition.
 	
 	the transition should do whatever you like or need it to do. and you need
-	associated draw,clickHandle,and proceed functions for ever transition. In 
+	associated draw,clickHandle, init, and proceed functions for every transition. In 
 	mathCatTwoPointOh.html transitions are looked for FIRST! in both the 
 	gameStatusCheck() and draw() meaning that regardless of the state the game 
 	is in, it essintially halts ALL	game progression and performs the transition
@@ -12,6 +12,9 @@
 	the init function within each of the transition sub-objects are used in setting up the state
 	of the object. transitions care only about limited information but need to know 
 	EVERYTHING potentially so we pass the gamestate to be absolutely sure!
+	
+	IT IS A GOOD IDEA TO STOP ALL CURRENT SOUNDS BEFORE INITIATING A TRANSITION, AND IT IS GOOD TO KILL
+	ALL SOUNDS WHEN ENDING A TRANSITION
 */
 
 function Transitions(){
@@ -27,14 +30,42 @@ function Transitions(){
 		else{return false;}
 	}
 	
-	this.update = function(click,pos){
-	
+	//update works like it should in the main page
+	//look for what should change based on the click
+	//positions, only call it if a click needs handling
+	this.update = function(posX,posY){
+		if(this.startLevelActive){
+			this.levelStart.clickHandler(posX,posY);
+		}
+		else if(this.levelSummaryActive){
+			this.summary.clickHandler(posX,posY);
+		}
+		else if(this.gameEndActive){
+			this.endGame.clickHandler(posX,posY);
+		}	
+	}
+	//proceed means do the suff you have to do in your
+	//transition, if that is making cutscenes or fetching
+	//and altering data, just make the correct sub object work it
+	this.proceed = function(){
+		if(this.startLevelActive){
+			this.startLevelActive = this.levelStart.proceed();
+		}
+		else if(this.levelSummaryactive){
+			this.levelSummaryActive = this.summary.proceed();
+		}
+		else if(this.gameEndActive){
+			this.gameEndActive = this.endGame.proceed();
+		}
+		else{
+			this.inTransition = false;
+		}
 	}
 	
-	this.draw = function(){
-		if(startLevelActive){this.levelStart.draw();}
-		else if(levelSummaryActive){this.levelSummary.draw();}
-		else if(gameEndActive){this.endGame.draw();}
+	this.draw = function(context){
+		if(startLevelActive){this.levelStart.draw(context);}
+		else if(levelSummaryActive){this.levelSummary.draw(context);}
+		else if(gameEndActive){this.endGame.draw(context);}
 	}
 	
 	this.startTransition = function(transName,gameStatus){
@@ -46,15 +77,15 @@ function Transitions(){
 				break;
 			case "levelStart":
 				this.startLevelActive = true;
-				this.startLevel.init(gameStatus);
+				this.levelStart.init(gameStatus);
 				break;
 			case "levelSummary":
 				this.levelSummaryActive = true;
-				this.levelSummary.init(gameStatus);
+				this.summary.init(gameStatus);
 				break;
 			case "gameEnd":
 				this.gameEndActive = true;
-				this.gameEnd.init(gameStatus);
+				this.endGame.init(gameStatus);
 				break;
 		}	
 	}
@@ -65,17 +96,20 @@ function Transitions(){
 	//the player what level they are on
 	//and giving a ready start
 	function startLevel(){
-		this.clickHandler = function(click,position){
+		this.currentState;
+	
+		this.clickHandler = function(posX,posY){
 			
 		}		
 		this.proceed = function(){
-			
+			//proceed must return true if the transition is not over
+			//and false to signal it is done
 		}
 		this.draw = function(ctx){
 		
 		}
 		this.init = function (gameStatus) {
-
+			this.currentState = gameStatus;
 		}
 		
 	}
@@ -85,17 +119,20 @@ function Transitions(){
 	//on the previous questions in the last homework
 	//level
 	function levelSummary() {
-		this.clickHandler = function (click,position) {
+		this.currentState;
+		
+		this.clickHandler = function (posX,posY) {
 
 		}
 		this.proceed = function () {
-
+			//proceed must return true if the transition is not over
+			//and false to signal it is done
 		}
 		this.draw = function (ctx) {
 
 		}
 		this.init = function(gameStatus) {
-
+			this.currentState = gameStatus;
 		}
 	}
 	this.summary = new levelSummary();
@@ -104,17 +141,20 @@ function Transitions(){
 	//they did, from score, level reached, and grades for tests.
 	//this will be followed by the game over state, after some encouraging
 	function gameEnd(){
-		this.clickHandler = function (click,position) {
+		this.currentState;
+		
+		this.clickHandler = function (posX,posY) {
 
 		}
 		this.proceed = function () {
-
+			//proceed must return true if the transition is not over
+			//and false to signal it is done
 		}
 		this.draw = function (ctx) {
 
 		}
 		this.init = function (gameStatus) {
-
+			this.currentState = gameStatus;
 		}
 	}
 	this.endGame = new gameEnd();
