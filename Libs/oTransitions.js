@@ -114,6 +114,7 @@ function Transitions(){
 		this.proceed = function () {
 			//proceed must return true if the transition is not over
 			//and false to signal it is done
+			//throw(this.currentState.player1.summaryData[0]);
 			if(this.showingItems){
 				this.itemTimer++;
 				if((this.itemTimer/this.fps) >= 0.3){
