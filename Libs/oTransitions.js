@@ -76,20 +76,66 @@ function Transitions(){
 	//on the previous questions in the last homework
 	//level
 	function levelSummary() {
+		//data
 		this.currentState;
+		this.itemTimer;
+		this.fps;
+		this.itemCount;
+		this.panic = new Image();
+		this.notPanic = new Image();
+		
+		this.panic.src = "Images/Buttons/panicButtonPressed.png";
+		this.notPanic.src = "Images/Buttons/panicButton.png";
+		//this.scorePics = [7];
+		
+		
+		this.showingItems = false;
+		this.linger = false;
+		this.end = false;
+		//things that need drawing
+		this.message1 = "LEVEL COMPLETE!";
+		this.message2 = "Good job!";
+		this.message3 = "Click Anywhere to Continue...";
+		this.message4 = "Current Score";		
 		
 		this.clickHandler = function (posX,posY) {
-
+				if(this.showingItems){
+					this.itemTimer = 8;
+					}
+				if(this.linger){
+					this.linger = false;
+					this.end = true;
+				}
 		}
 		this.proceed = function () {
 			//proceed must return true if the transition is not over
 			//and false to signal it is done
+			if(this.showingItems){
+				this.itemTimer++;
+				if((this.itemTimer/this.fps) >= 0.3){
+					this.itemTimer = 0;
+					this.itemCount++;
+				}
+				return true;
+			}
+			else if(this.linger){
+				return true;
+			}
+			else if(this.end){
+				return false;
+			}
 		}
 		this.draw = function (ctx) {
-
+			
 		}
 		this.init = function(gameStatus) {
 			this.currentState = gameStatus;
+			this.itemTimer = 0;
+			this.itemCount = 0;
+			this.fps = 30;
+			this.linger = false;
+			this.end = false;
+			this.showItems = true;
 		}
 	}
 	this.summary = new levelSummary();

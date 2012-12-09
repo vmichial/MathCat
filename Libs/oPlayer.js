@@ -39,6 +39,53 @@ function Player() {
 	
 	this.numLevels = 15;
 
+	//this small object is for holding the problem needed to recap a level
+	function problemData(){
+		this.EQ;
+		this.answered = false;
+		this.panic = false;
+	}
+	//this small object will summarize the level's information
+	function levelData(){
+		this.problems = [this.numLevels];
+		//for(var i = 0; i<this.numLevels; i++){
+		//	this.problems[i] = new problemData();
+		//}
+		this.averageCorrect;
+		this.highestAdd = 0;
+		this.highestSub = 0;
+		this.highestMult = 0;
+		this.highestDiv = 0;
+		
+		this.scoreSoFar = 0;
+		
+		this.checkDiv = function(divCount){
+			if(divCount > this.highestDiv){
+				this.highestDiv = divCount;
+			}
+		}
+		this.checkMult = function(multCount){
+			if(multCount > this.highestMult){
+				this.highestMult = multCount;
+			}
+		}
+		this.checkSub = function(subCount){
+			if(subCount > this.highestSub){
+				this.highestSub = subCount;
+			}
+		}
+		this.checkAdd = function(addCount){
+			if(addCount > this.highestAdd){
+				this.highestAdd = addCount;
+			}
+		}
+		this.setLevelScore = function(currentScore){
+			this.scoreSoFar = currentScore;
+		}		
+	}
+	this.SummaryData = [1];
+	this.SummaryData[0] = new levelData();
+	
 	this.initializePlayer = function () {
 		//ADD CODE HERE FOR SETTING THE PLAYER UP AT GAME START
 		//call functions for the deck.
@@ -75,32 +122,14 @@ function Player() {
 	    //variables for displaying info on answering questions
 	    this.answerSoFar = 0;//the answer you can attempt to submit
 	    this.answerBeingBuilt = 0;//the term you are currently building
+		
+		this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
+		this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 	}
-	//this small object is for holding the problem needed to recap a level
-	function problemData(){
-		this.EQ;
-		this.answered = false;
-		this.panic = false;	
-	}
-	//this small object will summarize the level's information
-	function levelData(){
-		this.scoreSoFar;
-		this.problems = [this.numLevels];
-		for(var i = 0; i<this.numLevels; i++){
-			this.problems[i] = new problemData();
-		}
-		this.averageCorrect;
-		this.highestAdd = 0;
-		this.highestSub = 0;
-		this.highestMult = 0;
-		this.highestDiv = 0;
-	}
-	this.SummaryData = new Array();
-	
 	this.restartProblem = function(){
 		this.totalScore -= this.currentScore;
 		this.currentScore = 0;
-		
+	
 		this.additionBonus = false;
 	    this.subtractionBonus = false;
 	    this.multiplyBonus = false;
@@ -124,6 +153,8 @@ function Player() {
 		var nextEQ;
 		this.totalScore -= this.currentScore;
 		this.currentScore = 0;
+		this.SummaryData[this.level-1].problems[this.problemNumber-1].answered = false;
+		if(this.panicked){this.SummaryData[this.level-1].problems[this.problemNumber-1].panicked = true;}
 		
 		if((this.problemNumber+1)>this.numLevels){
 			nextEQ = generateEQ(this.level+1);
@@ -133,14 +164,19 @@ function Player() {
 			this.currentX = nextEQ.answer;
 			this.myDeck.resetDeck();
 			this.updateHand();
+			this.SummaryData[this.level-1] = new levelData();
+			this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
+			this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 		}
 		else{
 			nextEQ = generateEQ(this.level);
 			this.problemNumber++;
 			this.currentEQ = nextEQ.EQ;
 			this.currentX = nextEQ.answer;
+			this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
+			this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 		}
-
+		
 		this.numAdditions = 0;
 		this.numSubtractions = 0;
 		this.numMultiplies = 0;
@@ -160,15 +196,27 @@ function Player() {
 		//and how many were used
 		this.totalScore -= this.currentScore;
 		this.currentScore += this.myHand[cardChoice].myValue;
-		this.totalScore += this.currentScore;		
+		this.totalScore += this.currentScore;
 	}
 	this.advanceProblem = function () {
 		//insert code here to advance to the next problem generate new EQ and X
 		//and bump up the problem number
-		this.problemNumber = this.problemNumber + 1;
+		if(this.panicked){
+			this.SummaryData[this.level-1].problems[this.problemNumber-1].panic = true;
+		}
+		this.SummaryData[this.level-1].problems[this.problemNumber-1].answered = true;
+		
+		this.problemNumber++;
 		var nexteq = generateEQ(this.level);
 		this.currentEQ = nexteq.EQ;
 		this.currentX = nexteq.answer;
+		this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
+		this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
+		
+		this.SummaryData[this.level-1].checkAdd(this.numAdditions);
+		this.SummaryData[this.level-1].checkSub(this.numSubtractions);
+		this.SummaryData[this.level-1].checkMult(this.numMultiplies);
+		this.SummaryData[this.level-1].checkDiv(this.numDivisions);
 		
 		this.addBonuses(this.panicked);
 		this.answerSoFar = 0;
@@ -183,12 +231,23 @@ function Player() {
 	this.advanceLevel = function () {
 		//add code here for progressing the player to the next level
 		//set all values appropriately
+		this.SummaryData[this.level-1].problems[this.problemNumber-1].answered = true;
+		if(this.panicked){
+			this.SummaryData[this.level-1].problems[this.problemNumber-1].panic = true;
+		}
+		
 		this.level++;
 		this.problemNumber = 1;
 		var nexteq = generateEQ(this.level);
 		this.currentEQ = nexteq.EQ;
 		this.currentX = nexteq.answer;
-		
+		this.SummaryData[this.level-1] = new levelData();
+		this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
+		this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
+		this.SummaryData[this.level-1].checkAdd(this.numAdditions);
+		this.SummaryData[this.level-1].checkSub(this.numSubtractions);
+		this.SummaryData[this.level-1].checkMult(this.numMultiplies);
+		this.SummaryData[this.level-1].checkDiv(this.numDivisions);
 		this.addBonuses(this.panicked);
 		this.answerSoFar = 0;
 		this.answerBeingBuilt = 0;
