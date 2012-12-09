@@ -116,7 +116,7 @@
 					trans.update(currentX,currentY);
 				}				
 				handleThisClick = false;
-				trans.proceed();//proceed modifies update handles clicks
+				trans.proceed(gameState);//proceed modifies update handles clicks
 
 			}else {
 				if (gameState.location.atStartupScreen) {
@@ -577,7 +577,10 @@
 								gameState.player1.skipProblem();
 								var nextLevel = gameState.player1.level;
 								gameState.time.followTime = true;
-								if(nextLevel != currentLevel){trans.startTransition('levelStart',gameState);}
+								if(nextLevel != currentLevel){
+									trans.startTransition('levelSummary',gameState);
+									//trans.startTransition('levelStart',gameState);
+								}
 							}
 							else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
 								handleThisClick = false;
@@ -641,7 +644,8 @@
 																, !gameState.hand.used[0], !gameState.hand.used[1], !gameState.hand.used[2]
 																, !gameState.hand.used[3], !gameState.hand.used[4]);
 											gameState.allCardsFalse();
-											trans.startTransition("levelStart",gameState);
+											trans.startTransition("levelSummary",gameState);
+											//trans.startTransition("levelStart",gameState);
 										}
 										else {
 											gameState.player1.advanceProblem();
@@ -942,7 +946,8 @@
 			}
 		}
 		// ****************** DRAW FUNCTION STARTS HERE ****************************
-		function draw(ctx) {		
+		function draw(ctx) {
+			ctx.clearRect(0,0,1000,700);
 			if (trans.transitionInProgress()) {
 				trans.draw(ctx);
 			}else{

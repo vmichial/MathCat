@@ -62,7 +62,12 @@ function Transitions(){
 			ctx.font = '20px Arial';
 			ctx.fillText(this.text,455,170);
 			ctx.font = '60px Arial';
-			ctx.fillText(this.currentState.player1.level,470,260);
+			if(this.currentState.player1.level > 9){
+				ctx.fillText(this.currentState.player1.level,440,260);
+			}
+			else{
+				ctx.fillText(this.currentState.player1.level,470,260);
+			}
 		}
 		this.init = function (gameStatus) {
 			this.currentState = gameStatus;
@@ -78,31 +83,30 @@ function Transitions(){
 	function levelSummary() {
 		//data
 		this.currentState;
-		this.itemTimer;
-		this.fps;
-		this.itemCount;
+		this.itemTimer = 0;
+		this.fps = 30;
+		this.itemCount = 0;
 		this.panic = new Image();
 		this.notPanic = new Image();
 		
 		this.panic.src = "Images/Buttons/panicButtonPressed.png";
 		this.notPanic.src = "Images/Buttons/panicButton.png";
-		//this.scorePics = [7];
+		//this.scorePics = [7];		
 		
-		
-		this.showingItems = false;
+		this.showingItems = true;
 		this.linger = false;
 		this.end = false;
 		//things that need drawing
-		this.message1 = "LEVEL COMPLETE!";
+		this.message1 = "LEVEL COMPLETE";
 		this.message2 = "Good job!";
 		this.message3 = "Click Anywhere to Continue...";
 		this.message4 = "Current Score";		
 		
 		this.clickHandler = function (posX,posY) {
 				if(this.showingItems){
-					this.itemTimer = 8;
+					this.itemTimer = 7;
 					}
-				if(this.linger){
+				else if(this.linger){
 					this.linger = false;
 					this.end = true;
 				}
@@ -116,6 +120,7 @@ function Transitions(){
 					this.itemTimer = 0;
 					this.itemCount++;
 				}
+				if(this.itemCount >= 15){this.showingItems = false; this.linger = true;}
 				return true;
 			}
 			else if(this.linger){
@@ -125,11 +130,26 @@ function Transitions(){
 				return false;
 			}
 		}
-		this.draw = function (ctx) {
+		this.draw = function(ctx){		
+			ctx.font = '60px Arial';
+			ctx.fillText(this.message1,190,90);
+			ctx.font = '30px Arial';
 			
+			var X = 45;
+			var Y = 160;
+			if(this.showingItems){
+				for(var i = 0; i<= this.itemCount;i++){
+				//throw(this.currentState);
+					ctx.fillText(this.currentState.player1.summaryData[this.currentState.player1.level-2].problems[this.itemCount].EQ,X,(Y+(30*this.itemCount)));
+				}
+			}
+			else if(this.linger){
+				
+			}			
 		}
-		this.init = function(gameStatus) {
-			this.currentState = gameStatus;
+		this.init = function(gameStatus){
+			var status = gameStatus;
+			this.currentState = status;
 			this.itemTimer = 0;
 			this.itemCount = 0;
 			this.fps = 30;
@@ -184,12 +204,13 @@ function Transitions(){
 	//proceed means do the suff you have to do in your
 	//transition, if that is making cutscenes or fetching
 	//and altering data, just make the correct sub object work it
-	this.proceed = function(){
+	this.proceed = function(currentState){
 		if(this.startLevelActive){
 			this.startLevelActive = this.levelStart.proceed();
 		}
-		else if(this.levelSummaryactive){
+		else if(this.levelSummaryActive){
 			this.levelSummaryActive = this.summary.proceed();
+			if(!this.levelSummaryActive){this.startTransition('levelStart',currentState);}
 		}
 		else if(this.gameEndActive){
 			this.gameEndActive = this.endGame.proceed();
@@ -201,11 +222,12 @@ function Transitions(){
 	
 	this.draw = function(context){
 		if(this.startLevelActive){this.levelStart.draw(context);}
-		else if(this.levelSummaryActive){this.levelSummary.draw(context);}
+		else if(this.levelSummaryActive){this.summary.draw(context);}
 		else if(this.gameEndActive){this.endGame.draw(context);}
 	}
 	
 	this.startTransition = function(transName,gameStatus){
+		var status = gameStatus;
 		this.inTransition = true;
 		var funcName = ((transName == 'undefined') ? "badName" : transName);
 		switch (funcName) {
@@ -214,15 +236,18 @@ function Transitions(){
 				break;
 			case "levelStart":
 				this.startLevelActive = true;
-				this.levelStart.init(gameStatus);
+				this.levelStart = new startLevel();
+				this.levelStart.init(status);
 				break;
 			case "levelSummary":
 				this.levelSummaryActive = true;
-				this.summary.init(gameStatus);
+				this.summary = new levelSummary();
+				this.summary.init(status);
 				break;
 			case "gameEnd":
 				this.gameEndActive = true;
-				this.endGame.init(gameStatus);
+				this.endGame = new gameEnd();
+				this.endGame.init(status);
 				break;
 		}	
 	}
