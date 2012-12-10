@@ -578,8 +578,8 @@
 								var nextLevel = gameState.player1.level;
 								gameState.time.followTime = true;
 								if(nextLevel != currentLevel){
-									//trans.startTransition('levelSummary',gameState);
-									trans.startTransition('levelStart',gameState);
+									trans.startTransition('levelSummary',gameState);
+									//trans.startTransition('levelStart',gameState);
 								}
 							}
 							else if (gameState.logic.pickAcard || gameState.logic.pickAsign || gameState.logic.merge) {
@@ -644,8 +644,8 @@
 																, !gameState.hand.used[0], !gameState.hand.used[1], !gameState.hand.used[2]
 																, !gameState.hand.used[3], !gameState.hand.used[4]);
 											gameState.allCardsFalse();
-											//trans.startTransition("levelSummary",gameState);
-											trans.startTransition("levelStart",gameState);
+											trans.startTransition("levelSummary",gameState);
+											//trans.startTransition("levelStart",gameState);
 										}
 										else {
 											gameState.player1.advanceProblem();
@@ -828,6 +828,7 @@
 								gameState.mood.OMG = false;
 								gameState.mood.Dead = true;
 								gameState.time.outOfTime = true;
+								//HERE WILL BE THE TRANSITION
 								msg.failDialog = true;
 							}
 							else { gameState.time.timeRemaining--; }

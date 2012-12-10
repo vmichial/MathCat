@@ -137,15 +137,16 @@ function Transitions(){
 			ctx.font = '30px Arial';
 			
 			var X = 45;
-			var Y = 160;
+			var Y = 170;
 			if(this.showingItems){
 				for(var i = 0; i<= this.itemCount;i++){
-				//throw(this.currentState);
-					ctx.fillText(this.currentState.player1.summaryData[this.currentState.player1.level-2].problems[this.itemCount].EQ,X,(Y+(30*this.itemCount)));
+					ctx.fillText(this.currentState.player1.SummaryData[this.currentState.player1.level-2].problems[i].EQ ,X,(Y+(36*i)));
 				}
 			}
 			else if(this.linger){
-				
+				for(var i = 0; i < 15;i++){
+					ctx.fillText(this.currentState.player1.SummaryData[this.currentState.player1.level-2].problems[i].EQ ,X,(Y+(36*i)));
+				}
 			}			
 		}
 		this.init = function(gameStatus){
@@ -168,7 +169,7 @@ function Transitions(){
 		this.currentState;
 		
 		this.clickHandler = function (posX,posY) {
-
+			
 		}
 		this.proceed = function () {
 			//proceed must return true if the transition is not over
