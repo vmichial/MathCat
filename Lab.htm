@@ -39,50 +39,35 @@
 			float: right;
 			background-color: #005000;
 		}
+
+		table {
+			display:inline;
+		}
 	</style>
 </head>
 <body>
 	<div class="lab"></div>
 
 	<script type="text/javascript">
-		/*
 		var deck1 = new Deck(); // Makes a new Deck of default size 52
 		var handSize, hand = new Array();
 
 		deck1.shuffle();
-		deck1.select(4);
-		deck1.select(7);
-		deck1.select(23);
-		deck1.select(30);
-		deck1.select(50);
-		deck1.deselect(7);
-			
-		document.write('<div style="float:right">' +
-		'deck1.shuffle();		<br>' +
-		'deck1.select(4);		<br>' +
-		'deck1.select(7);		<br>' +
-		'deck1.select(23);	<br>' +
-		'deck1.select(30);	<br>' +
-		'deck1.select(50);	<br>' +
-		'deck1.deselect(7);	<br>' +
-		'</div>')
-
-		document.write('Card Deck Representation<br><table>');
+		deck1.selectD(0);
+		deck1.selectV(4);
+		deck1.selectV(7);
+		deck1.selectV(23);
+		deck1.selectV(30);
+		deck1.selectV(50);
+		deck1.deselectV(7);
 
 		handSize = deck1.listSelected(hand);
-		deck1.setCards(hand, handSize);
 
-		for (var i = 0; i < handSize; i++)
-			document.write(hand[i] + '<br>');
+		document.write('Card Deck Representation<br>');
 
-		document.write('<tr>');
-		document.write('<td>Num</td>');
-		document.write('<td>Value</td>');
-		document.write('<td>Suit</td>');
-		document.write('<td>File Name</td>');
-		document.write('<td>Selected</td>');
-		document.write('</tr>');
 
+
+		document.write('<table><tr><td>Num</td><td>Value</td><td>Suit</td><td>File Name</td><td>Selected</td></tr>');
 		for (var i = 0; i < deck1.DECKSIZE; i++) {
 			var c = deck1.cards[i];
 			document.write('<tr>');
@@ -91,15 +76,31 @@
 			document.write('<td>' + cardV(c) + '</td>');
 			document.write('<td>' + cardS(c) + '</td>');
 			document.write('<td>' + cardFile(c) + '</td>');
-			document.write('<td>' + (deck1.isSelected(c) ? 'true' : '&nbsp;') + '</td>');
+			document.write('<td>' + (deck1.isSelectedV(c) ? 'true' : '&nbsp;') + '</td>');
 
 			document.write('</tr>');
 		}
 		document.write('</table>');
-		*/
+
+
+
+		document.write('<table><tr><td>Num</td><td>Value</td><td>Suit</td><td>File Name</td></tr>');
+		for (var i = 0; i < handSize; i++) {
+			var c = hand[i];
+			document.write('<tr>');
+
+			document.write('<td>' + c + '</td>');
+			document.write('<td>' + cardV(c) + '</td>');
+			document.write('<td>' + cardS(c) + '</td>');
+			document.write('<td>' + cardFile(c) + '</td>');
+
+			document.write('</tr>');
+		}
+		document.write('</table>')
 	</script>
 
 	<script type="text/javascript">
+		/*
 		function struct() { this.EQ = ""; this.answer = 0; };
 
 		document.write('Equation Generator Test<br><table>');
@@ -123,6 +124,7 @@
 			document.write('</tr>');
 		}
 		document.write('</table>');
+		*/
 	</script>
 </body>
 </html>
