@@ -122,8 +122,8 @@ function Player() {
 	    this.answerSoFar = 0;//the answer you can attempt to submit
 	    this.answerBeingBuilt = 0;//the term you are currently building
 		//initialize the leveldata
-		this.SummaryData[0] = new levelData();
-		this.SummaryData[0].problems[0] = new problemData();
+		this.SummaryData[this.level-1] = new levelData();
+		this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
 
 		this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 	}

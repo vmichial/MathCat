@@ -62,11 +62,14 @@ function Transitions(){
 			ctx.font = '20px Arial';
 			ctx.fillText(this.text,455,170);
 			ctx.font = '60px Arial';
-			if(this.currentState.player1.level > 9){
-				ctx.fillText(this.currentState.player1.level,440,260);
+			if(this.currentState.player1.level > 99){
+				ctx.fillText(this.currentState.player1.level,439,260);
 			}
+			else if(this.currentState.player1.level > 9){
+				ctx.fillText(this.currentState.player1.level,453,260);
+			}			
 			else{
-				ctx.fillText(this.currentState.player1.level,470,260);
+				ctx.fillText(this.currentState.player1.level,473,260);
 			}
 		}
 		this.init = function (gameStatus) {
