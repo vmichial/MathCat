@@ -145,6 +145,9 @@ var Deck=function(deckSize) {
 		}
 	}
 
+	/*		List Selected
+		Returns the amount of things selected & the array passed will have the card numbers inserted
+	*/
 	this.listSelected=function(list) {
 		var listSize=0;
 		for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++) {
@@ -158,9 +161,19 @@ var Deck=function(deckSize) {
 		return listSize;
 	}
 
-	// add
-	// del
-	// size
+	/*		
+	*/
+	this.add=function(list) {
+		throw ('Not done yet');
+	}
+	this.del=function(list) {
+		throw ('Not done yet');
+	}
+
+	/*		Get Card Count
+		Returns the amount of cards left in the deck
+	*/
+	this.getCount=function() { return this.count; };
 
 
 
@@ -169,13 +182,20 @@ var Deck=function(deckSize) {
 
 
 
-	// --====[ Common Case Errors ]====--
+	// --====[ Stop Herpaderping Cases ]====--
+	this.isSelected=function(num) { throw ('this.isSelected() missing context.  Contexts are: [V]alue, [A]rray'); }
+
 	this.isSelectedv=function(num) { throw (throw_case('Deck.isSelectedV')); }
 	this.isSelectedd=function(num) { throw (throw_case('Deck.isSelectedD')); }
 	this.isselectedV=function(num) { throw (throw_case('Deck.isSelectedV')); }
 	this.isselectedD=function(num) { throw (throw_case('Deck.isSelectedD')); }
 	this.isselectedv=function(num) { throw (throw_case('Deck.isSelectedV')); }
 	this.isselectedd=function(num) { throw (throw_case('Deck.isSelectedD')); }
+
+
+
+	this.select=function(num) { throw ('this.select() missing context.  Contexts are: [V]alue, [A]rray'); }
+	this.deselect=function(num) { throw ('this.deselect() missing context.  Contexts are: [V]alue, [A]rray'); }
 
 	this.SelectV=function(num) { throw (throw_case('Deck.selectV')); }
 	this.DeselectV=function(num) { throw (throw_case('Deck.deselectV')); }
@@ -192,11 +212,18 @@ var Deck=function(deckSize) {
 	this.selectd=function(num) { throw (throw_case('Deck.selectD')); }
 	this.deselectd=function(num) { throw (throw_case('Deck.seselectD')); }
 
+
+
 	this.selectall=function(num) { throw (throw_case('Deck.selectAll')); }
 	this.deselectall=function(num) { throw (throw_case('Deck.deselectAll')); }
 
 	this.SelectAll=function(num) { throw (throw_case('Deck.selectAll')); }
 	this.DeselectAll=function(num) { throw (throw_case('Deck.deselectAll')); }
+
+
+
+	this.Add=function(num) { throw (throw_case('Deck.addV')); }
+	this.Del=function(num) { throw (throw_case('Deck.delV')); }
 }
 
 function throw_case(correct) { return 'Wrong casing.  Correct version of this call: '+correct+'(...)'; }
