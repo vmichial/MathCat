@@ -1,33 +1,33 @@
 ﻿/* 	Cards Value
-Returns the number a card represents
+	Returns the number a card represents
 
-For n cards in a deck, cards are represented from 0 to (n-1)
-In a deck of 52 cards, the cards are represented from 0-51
+	For n cards in a deck, cards are represented from 0 to (n-1)
+	In a deck of 52 cards, the cards are represented from 0-51
 
-In this sample deck, here is some of the values & suits for each n:
-n  Val  Suit
-0 = A - Diamond
-1 = A - Clover
-2 = A - Heart
-3 = A - Spade
-4 = 2 - Diamond
-5 = 2 - Clover
-6 = 2 - Heart
-7 = 2 - Spade
+	In this sample deck, here is some of the values & suits for each n:
+	n  Val  Suit
+	0 = A - Diamond
+	1 = A - Clover
+	2 = A - Heart
+	3 = A - Spade
+	4 = 2 - Diamond
+	5 = 2 - Clover
+	6 = 2 - Heart
+	7 = 2 - Spade
 */
 function cardV(num) {
 	return Math.floor(num/4);
 }
 
 /* 	Cards Suit
-Returns the number representing a suit from 0 to 3
+	Returns the number representing a suit from 0 to 3
 */
 function cardS(num) {
 	return num%4;
 }
 
 /* 	Cards File
-Returns the file name of a card
+	Returns the file name of a card
 */
 function cardFile(num) {
 	var suitName;
@@ -50,8 +50,9 @@ var Deck=function(deckSize) {
 
 
 	// --====[ Variables ]====--
-	this.DECKSIZE=deckSize;
+	this.DECKSIZE=deckSize; // If this must be changed, init() must be called afterwards
 	this.cardCount;
+	this.old_cardCount;
 
 	this.selected=new Array(); // An array of size [deck size / (byte size(int))]
 	this.old_selected=new Array();
@@ -62,66 +63,74 @@ var Deck=function(deckSize) {
 
 
 	// --====[ Methods ]====--
+	/*		Initialization
+		Resets the deck's cards & selections
+	*/
 	this.init=function() {
 		for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++)
 			this.selected[i]=this.old_selected[i]=0;
 		for(var i=0, e=this.DECKSIZE; i<e; i++)
 			this.cards[i]=this.old_cards[i]=i;
-		this.cardCount=this.DECKSIZE;
+		this.cardCount=old_cardCount=this.DECKSIZE;
 	}
 
-	this.isSelectedV=function(num) {
-		return 0!=(this.selected[Math.floor(num/32)]&(1<<(num%32)));
-	}
-	this.isSelectedD=function(num) {
-		num=this.cards[num];
-		return this.isSelected(num);
-	}
+	/*		Is Selected?
+		Returns true/false for if a card is selected
 
-	this.selectV=function(num) {
-		this.selected[Math.floor(num/32)]|=(1<<(num%32));
-	}
-	this.deselectV=function(num) {
-		this.selected[Math.floor(num/32)]&=~(1<<(num%32));
-	}
-	this.selectD=function(num) {
-		num=this.cards[num];
-		this.selectV(num);
-	}
-	this.deselectD=function(num) {
-		num=this.cards[num];
-		this.deselectV(num);
-	}
+		Ex of selection in use:
+			1] User picks 3 cards
+			2] Program calls isSelectedV(num) on each selected card
+			3] User submits
+			4] Program calls listSelected(array) & adds all selected cards to the array
+			5] Program calls deleteSelected()
+			6] Program uses the values in the array
+	*/
+	this.isSelectedV=function(num) { return 0!=(this.selected[Math.floor(num/32)]&(1<<(num%32))); }
+	this.isSelectedD=function(num) { return this.isSelected(this.cards[num]); }
 
-	this.selectAll=function() {
-		for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++)
-			this.selected[i]=0xffffffff;
-	}
-	this.deselectAll=function() {
-		for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++)
-			this.selected[i]=0;
-	}
+	/*		Selection
+		[De]Select
+	*/
+	this.selectV=function(num) { this.selected[Math.floor(num/32)]|=(1<<(num%32)); }
+	this.deselectV=function(num) { this.selected[Math.floor(num/32)]&=~(1<<(num%32)); }
+	this.selectD=function(num) { this.selectV(this.cards[num]); }
+	this.deselectD=function(num) { this.deselectV(this.cards[num]); }
 
-	this.selectInverse=function() {
-		for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++)
-			this.selected[i]=~this.selected[i];
-	}
+	/*		Selection
+		[De]Select All
+	*/
+	this.selectAll=function() { for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++) this.selected[i]=0xffffffff; }
+	this.deselectAll=function() { for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++) this.selected[i]=0; }
 
+	/*		Selection
+		[De]Select Inverse
+	*/
+	this.selectInverse=function() { for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++) this.selected[i]=~this.selected[i]; }
+
+	/*		State Save
+		Save the current deck state so the player can experiment with the deck
+	*/
 	this.stateSave=function() {
 		for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++)
 			this.old_selected[i]=this.selected[i];
+		for(var i=0, e=this.DECKSIZE; i<e; i++)
+			this.old_cards[i]=this.cards[i];
+		this.old_cardCount=this.cardCount;
 	}
+
+	/*		State Load
+		Load the last state save
+	*/
 	this.stateLoad=function() {
 		for(var i=0, e=Math.floor(this.DECKSIZE/32)+1 ; i<e; i++)
 			this.selected[i]=this.old_selected[i];
+		for(var i=0, e=this.DECKSIZE; i<e; i++)
+			this.cards[i]=this.old_cards[i];
+		this.cardCount=this.old_cardCount;
 	}
 
-	this.setCards=function(list, listSize) {
-		this.DECKSIZE=listSize;
-		this.init();
-		for(var i=0; i<listSize; i++) this.cards[i]=list[i];
-	}
-
+	/*		Shuffle
+	*/
 	this.shuffle=function() {
 		var r, new_cards=new Array();
 		for(var i=this.DECKSIZE-1; 0<=i; i--) {
