@@ -91,7 +91,7 @@ function Transitions(){
 		
 		this.panic.src = "Images/Buttons/panicButtonPressed.png";
 		this.notPanic.src = "Images/Buttons/panicButton.png";
-		//this.scorePics = [7];		
+		//this.scorePics = [7];
 		
 		this.showingItems = true;
 		this.linger = false;

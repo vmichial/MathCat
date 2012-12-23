@@ -83,7 +83,7 @@ function Player() {
 			this.scoreSoFar = currentScore;
 		}		
 	}
-	this.SummaryData = [100];
+	this.SummaryData = [];
 	
 	this.initializePlayer = function () {
 		//ADD CODE HERE FOR SETTING THE PLAYER UP AT GAME START
@@ -122,12 +122,9 @@ function Player() {
 	    this.answerSoFar = 0;//the answer you can attempt to submit
 	    this.answerBeingBuilt = 0;//the term you are currently building
 		//initialize the leveldata
-		for(var i = 0; i<100;i++){
-			this.SummaryData[i] = new levelData();
-			for(var c=0; c<15 ; c++){
-				this.SummaryData[i].problems[c] = new problemData();
-			}
-		}
+		this.SummaryData[0] = new levelData();
+		this.SummaryData[0].problems[0] = new problemData();
+
 		this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 	}
 	this.restartProblem = function(){
@@ -168,6 +165,8 @@ function Player() {
 			this.currentX = nextEQ.answer;
 			this.myDeck.resetDeck();
 			this.updateHand();
+			this.SummaryData[this.level-1] = new levelData();
+			this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
 			this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 		}
 		else{
@@ -175,6 +174,7 @@ function Player() {
 			this.problemNumber++;
 			this.currentEQ = nextEQ.EQ;
 			this.currentX = nextEQ.answer;
+			this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
 			this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 		}
 		
@@ -211,6 +211,7 @@ function Player() {
 		var nexteq = generateEQ(this.level);
 		this.currentEQ = nexteq.EQ;
 		this.currentX = nexteq.answer;
+		this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
 		this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 		
 		this.SummaryData[this.level-1].checkAdd(this.numAdditions);
@@ -241,6 +242,8 @@ function Player() {
 		var nexteq = generateEQ(this.level);
 		this.currentEQ = nexteq.EQ;
 		this.currentX = nexteq.answer;
+		this.SummaryData[this.level-1] = new levelData();
+		this.SummaryData[this.level-1].problems[this.problemNumber-1] = new problemData();
 		this.SummaryData[this.level-1].problems[this.problemNumber-1].EQ = this.currentEQ;
 		this.SummaryData[this.level-1].checkAdd(this.numAdditions);
 		this.SummaryData[this.level-1].checkSub(this.numSubtractions);
