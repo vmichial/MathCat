@@ -1,10 +1,34 @@
-﻿function cardV(num) {
-	//if (num < 0 || 52 <= num) throw ('Index out of bound of standard deck [0-51].  Attempted to call: ' + 'cardV(' + num + ')');
+﻿/* 	Cards Value
+Returns the number a card represents
+
+For n cards in a deck, cards are represented from 0 to (n-1)
+In a deck of 52 cards, the cards are represented from 0-51
+
+In this sample deck, here is some of the values & suits for each n:
+n  Val  Suit
+0 = A - Diamond
+1 = A - Clover
+2 = A - Heart
+3 = A - Spade
+4 = 2 - Diamond
+5 = 2 - Clover
+6 = 2 - Heart
+7 = 2 - Spade
+*/
+function cardV(num) {
 	return Math.floor(num/4);
 }
+
+/* 	Cards Suit
+Returns the number representing a suit from 0 to 3
+*/
 function cardS(num) {
 	return num%4;
 }
+
+/* 	Cards File
+Returns the file name of a card
+*/
 function cardFile(num) {
 	var suitName;
 	switch(cardS(num)) {
