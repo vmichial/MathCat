@@ -7,7 +7,6 @@
 	<script type="text/javascript" src="Libs/Basic.js"></script>
 	<script type="text/javascript" src="Libs/Equation Generator.js"></script>
 	<script type="text/javascript" src="Libs/Deck.js"></script>
-	<script type="text/javascript" src="Libs/jquery.js"></script>
 	
 	<script type="text/javascript" src="Libs/oTransitions.js"></script>
 	<script type="text/javascript" src="Libs/oPlayer.js"></script>
@@ -74,7 +73,7 @@
 
 		var fps = 30;
 		// When the click fires set bools, get position and call clickhandler
-		$("#myCanvas").mousedown(function (mouseEvent) {
+		gameCanvas.addEventListener('mousedown',function (mouseEvent) {
 			clickDown = true;
 			clicked = true;
 			clickTime = new Date().getTime();
@@ -83,17 +82,14 @@
 			var position = getPosition(mouseEvent, gameCanvas);
 			//call clickHandler if you got a click, and update accordingly
 			clickHandler(position);
-
+			},false);
 			// attach event handlers
-			$(this).mousemove(function (mouseEvent) {
-				//not doing anything when the mouse position changes
-			}).mouseup(function (mouseEvent) {
+			gameCanvas.addEventListener('mouseup',function (mouseEvent) {
 				clickDown = false;
 				clicked = false;
 				clickTime = 0;
-			}).mouseout(function (mouseEvent) {
-			});
-		});
+			},false);
+			
 		var touchSpot = new String();
 		var clickSpot = new String();
 
@@ -1114,7 +1110,6 @@
 				}
 			}
 		}
-		$(document).ready(function () {
 			var GameLoop = setInterval(
 				function () {
 					var gameScreen = document.getElementById("myCanvas");
@@ -1126,7 +1121,7 @@
 					doubleclicked = 0;
 				}, 1000 / fps
 			);
-		});
+
 	</script>
 </body>
 </html>
